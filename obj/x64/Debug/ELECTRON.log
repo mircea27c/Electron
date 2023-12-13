@@ -1,4 +1,4 @@
-﻿  Aplicatie.cpp
+﻿  UIManager.cpp
 E:\IP\Electron_Synced\Electron\src\vector2.h(10,13): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 E:\IP\Electron_Synced\Electron\src\vector2.h(11,13): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 E:\IP\Electron_Synced\Electron\src\unelteDesenare.h(12,130): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
@@ -9,23 +9,42 @@ E:\IP\Electron_Synced\Electron\src\unelteDesenare.h(13,130): warning C4244: 'arg
 E:\IP\Electron_Synced\Electron\src\unelteDesenare.h(13,104): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
 E:\IP\Electron_Synced\Electron\src\unelteDesenare.h(13,78): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
 E:\IP\Electron_Synced\Electron\src\unelteDesenare.h(13,52): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-E:\IP\Electron_Synced\Electron\src\desenatorConectori.h(62,25): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-E:\IP\Electron_Synced\Electron\src\desenatorConectori.h(63,25): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-E:\IP\Electron_Synced\Electron\src\Aplicatie.cpp(141,26): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-E:\IP\Electron_Synced\Electron\src\Aplicatie.cpp(142,26): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-  pozitionatorComponente.cpp
-E:\IP\Electron_Synced\Electron\src\vector2.h(10,13): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-E:\IP\Electron_Synced\Electron\src\vector2.h(11,13): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-E:\IP\Electron_Synced\Electron\src\unelteDesenare.h(12,130): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-E:\IP\Electron_Synced\Electron\src\unelteDesenare.h(12,104): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-E:\IP\Electron_Synced\Electron\src\unelteDesenare.h(12,78): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-E:\IP\Electron_Synced\Electron\src\unelteDesenare.h(12,52): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-E:\IP\Electron_Synced\Electron\src\unelteDesenare.h(13,130): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-E:\IP\Electron_Synced\Electron\src\unelteDesenare.h(13,104): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-E:\IP\Electron_Synced\Electron\src\unelteDesenare.h(13,78): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-E:\IP\Electron_Synced\Electron\src\unelteDesenare.h(13,52): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-E:\IP\Electron_Synced\Electron\src\pozitionatorComponente.cpp(8,41): error C2440: '=': cannot convert from 'Vector2' to 'float'
-E:\IP\Electron_Synced\Electron\src\pozitionatorComponente.cpp(8,39): message : No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
-E:\IP\Electron_Synced\Electron\src\pozitionatorComponente.cpp(41,24): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-E:\IP\Electron_Synced\Electron\src\pozitionatorComponente.cpp(42,24): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-  Generating Code...
+E:\IP\Electron_Synced\Electron\src\UIManager.cpp(206,23): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+E:\IP\Electron_Synced\Electron\src\UIManager.cpp(208,64): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
+E:\IP\Electron_Synced\Electron\src\UIManager.cpp(208,64): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+E:\IP\Electron_Synced\Electron\src\UIManager.cpp(208,95): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
+E:\IP\Electron_Synced\Electron\src\UIManager.cpp(208,95): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+E:\IP\Electron_Synced\Electron\src\UIManager.cpp(214,23): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+E:\IP\Electron_Synced\Electron\src\UIManager.cpp(216,51): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
+E:\IP\Electron_Synced\Electron\src\UIManager.cpp(216,51): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+E:\IP\Electron_Synced\Electron\src\UIManager.cpp(216,86): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
+E:\IP\Electron_Synced\Electron\src\UIManager.cpp(216,86): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+E:\IP\Electron_Synced\Electron\src\UIManager.cpp(227,27): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+E:\IP\Electron_Synced\Electron\src\UIManager.cpp(228,27): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+E:\IP\Electron_Synced\Electron\src\UIManager.cpp(232,48): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
+E:\IP\Electron_Synced\Electron\src\UIManager.cpp(232,48): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+E:\IP\Electron_Synced\Electron\src\UIManager.cpp(232,78): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
+E:\IP\Electron_Synced\Electron\src\UIManager.cpp(232,78): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+E:\IP\Electron_Synced\Electron\src\UIManager.cpp(232,95): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
+E:\IP\Electron_Synced\Electron\src\UIManager.cpp(232,95): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+E:\IP\Electron_Synced\Electron\src\UIManager.cpp(232,108): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
+E:\IP\Electron_Synced\Electron\src\UIManager.cpp(232,108): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+E:\IP\Electron_Synced\Electron\src\UIManager.cpp(240,147): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+E:\IP\Electron_Synced\Electron\src\UIManager.cpp(240,114): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+E:\IP\Electron_Synced\Electron\src\UIManager.cpp(240,81): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+E:\IP\Electron_Synced\Electron\src\UIManager.cpp(240,48): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+E:\IP\Electron_Synced\Electron\src\UIManager.cpp(241,147): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+E:\IP\Electron_Synced\Electron\src\UIManager.cpp(241,114): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+E:\IP\Electron_Synced\Electron\src\UIManager.cpp(241,81): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+E:\IP\Electron_Synced\Electron\src\UIManager.cpp(241,48): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+E:\IP\Electron_Synced\Electron\src\UIManager.cpp(242,147): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+E:\IP\Electron_Synced\Electron\src\UIManager.cpp(242,114): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+E:\IP\Electron_Synced\Electron\src\UIManager.cpp(242,81): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+E:\IP\Electron_Synced\Electron\src\UIManager.cpp(242,48): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+E:\IP\Electron_Synced\Electron\src\UIManager.cpp(243,147): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+E:\IP\Electron_Synced\Electron\src\UIManager.cpp(243,114): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+E:\IP\Electron_Synced\Electron\src\UIManager.cpp(243,81): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+E:\IP\Electron_Synced\Electron\src\UIManager.cpp(243,48): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+E:\IP\Electron_Synced\Electron\src\UIManager.cpp(297,44): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+E:\IP\Electron_Synced\Electron\src\UIManager.cpp(298,44): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  ELECTRON.vcxproj -> E:\IP\Electron_Synced\Electron\bin\x64\Debug\ELECTRON.exe

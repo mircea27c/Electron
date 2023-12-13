@@ -80,7 +80,7 @@ void Aplicatie::InitializareUI() {
     bg_btn3->pozitie = Vector2(300, INALTIME - 60);
     bg_btn3->marime = 1;
 
-    zoomOutBtn->AdaugaElementGrafic(bg_btn3);
+    placeButton->AdaugaElementGrafic(bg_btn3);
 
     InregistrareButon(zoomInBtn);
     InregistrareButon(zoomOutBtn);

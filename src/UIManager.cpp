@@ -96,12 +96,17 @@ void DeseneazaComponenta(Componenta* comp) {
 
     //Ajustam pozitia punctelor de conexiune
     if (comp) {
+        
         ActualizeazaGraficaComponenta(comp);
         comp->grafica->Desenare(renderer);
         
         for (auto& pct : comp->puncte_conexiune)
         {
+            cout << "deseneaza buton " << pct->buton->ListaElementeGrafice.front()->pozitie.x << " " << pct->buton->ListaElementeGrafice.front()->pozitie.y << endl;
+            DreptunghiGrafic* dr = (DreptunghiGrafic*)pct->buton->ListaElementeGrafice.front();
+            cout << " buton " << dr->dimensiuni.x << " " << dr->dimensiuni.y << endl;
             DeseneazaButon(pct->buton);
+
         }
     }
 
@@ -121,8 +126,9 @@ void ActualizeazaGraficaComponenta(Componenta* comp) {
         Vector2 v = (pct->pozitie_relativa * Grid::MARIME_CELULA * factor_zoom);
         Vector2 pozGrafica = comp->grafica->pozitie;
         Vector2 m = Vector2(Grid::MARIME_CELULA * factor_zoom, Grid::MARIME_CELULA * factor_zoom) / 2 - v;
+        pct->buton->ListaElementeGrafice.front()->pozitie = pozGrafica - m;
         pct->buton->pozitie = pozGrafica - m;
-        pct->buton->marime = factor_zoom;
+        pct->buton->ListaElementeGrafice.front()->marime = factor_zoom;
 
     }
 }

@@ -5,7 +5,7 @@ void SelectareComponenta(Componenta* comp) {
 	if (component_preview == NULL) {
 		DreptunghiGrafic* dreptunghi_preview = new DreptunghiGrafic();
 		dreptunghi_preview->culoare = SDL_Color{ 180,180,180,255 };
-		dreptunghi_preview->marime = Vector2();
+		dreptunghi_preview->dimensiuni = Vector2(50,50);
 
 		component_preview = dreptunghi_preview;
 	}
