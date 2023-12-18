@@ -28,4 +28,6 @@ class Aplicatie
 	float ParteFractionara(float nr);
 
 	void Ruleaza();
+
+	void SelecteazaComponenta(int index);
 }; 

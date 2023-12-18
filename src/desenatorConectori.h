@@ -52,15 +52,13 @@ namespace desenator_conectori {
 			if (conector_desenat->pozitii.empty()) {
 				Vector2 poz_start = conector_desenat->start_conexiune->parinte->GetPozitie();
 				Vector2 adiacenta_blocata = CelulaAdiacentaInDir(poz_start, conector_desenat->start_conexiune->orientare);
-				printf("pozitie parinte: %f, %f", poz_start.x,poz_start.y);
-				printf("pozitie grid: %f, %f", gridPos.x, gridPos.y);
-				printf("sunt adiacente %i \n", SuntCeluleAdiacente(poz_start, gridPos));
-				printf("coliziune %i \n", VerificaColiziune(gridPos));
 				if (SuntCeluleAdiacente(poz_start, gridPos) /*&& !(gridPos == adiacenta_blocata)*/ && !VerificaColiziune(gridPos)) {
-					if (!conector_desenat->pozitii.empty())
 
 					conector_desenat->pozitii.push_back(gridPos);
+
 					RefreshUI();
+					printf("refresh the UI \n");
+
 				}
 			}
 			else {

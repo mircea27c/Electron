@@ -164,14 +164,18 @@ void ActualizeazaGraficaConector(Conector* con) {
     Path* path_conector = (Path*)con->grafica;
     path_conector->pozitii.clear();
 
-    //Obtine al doilea element din lista de pozitii
+    //adauga pozitia butonului conector de la care a plecat
+    Vector2 poz_start_conex_ecran = con->start_conexiune->buton->pozitie;
+    path_conector->pozitii.push_back(poz_start_conex_ecran);
 
-    Vector2 pozCelula2;
-    if (con->pozitii.size() >= 2) {
+    //Obtine al doilea element din lista de pozitii
+    Vector2 poz_cel_2_grid;
+    Vector2 poz_cel_1_grid = con->start_conexiune->parinte->GetPozitie();
+    if (con->pozitii.size() >= 1) {
         int i = 0;
         for (auto poz : con->pozitii) {
-            if (i == 1) {
-                pozCelula2 = poz;
+            if (i == 0) {
+                poz_cel_2_grid = poz;
                 break;
             }
             i++;
@@ -180,8 +184,9 @@ void ActualizeazaGraficaConector(Conector* con) {
     else {
         return;
     }
-    //printf("\n pozitie con: %f %f \n pozitie grid con %f %f \n", PozitieGridLaPozitieEcran(PozitieEcranLaPozitieGrid(con->GetPozitie())).x, PozitieGridLaPozitieEcran(PozitieEcranLaPozitieGrid(con->GetPozitie())).y, pozCelula2.x, pozCelula2.y, dirLaUrmatorulPunct.x, dirLaUrmatorulPunct.y);
-    Vector2 dirLaUrmatorulPunct = con->pozitii.front() - pozCelula2;
+
+    //Conecteaza la urmatorul punct ocolind desenul propriu printr-o generalizare a traseului-------------
+    Vector2 dirLaUrmatorulPunct = poz_cel_1_grid - poz_cel_2_grid;
 
     float distanta = sqrt(dirLaUrmatorulPunct.x * dirLaUrmatorulPunct.x + dirLaUrmatorulPunct.y * dirLaUrmatorulPunct.y);
 
@@ -191,16 +196,23 @@ void ActualizeazaGraficaConector(Conector* con) {
 
     Vector2 dirLaPunctIntermediar = dirLaUrmatorulPunct * Grid::MARIME_CELULA * 0.4f * factor_zoom;
 
-
     Vector2 testVector = Vector2((float)0, Grid::MARIME_CELULA/2 * factor_zoom);
-
-    path_conector->pozitii.push_back(con->start_conexiune->buton->pozitie);
-    path_conector->pozitii.push_back(con->start_conexiune->buton->pozitie + dirLaPunctIntermediar);
 
     Vector2 dirIntermediar2 = dirLaUrmatorulPunct * Grid::MARIME_CELULA/2 * factor_zoom;
 
-    path_conector->pozitii.push_back(PozitieGridLaPozitieEcran(con->pozitii.front()) + dirIntermediar2);
+    
 
+    if (dirLaUrmatorulPunct.x == 1 || dirLaUrmatorulPunct.x == -1)
+    {
+        path_conector->pozitii.push_back(PozitieGridLaPozitieEcran(poz_cel_1_grid) + dirIntermediar2);
+        path_conector->pozitii.push_back(poz_start_conex_ecran + dirLaPunctIntermediar);
+    }
+    else {
+        path_conector->pozitii.push_back(poz_start_conex_ecran + dirLaPunctIntermediar);
+        path_conector->pozitii.push_back(PozitieGridLaPozitieEcran(poz_cel_1_grid) + dirIntermediar2);
+    }
+
+    //------------------------------------
 
     for (auto pozitie : con->pozitii) {
         if (pozitie == con->pozitii.front())continue;

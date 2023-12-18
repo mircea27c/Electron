@@ -98,7 +98,9 @@ void Path::Desenare(SDL_Renderer* rend){
 	Vector2 pozAnterior;
 
 	bool prima = true;
+	printf("drawing conector cu %d \n", pozitii.size());
 	for (auto poz : pozitii) {
+		printf("pozitie %f, %f \n", poz.x, poz.y);
 		if (prima) {
 			prima = false;
 		}

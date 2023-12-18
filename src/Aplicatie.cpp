@@ -26,6 +26,16 @@ void Aplicatie::InitializareUI() {
     InititalizareUIManager();
     desenator_conectori::InitializareDesenatorConectori();
 
+    for (int i = 0; i < 10; i++)
+    {
+        auto functie_selectare_comp = [i]() -> void {
+
+            return;
+        };
+        //arrayTest[i] = functie_selectare_comp;
+
+    }
+
     Buton* zoomInBtn = new Buton(Vector2(80, INALTIME - 60), Vector2(60, 30), ZoomIn);
     
     DreptunghiGrafic* bg_btn = new DreptunghiGrafic();
@@ -40,7 +50,6 @@ void Aplicatie::InitializareUI() {
     text_btn1->pozitie = Vector2(80, INALTIME - 60);
     text_btn1->marime = 1;
     text_btn1->text = "+";
-
 
     zoomInBtn->AdaugaElementGrafic(bg_btn);
     zoomInBtn->AdaugaElementGrafic(text_btn1);
