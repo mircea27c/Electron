@@ -23,18 +23,18 @@ void ProcesarePlasare() {
 	//in functie de pozitia mouseului, determina celula din tabel in care se afla Componenta
 
 	if (gridPos.x != -1) {
-		component_preview->pozitie = PozitieGridLaPozitieEcran(gridPos);
-		component_preview->marime = factor_zoom;
-		component_preview->Desenare(GetCurrentRenderer());
+			
+			component_preview->pozitie = PozitieGridLaPozitieEcran(gridPos);
+			component_preview->marime = factor_zoom;
 
-		if (VerificaColiziune(gridPos)) {
-			component_preview->culoare = SDL_Color{ 200,0,0,255 };
-		}
-		else {
-			component_preview->culoare = SDL_Color{ 180,180,180,255 };
-		}
-		SDL_RenderPresent(GetCurrentRenderer());
-
+			if (VerificaColiziune(gridPos)) {
+				component_preview->culoare = SDL_Color{ 200,0,0,255 };
+			}
+			else {
+				component_preview->culoare = SDL_Color{ 180,180,180,255 };
+			}
+			component_preview->Desenare(GetCurrentRenderer());
+			SDL_RenderPresent(GetCurrentRenderer());
 	}
 
 

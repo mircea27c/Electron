@@ -21,6 +21,36 @@ SDL_Renderer* GetCurrentRenderer() {
 
 //Componente si grid-------------------------------------------
 
+void ZoomIn() {
+    factor_zoom *= rata_zoom;
+    if (factor_zoom > 10) {
+        factor_zoom = 10;
+        return;
+    }
+
+    int mouseX, mouseY;
+    SDL_GetMouseState(&mouseX, &mouseY);
+
+    pozitie_grid = pozitie_grid * rata_zoom;
+    RefreshUI();
+}
+
+void ZoomOut() {
+
+    factor_zoom /= rata_zoom;
+    if (factor_zoom < 0.1f) {
+        factor_zoom = 0.1f;
+        return;
+    }
+
+
+    int mouseX, mouseY;
+    SDL_GetMouseState(&mouseX, &mouseY);
+
+    pozitie_grid = pozitie_grid / rata_zoom;
+    RefreshUI();
+}
+
 
 void InititalizareUIManager() {
 
@@ -102,9 +132,7 @@ void DeseneazaComponenta(Componenta* comp) {
         
         for (auto& pct : comp->puncte_conexiune)
         {
-            cout << "deseneaza buton " << pct->buton->ListaElementeGrafice.front()->pozitie.x << " " << pct->buton->ListaElementeGrafice.front()->pozitie.y << endl;
-            DreptunghiGrafic* dr = (DreptunghiGrafic*)pct->buton->ListaElementeGrafice.front();
-            cout << " buton " << dr->dimensiuni.x << " " << dr->dimensiuni.y << endl;
+
             DeseneazaButon(pct->buton);
 
         }
@@ -129,7 +157,6 @@ void ActualizeazaGraficaComponenta(Componenta* comp) {
         pct->buton->ListaElementeGrafice.front()->pozitie = pozGrafica - m;
         pct->buton->pozitie = pozGrafica - m;
         pct->buton->ListaElementeGrafice.front()->marime = factor_zoom;
-
     }
 }
 
@@ -280,7 +307,7 @@ Vector2 PozitieMouseInGrid() {
     float zoomedCellSize = Grid::MARIME_CELULA * factor_zoom;
     Vector2 gridSize = Vector2(Grid::GRID_CELULE_LATIME * zoomedCellSize, Grid::GRID_CELULE_INALTIME * zoomedCellSize);
     Vector2 gridCenter = Vector2(gridSize.x / 2, gridSize.y / 2);
-    Vector2 screenCenter = Vector2(LATIME / 2 + pozitie_grid.x, INALTIME / 2 + pozitie_grid.y);
+    Vector2 screenCenter = GetCentruEcran();
 
     int mouseX, mouseY;
     SDL_GetMouseState(&mouseX,&mouseY);
@@ -299,11 +326,20 @@ Vector2 PozitieMouseInGrid() {
     return positionInGrid;
 
 }
-
+Vector2 GetCentruEcran() {
+    return Vector2(LATIME / 2 + pozitie_grid.x, INALTIME / 2 + pozitie_grid.y);
+}
 
 bool VerificaColiziune(Vector2 pozitie_in_grid) {
     for (auto comp: toate_componentele)
     {
+        if (Conector* conector = dynamic_cast<Conector*>(comp)) {
+            for (auto poz : conector->pozitii) {
+                if (poz == pozitie_in_grid) {
+                    return true;
+                }
+            }
+        }
         if (comp->GetPozitie().x == pozitie_in_grid.x && comp->GetPozitie().y == pozitie_in_grid.y) {
             return true;
         }

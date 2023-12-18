@@ -19,9 +19,7 @@ class Aplicatie
 
 	void InchidereAplicatie();
 
-	static void ZoomIn();
 
-	static void ZoomOut();
 
 	void InitializareUI();
 

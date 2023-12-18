@@ -21,14 +21,14 @@ extern Vector2 pozitie_grid;
 static SDL_Window* window;
 static SDL_Renderer* renderer;
 
-//static PunctConexiune* pct_conex_selectat;
-
-
 static std::list<Componenta*> toate_componentele;
 static std::list<Buton*> toate_butoanele;
 
 typedef void (*PctConexSelectatCallback)(PunctConexiune*);
 extern PctConexSelectatCallback callback_slectare_pct_conex;
+
+void ZoomIn();
+void ZoomOut();
 
 SDL_Renderer* GetCurrentRenderer();
 void InititalizareUIManager();
@@ -45,7 +45,8 @@ void DeseneazaGrid(int grosime);
 Vector2 PozitieGridLaPozitieEcran(Vector2 grid_poz);
 Vector2 PozitieEcranLaPozitieGrid(Vector2 ecran_poz);
 Vector2 PozitieMouseInGrid();
-
+Vector2 GetCentruEcran();
+Vector2 GetCentruGrid();
 
 bool ButonApasat(Buton* btn, Vector2 clickPos);
 
@@ -60,3 +61,27 @@ bool VerificaColiziune(Vector2 pozitie_in_grid);
 
 void SelecteazaPunctConexiune(PunctConexiune* pct);
 void ProceseazaClickPuncteConexiune(Vector2 poz_click);
+
+inline bool SuntCeluleAdiacente(Vector2 poz1, Vector2 poz2) {
+	
+	return (abs(poz1.x - poz2.x) + abs(poz1.y - poz2.y) == 1);
+}
+inline Vector2 CelulaAdiacentaInDir(Vector2 poz, ORIENTARE dir) {
+	switch (dir)
+	{
+	case STANGA:
+		return Vector2(poz.x - 1, poz.y);
+		break;
+	case DREAPTA:
+		return Vector2(poz.x + 1, poz.y);
+		break;
+	case SUS:
+		return Vector2(poz.x, poz.y + 1);
+		break;
+	case JOS:
+		return Vector2(poz.x, poz.y - 1);
+		break;
+	default:
+		break;
+	}
+}

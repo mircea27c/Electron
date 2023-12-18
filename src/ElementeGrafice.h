@@ -2,6 +2,7 @@
 #include <SDL.h> 
 #include <SDL_ttf.h> 
 #include <list>
+#include <iostream>
 #include "Vector2.h" 
 #include "unelteDesenare.h"
 
@@ -13,7 +14,6 @@ typedef void(*ClickFunct)();
 class ElementGrafic {
 public:
 	Vector2 pozitie;
-	const char* nume = "";
 	float marime;
 	SDL_Color culoare = SDL_Color{ 255,255,255,255 };
 
@@ -23,8 +23,6 @@ public:
 class DreptunghiGrafic : public ElementGrafic {
 public:
 	Vector2 dimensiuni;
-	SDL_Color culoare;
-
 	void Desenare(SDL_Renderer* rend) override;
 };
 
@@ -39,7 +37,7 @@ public:
 class TextGrafic : public ElementGrafic {
 public:
 	Vector2 dimensiuni;
-	char* text;
+	const char* text;
 
 	virtual void Desenare(SDL_Renderer* rend)override;
 };
@@ -55,8 +53,8 @@ public:
 
 	Vector2 dimensiuni;
 
-	Buton(const char* _text, SDL_Color _culoare, const char* _nume, Vector2 _pozitie, Vector2 _dimensiuni);
-	Buton(const char* _text, SDL_Color _culoare, const char* _nume, Vector2 _pozitie, Vector2 _dimensiuni, ClickFunct actiune);
+	Buton(Vector2 _pozitie, Vector2 _dimensiuni);
+	Buton(Vector2 _pozitie, Vector2 _dimensiuni, ClickFunct actiune);
 
 	ClickFunct actiune_click;
 
