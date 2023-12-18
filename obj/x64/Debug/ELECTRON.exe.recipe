@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <ProjectOutputs>
+    <ProjectOutput>
+      <FullPath>D:\Proiect ip\Proiect ip bun\Electron\bin\x64\Debug\ELECTRON.exe</FullPath>
+    </ProjectOutput>
+  </ProjectOutputs>
+  <ContentFiles>
+    <ContentFile>
+      <FullPath>D:\Proiect ip\Proiect ip bun\Electron\bin\arial.ttf</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>D:\Proiect ip\Proiect ip bun\Electron\bin\ShareTech.ttf</FullPath>
+    </ContentFile>
+  </ContentFiles>
+  <SatelliteDlls />
+  <NonRecipeFileRefs />
+</Project>

@@ -88,7 +88,7 @@ void Aplicatie::InitializareUI() {
     bg_btn3->pozitie = Vector2(300, INALTIME - 60);
     bg_btn3->marime = 1;
 
-<<<<<<< HEAD
+
     ImagineGrafica* bg_btn4 = new ImagineGrafica();
     bg_btn4->path = "Desenecomponente/rezistor.bmp";
     bg_btn4->culoare = SDL_Color{ 150,150,150,255 };
@@ -98,9 +98,9 @@ void Aplicatie::InitializareUI() {
     
     placeButton->AdaugaElementGrafic(bg_btn4);
     zoomOutBtn->AdaugaElementGrafic(bg_btn3);
-=======
-    placeButton->AdaugaElementGrafic(bg_btn3);
->>>>>>> 26cd6969b1637eebc92229e56c0ad28e5b693395
+
+   
+
 
     InregistrareButon(zoomInBtn);
     InregistrareButon(zoomOutBtn);
