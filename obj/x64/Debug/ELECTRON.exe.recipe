@@ -2,15 +2,15 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>E:\IP\Electron_Synced\Electron\bin\x64\Debug\ELECTRON.exe</FullPath>
+      <FullPath>D:\Proiect ip\Proiect ip bun\Electron\bin\x64\Debug\ELECTRON.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles>
     <ContentFile>
-      <FullPath>E:\IP\Electron_Synced\Electron\bin\arial.ttf</FullPath>
+      <FullPath>D:\Proiect ip\Proiect ip bun\Electron\bin\arial.ttf</FullPath>
     </ContentFile>
     <ContentFile>
-      <FullPath>E:\IP\Electron_Synced\Electron\bin\ShareTech.ttf</FullPath>
+      <FullPath>D:\Proiect ip\Proiect ip bun\Electron\bin\ShareTech.ttf</FullPath>
     </ContentFile>
   </ContentFiles>
   <SatelliteDlls />

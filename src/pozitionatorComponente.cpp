@@ -3,11 +3,15 @@
 void SelectareComponenta(Componenta* comp) {
 	component_selectat = comp;
 	if (component_preview == NULL) {
-		DreptunghiGrafic* dreptunghi_preview = new DreptunghiGrafic();
+		ImagineGrafica* rezistor = new ImagineGrafica();
+		rezistor->dimensiuni = Vector2(50, 50);
+		rezistor->path="Desenecomponente/rezistor.bmp";
+        component_preview = rezistor;
+		/*/DreptunghiGrafic* dreptunghi_preview = new DreptunghiGrafic();
 		dreptunghi_preview->culoare = SDL_Color{ 180,180,180,255 };
-		dreptunghi_preview->marime = Vector2();
+		dreptunghi_preview->dimensiuni = Vector2(50,50);
 
-		component_preview = dreptunghi_preview;
+		component_preview = dreptunghi_preview;*/
 	}
 	se_plaseaza = true;
 }
