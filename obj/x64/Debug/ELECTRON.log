@@ -1,298 +1,155 @@
 ﻿  Aplicatie.cpp
-D:\Proiect ip\Proiect ip bun\Electron\src\vector2.h(10,13): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-  (compiling source file 'src/Aplicatie.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\vector2.h(11,13): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-  (compiling source file 'src/Aplicatie.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(12,130): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/Aplicatie.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(12,104): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/Aplicatie.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(12,78): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/Aplicatie.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(12,52): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/Aplicatie.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(13,130): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/Aplicatie.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(13,104): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/Aplicatie.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(13,78): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/Aplicatie.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(13,52): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/Aplicatie.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\desenatorConectori.h(74,25): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/Aplicatie.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\desenatorConectori.h(75,25): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/Aplicatie.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\Aplicatie.cpp(161,26): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\Proiect ip\Proiect ip bun\Electron\src\Aplicatie.cpp(162,26): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\Facultate\IP\Electron\src\vector2.h(10,13): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\Facultate\IP\Electron\src\vector2.h(11,13): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(12,130): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(12,104): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(12,78): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(12,52): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(13,130): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(13,104): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(13,78): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(13,52): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\desenatorConectori.h(74,25): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\desenatorConectori.h(75,25): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\Aplicatie.cpp(156,26): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\Facultate\IP\Electron\src\Aplicatie.cpp(157,26): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
   Componente.cpp
-D:\Proiect ip\Proiect ip bun\Electron\src\Vector2.h(10,13): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-  (compiling source file 'src/Componente.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\Vector2.h(11,13): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-  (compiling source file 'src/Componente.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(12,130): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/Componente.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(12,104): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/Componente.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(12,78): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/Componente.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(12,52): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/Componente.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(13,130): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/Componente.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(13,104): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/Componente.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(13,78): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/Componente.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(13,52): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/Componente.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\Componente.cpp(15,56): warning C4305: 'argument': truncation from 'double' to 'float'
-D:\Proiect ip\Proiect ip bun\Electron\src\Componente.cpp(17,56): warning C4305: 'argument': truncation from 'double' to 'float'
+D:\Facultate\IP\Electron\src\Vector2.h(10,13): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\Facultate\IP\Electron\src\Vector2.h(11,13): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(12,130): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(12,104): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(12,78): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(12,52): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(13,130): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(13,104): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(13,78): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(13,52): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
   desenatorConectori.cpp
-D:\Proiect ip\Proiect ip bun\Electron\src\vector2.h(10,13): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-  (compiling source file 'src/desenatorConectori.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\vector2.h(11,13): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-  (compiling source file 'src/desenatorConectori.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(12,130): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/desenatorConectori.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(12,104): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/desenatorConectori.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(12,78): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/desenatorConectori.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(12,52): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/desenatorConectori.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(13,130): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/desenatorConectori.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(13,104): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/desenatorConectori.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(13,78): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/desenatorConectori.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(13,52): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/desenatorConectori.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\desenatorConectori.h(74,25): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/desenatorConectori.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\desenatorConectori.h(75,25): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/desenatorConectori.cpp')
-  
+D:\Facultate\IP\Electron\src\vector2.h(10,13): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\Facultate\IP\Electron\src\vector2.h(11,13): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(12,130): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(12,104): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(12,78): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(12,52): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(13,130): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(13,104): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(13,78): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(13,52): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\desenatorConectori.h(74,25): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\desenatorConectori.h(75,25): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
   ElementeGrafice.cpp
-D:\Proiect ip\Proiect ip bun\Electron\src\Vector2.h(10,13): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-  (compiling source file 'src/ElementeGrafice.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\Vector2.h(11,13): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-  (compiling source file 'src/ElementeGrafice.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(12,130): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/ElementeGrafice.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(12,104): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/ElementeGrafice.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(12,78): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/ElementeGrafice.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(12,52): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/ElementeGrafice.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(13,130): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/ElementeGrafice.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(13,104): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/ElementeGrafice.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(13,78): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/ElementeGrafice.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(13,52): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/ElementeGrafice.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\ElementeGrafice.cpp(77,33): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\Proiect ip\Proiect ip bun\Electron\src\ElementeGrafice.cpp(78,27): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\Proiect ip\Proiect ip bun\Electron\src\ElementeGrafice.cpp(83,33): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\Proiect ip\Proiect ip bun\Electron\src\ElementeGrafice.cpp(84,27): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\Proiect ip\Proiect ip bun\Electron\src\ElementeGrafice.cpp(89,26): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\Proiect ip\Proiect ip bun\Electron\src\ElementeGrafice.cpp(90,26): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\Proiect ip\Proiect ip bun\Electron\src\ElementeGrafice.cpp(103,9): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'unsigned __int64'
-  D:\Proiect ip\Proiect ip bun\Electron\src\ElementeGrafice.cpp(103,9):
-  consider using '%zd' in the format string
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\ElementeGrafice.cpp(110,69): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Proiect ip\Proiect ip bun\Electron\src\ElementeGrafice.cpp(110,62): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Proiect ip\Proiect ip bun\Electron\src\ElementeGrafice.cpp(110,55): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Proiect ip\Proiect ip bun\Electron\src\ElementeGrafice.cpp(110,40): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\Vector2.h(10,13): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\Facultate\IP\Electron\src\Vector2.h(11,13): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(12,130): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(12,104): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(12,78): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(12,52): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(13,130): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(13,104): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(13,78): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(13,52): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\ElementeGrafice.cpp(77,33): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\ElementeGrafice.cpp(78,27): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\ElementeGrafice.cpp(83,33): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\ElementeGrafice.cpp(84,27): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\ElementeGrafice.cpp(89,26): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\ElementeGrafice.cpp(90,26): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\ElementeGrafice.cpp(103,9): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'unsigned __int64'
+D:\Facultate\IP\Electron\src\ElementeGrafice.cpp(103,9): message : consider using '%zd' in the format string
+D:\Facultate\IP\Electron\src\ElementeGrafice.cpp(110,69): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\ElementeGrafice.cpp(110,62): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\ElementeGrafice.cpp(110,55): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\ElementeGrafice.cpp(110,40): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
   grid.cpp
   main.cpp
-D:\Proiect ip\Proiect ip bun\Electron\src\vector2.h(10,13): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-  (compiling source file 'src/main.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\vector2.h(11,13): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-  (compiling source file 'src/main.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(12,130): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/main.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(12,104): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/main.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(12,78): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/main.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(12,52): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/main.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(13,130): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/main.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(13,104): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/main.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(13,78): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/main.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(13,52): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/main.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\desenatorConectori.h(74,25): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/main.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\desenatorConectori.h(75,25): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/main.cpp')
-  
+D:\Facultate\IP\Electron\src\vector2.h(10,13): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\Facultate\IP\Electron\src\vector2.h(11,13): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(12,130): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(12,104): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(12,78): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(12,52): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(13,130): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(13,104): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(13,78): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(13,52): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\desenatorConectori.h(74,25): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\desenatorConectori.h(75,25): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
   pozitionatorComponente.cpp
-D:\Proiect ip\Proiect ip bun\Electron\src\vector2.h(10,13): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-  (compiling source file 'src/pozitionatorComponente.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\vector2.h(11,13): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-  (compiling source file 'src/pozitionatorComponente.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(12,130): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/pozitionatorComponente.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(12,104): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/pozitionatorComponente.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(12,78): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/pozitionatorComponente.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(12,52): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/pozitionatorComponente.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(13,130): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/pozitionatorComponente.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(13,104): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/pozitionatorComponente.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(13,78): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/pozitionatorComponente.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(13,52): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/pozitionatorComponente.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\pozitionatorComponente.cpp(45,24): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\Proiect ip\Proiect ip bun\Electron\src\pozitionatorComponente.cpp(46,24): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\vector2.h(10,13): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\Facultate\IP\Electron\src\vector2.h(11,13): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(12,130): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(12,104): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(12,78): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(12,52): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(13,130): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(13,104): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(13,78): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(13,52): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\pozitionatorComponente.cpp(55,24): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\pozitionatorComponente.cpp(56,24): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
   SistemEvenimente.cpp
   UIManager.cpp
-D:\Proiect ip\Proiect ip bun\Electron\src\vector2.h(10,13): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-  (compiling source file 'src/UIManager.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\vector2.h(11,13): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-  (compiling source file 'src/UIManager.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(12,130): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/UIManager.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(12,104): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/UIManager.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(12,78): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/UIManager.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(12,52): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/UIManager.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(13,130): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/UIManager.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(13,104): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/UIManager.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(13,78): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/UIManager.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(13,52): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'src/UIManager.cpp')
-  
-D:\Proiect ip\Proiect ip bun\Electron\src\UIManager.cpp(245,23): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-D:\Proiect ip\Proiect ip bun\Electron\src\UIManager.cpp(247,64): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
-D:\Proiect ip\Proiect ip bun\Electron\src\UIManager.cpp(247,64): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-D:\Proiect ip\Proiect ip bun\Electron\src\UIManager.cpp(247,95): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
-D:\Proiect ip\Proiect ip bun\Electron\src\UIManager.cpp(247,95): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-D:\Proiect ip\Proiect ip bun\Electron\src\UIManager.cpp(253,23): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-D:\Proiect ip\Proiect ip bun\Electron\src\UIManager.cpp(255,51): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
-D:\Proiect ip\Proiect ip bun\Electron\src\UIManager.cpp(255,51): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-D:\Proiect ip\Proiect ip bun\Electron\src\UIManager.cpp(255,86): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
-D:\Proiect ip\Proiect ip bun\Electron\src\UIManager.cpp(255,86): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-D:\Proiect ip\Proiect ip bun\Electron\src\UIManager.cpp(266,27): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-D:\Proiect ip\Proiect ip bun\Electron\src\UIManager.cpp(267,27): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-D:\Proiect ip\Proiect ip bun\Electron\src\UIManager.cpp(271,48): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
-D:\Proiect ip\Proiect ip bun\Electron\src\UIManager.cpp(271,48): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-D:\Proiect ip\Proiect ip bun\Electron\src\UIManager.cpp(271,78): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
-D:\Proiect ip\Proiect ip bun\Electron\src\UIManager.cpp(271,78): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-D:\Proiect ip\Proiect ip bun\Electron\src\UIManager.cpp(271,95): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
-D:\Proiect ip\Proiect ip bun\Electron\src\UIManager.cpp(271,95): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-D:\Proiect ip\Proiect ip bun\Electron\src\UIManager.cpp(271,108): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
-D:\Proiect ip\Proiect ip bun\Electron\src\UIManager.cpp(271,108): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-D:\Proiect ip\Proiect ip bun\Electron\src\UIManager.cpp(279,147): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Proiect ip\Proiect ip bun\Electron\src\UIManager.cpp(279,114): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Proiect ip\Proiect ip bun\Electron\src\UIManager.cpp(279,81): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Proiect ip\Proiect ip bun\Electron\src\UIManager.cpp(279,48): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Proiect ip\Proiect ip bun\Electron\src\UIManager.cpp(280,147): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Proiect ip\Proiect ip bun\Electron\src\UIManager.cpp(280,114): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Proiect ip\Proiect ip bun\Electron\src\UIManager.cpp(280,81): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Proiect ip\Proiect ip bun\Electron\src\UIManager.cpp(280,48): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Proiect ip\Proiect ip bun\Electron\src\UIManager.cpp(281,147): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Proiect ip\Proiect ip bun\Electron\src\UIManager.cpp(281,114): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Proiect ip\Proiect ip bun\Electron\src\UIManager.cpp(281,81): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Proiect ip\Proiect ip bun\Electron\src\UIManager.cpp(281,48): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Proiect ip\Proiect ip bun\Electron\src\UIManager.cpp(282,147): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Proiect ip\Proiect ip bun\Electron\src\UIManager.cpp(282,114): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Proiect ip\Proiect ip bun\Electron\src\UIManager.cpp(282,81): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Proiect ip\Proiect ip bun\Electron\src\UIManager.cpp(282,48): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Proiect ip\Proiect ip bun\Electron\src\UIManager.cpp(336,44): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\Proiect ip\Proiect ip bun\Electron\src\UIManager.cpp(337,44): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\Facultate\IP\Electron\src\vector2.h(10,13): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\Facultate\IP\Electron\src\vector2.h(11,13): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(12,130): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(12,104): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(12,78): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(12,52): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(13,130): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(13,104): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(13,78): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(13,52): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\UIManager.cpp(245,23): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\UIManager.cpp(247,64): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
+D:\Facultate\IP\Electron\src\UIManager.cpp(247,64): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\UIManager.cpp(247,95): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
+D:\Facultate\IP\Electron\src\UIManager.cpp(247,95): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\UIManager.cpp(253,23): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\UIManager.cpp(255,51): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
+D:\Facultate\IP\Electron\src\UIManager.cpp(255,51): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\UIManager.cpp(255,86): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
+D:\Facultate\IP\Electron\src\UIManager.cpp(255,86): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\UIManager.cpp(266,27): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\UIManager.cpp(267,27): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\UIManager.cpp(271,48): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
+D:\Facultate\IP\Electron\src\UIManager.cpp(271,48): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\UIManager.cpp(271,78): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
+D:\Facultate\IP\Electron\src\UIManager.cpp(271,78): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\UIManager.cpp(271,95): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
+D:\Facultate\IP\Electron\src\UIManager.cpp(271,95): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\UIManager.cpp(271,108): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
+D:\Facultate\IP\Electron\src\UIManager.cpp(271,108): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\UIManager.cpp(279,147): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\UIManager.cpp(279,114): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\UIManager.cpp(279,81): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\UIManager.cpp(279,48): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\UIManager.cpp(280,147): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\UIManager.cpp(280,114): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\UIManager.cpp(280,81): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\UIManager.cpp(280,48): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\UIManager.cpp(281,147): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\UIManager.cpp(281,114): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\UIManager.cpp(281,81): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\UIManager.cpp(281,48): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\UIManager.cpp(282,147): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\UIManager.cpp(282,114): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\UIManager.cpp(282,81): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\UIManager.cpp(282,48): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\UIManager.cpp(336,44): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\Facultate\IP\Electron\src\UIManager.cpp(337,44): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  TipuriComponente.cpp
+D:\Facultate\IP\Electron\src\Vector2.h(10,13): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\Facultate\IP\Electron\src\Vector2.h(11,13): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(12,130): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(12,104): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(12,78): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(12,52): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(13,130): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(13,104): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(13,78): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\unelteDesenare.h(13,52): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\TipuriComponente.cpp(15,66): warning C4305: 'argument': truncation from 'double' to 'float'
+D:\Facultate\IP\Electron\src\TipuriComponente.cpp(16,66): warning C4305: 'argument': truncation from 'double' to 'float'
   Generating Code...
-D:\Proiect ip\Proiect ip bun\Electron\src\UIManager.h(87): warning C4715: 'CelulaAdiacentaInDir': not all control paths return a value
-  ELECTRON.vcxproj -> D:\Proiect ip\Proiect ip bun\Electron\bin\x64\Debug\ELECTRON.exe
+D:\Facultate\IP\Electron\src\UIManager.h(87): warning C4715: 'CelulaAdiacentaInDir': not all control paths return a value
+  ELECTRON.vcxproj -> D:\Facultate\IP\Electron\bin\x64\Debug\ELECTRON.exe

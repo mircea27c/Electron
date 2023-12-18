@@ -1,7 +1,17 @@
 #include "pozitionatorComponente.h"
 
-void SelectareComponenta(Componenta* comp) {
-	component_selectat = comp;
+void SelectareComponentaPozitionare(int index) {
+	printf("indexul este %d si se selecteaza componenta\n ", index);
+	SelecteazaComponenta(index);
+
+	Componenta* comp = GetComponentaSelectata();
+
+	if (comp == NULL) {
+		printf("comp e nula pula");
+		return;
+	}
+
+	component_selectat = new Componenta( GetComponentaSelectata());
 	if (component_preview == NULL) {
 		ImagineGrafica* rezistor = new ImagineGrafica();
 		rezistor->dimensiuni = Vector2(50, 50);

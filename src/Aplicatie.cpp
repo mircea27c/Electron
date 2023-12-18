@@ -1,16 +1,4 @@
 #include "Aplicatie.h"
-void Aplicatie::StartPlasare() {
-    ImagineGrafica* bg_btn4 = new ImagineGrafica();
-    bg_btn4->path = "Desenecomponente/rezistor.bmp";
-    bg_btn4->culoare = SDL_Color{ 150,150,150,255 };
-    bg_btn4->dimensiuni = Vector2(50, 50);
-    bg_btn4->pozitie = Vector2(300, INALTIME - 60);
-    bg_btn4->marime = 1;
-
-    Componenta* comp = new Componenta();
-    SelectareComponenta(comp);
-    comp->grafica = bg_btn4;
-}
 
 bool Aplicatie::InitializareAplicatie() {
     int initResult = SDL_Init(SDL_INIT_VIDEO);
@@ -19,6 +7,8 @@ bool Aplicatie::InitializareAplicatie() {
         printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
         return false;
     }
+
+    InitializareTipuriComponente();
 
     return true;
 }
@@ -80,7 +70,12 @@ void Aplicatie::InitializareUI() {
     zoomOutBtn->AdaugaElementGrafic(bg_btn2);
     zoomOutBtn->AdaugaElementGrafic(text_btn2);
 
-    Buton* placeButton = new Buton(Vector2(300, INALTIME - 60), Vector2(100, 30), StartPlasare);
+    Buton* placeButton = new Buton(Vector2(300, INALTIME - 60), Vector2(100, 30));
+
+    auto fct_select_rezistor = []() {
+        SelectareComponentaPozitionare(0);
+    };
+    placeButton->actiune_click = fct_select_rezistor;
 
     DreptunghiGrafic* bg_btn3 = new DreptunghiGrafic();
     bg_btn3->culoare = SDL_Color{ 80,80,80,80 };

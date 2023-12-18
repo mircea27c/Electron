@@ -7,13 +7,12 @@
 #include "UIManager.h"
 #include "pozitionatorComponente.h"
 #include "desenatorConectori.h"
+#include "TipuriComponente.h" 
 class Aplicatie
 {public:
 	bool middle_btn_apasat=false;
 
     Vector2 mouse_ultima_poz;
-
-	static void StartPlasare();
 
 	bool InitializareAplicatie();
 
@@ -29,5 +28,4 @@ class Aplicatie
 
 	void Ruleaza();
 
-	void SelecteazaComponenta(int index);
 }; 

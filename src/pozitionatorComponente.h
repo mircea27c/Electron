@@ -1,5 +1,6 @@
 #pragma once
 #include "UIManager.h"
+#include "TipuriComponente.h"
 
 
 static Componenta* component_selectat = NULL;
@@ -10,7 +11,7 @@ static int grid_ultim_y;
 
 static bool se_plaseaza;
 
-void SelectareComponenta(Componenta* comp);
+void SelectareComponentaPozitionare(int index);
 
 void ProcesarePlasare();
 

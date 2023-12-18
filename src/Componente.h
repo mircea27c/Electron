@@ -37,6 +37,14 @@ public:
 	std::list<PunctConexiune*> puncte_conexiune;
 	
 	Componenta();
+	inline Componenta(Componenta* tip) {
+		grafica = tip->grafica->Clonare();
+
+		puncte_conexiune.clear();
+		std::copy(tip->puncte_conexiune.begin(), tip->puncte_conexiune.end(), std::back_inserter(puncte_conexiune));
+
+		pozitie_in_grid = Vector2();
+	}
 	
 	void SetPozitie(Vector2 pozitie);
 	Vector2 GetPozitie();

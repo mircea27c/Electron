@@ -12,9 +12,6 @@ Componenta::Componenta() {
 	grafica = dreptunghi;
 
 	pozitie_in_grid = Vector2();
-	puncte_conexiune.push_back(new PunctConexiune(Vector2(0.8, 0.5f),this, DREAPTA));
-
-	puncte_conexiune.push_back(new PunctConexiune(Vector2(0.2, 0.5f),this, STANGA));
 }
 
 PunctConexiune::PunctConexiune(Vector2 _poz_rel, Componenta* _parinte, ORIENTARE _orientare)

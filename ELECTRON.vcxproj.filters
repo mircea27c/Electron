@@ -10,6 +10,7 @@
     <ClCompile Include="src\desenatorConectori.cpp" />
     <ClCompile Include="src\ElementeGrafice.cpp" />
     <ClCompile Include="src\SistemEvenimente.cpp" />
+    <ClCompile Include="src\TipuriComponente.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\pozitionatorComponente.h" />
@@ -21,6 +22,7 @@
     <ClInclude Include="src\SistemEvenimente.h" />
     <ClInclude Include="src\unelteDesenare.h" />
     <ClInclude Include="src\vector2.h" />
+    <ClInclude Include="src\TipuriComponente.h" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="bin\ShareTech.ttf" />

@@ -18,12 +18,24 @@ public:
 	SDL_Color culoare = SDL_Color{ 255,255,255,255 };
 
 	virtual void Desenare(SDL_Renderer* rend);
+	inline virtual ElementGrafic* Clonare() {
+		ElementGrafic* element = new ElementGrafic();
+		element->culoare = culoare;
+
+		return element;
+	}
 };
 
 class DreptunghiGrafic : public ElementGrafic {
 public:
 	Vector2 dimensiuni;
 	void Desenare(SDL_Renderer* rend) override;
+	inline ElementGrafic* Clonare() override {
+		DreptunghiGrafic* element = (DreptunghiGrafic*)ElementGrafic::Clonare();
+		element->dimensiuni = element->dimensiuni;
+
+		return element;
+	}
 };
 
 class ImagineGrafica : public ElementGrafic {
@@ -32,6 +44,12 @@ public:
 	const char* path;
 
 	virtual void Desenare(SDL_Renderer* rend)override;
+	inline ElementGrafic* Clonare() override {
+		ImagineGrafica* element = (ImagineGrafica*)ElementGrafic::Clonare();
+		element->dimensiuni = element->dimensiuni;
+
+		return element;
+	}
 };
 
 class TextGrafic : public ElementGrafic {
@@ -40,6 +58,13 @@ public:
 	const char* text;
 
 	virtual void Desenare(SDL_Renderer* rend)override;
+	inline ElementGrafic* Clonare() override {
+		TextGrafic* element = (TextGrafic*)ElementGrafic::Clonare();
+		dimensiuni = element->dimensiuni;
+		text = element->text;
+
+		return element;
+	}
 };
 
 #pragma endregion
