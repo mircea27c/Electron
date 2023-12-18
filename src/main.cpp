@@ -4,7 +4,7 @@ int main()
 {
 	Aplicatie Obiect;
 
-	Obiect.Ruleaza();
+	Obiect.Ruleaza();	
 
 
 }

@@ -23,14 +23,11 @@ namespace desenator_conectori {
 
 		se_deseneaza_conector = true;
 
-		cout << "start conectare";
+		InregistreazaComponenta(conector_desenat);
 	}
 	inline void StopConectare() {
 
-
-
 		se_deseneaza_conector = false;
-		InregistreazaComponenta(conector_desenat);
 		conector_desenat = NULL;
 	}
 
@@ -52,12 +49,27 @@ namespace desenator_conectori {
 		//in functie de pozitia mouseului, determina celula din tabel in care se afla Componenta
 
 		if (gridPos.x != -1) {
-			RefreshUI();	
-			conector_desenat->pozitii.push_back(gridPos);
-			ActualizeazaGraficaComponenta(conector_desenat);
+			if (conector_desenat->pozitii.empty()) {
+				Vector2 poz_start = conector_desenat->start_conexiune->parinte->GetPozitie();
+				Vector2 adiacenta_blocata = CelulaAdiacentaInDir(poz_start, conector_desenat->start_conexiune->orientare);
+				if (SuntCeluleAdiacente(poz_start, gridPos) /*&& !(gridPos == adiacenta_blocata)*/ && !VerificaColiziune(gridPos)) {
 
-			conector_desenat->grafica->Desenare(GetCurrentRenderer());
-			SDL_RenderPresent(GetCurrentRenderer());
+					conector_desenat->pozitii.push_back(gridPos);
+
+					RefreshUI();
+					printf("refresh the UI \n");
+
+				}
+			}
+			else {
+				if (SuntCeluleAdiacente(conector_desenat->pozitii.back(), gridPos) && !VerificaColiziune(gridPos)){
+					if (!conector_desenat->pozitii.empty())
+
+
+					conector_desenat->pozitii.push_back(gridPos);
+					RefreshUI();
+				}
+			}
 		}
 		grid_ultim_x = gridPos.x;
 		grid_ultim_y = gridPos.y;

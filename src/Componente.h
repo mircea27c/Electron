@@ -11,16 +11,21 @@ enum ORIENTARE {
 	JOS
 };
 
+class Componenta;
+class PunctConexiune;
+
 class PunctConexiune {
 private:
 public:
 	ORIENTARE orientare;
+	
+	Componenta* parinte;
 
 	//exprimat in procentaj din latimea si lungimea celulei respective(valori intre 0 si 1)
 	Vector2 pozitie_relativa;
 	Buton* buton;
 
-	PunctConexiune(Vector2 _poz_rel, ORIENTARE _orientare);
+	PunctConexiune(Vector2 _poz_rel, Componenta* _parinte, ORIENTARE _orientare);
 };
 
 class Componenta {

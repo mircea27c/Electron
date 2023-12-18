@@ -21,6 +21,36 @@ SDL_Renderer* GetCurrentRenderer() {
 
 //Componente si grid-------------------------------------------
 
+void ZoomIn() {
+    factor_zoom *= rata_zoom;
+    if (factor_zoom > 10) {
+        factor_zoom = 10;
+        return;
+    }
+
+    int mouseX, mouseY;
+    SDL_GetMouseState(&mouseX, &mouseY);
+
+    pozitie_grid = pozitie_grid * rata_zoom;
+    RefreshUI();
+}
+
+void ZoomOut() {
+
+    factor_zoom /= rata_zoom;
+    if (factor_zoom < 0.1f) {
+        factor_zoom = 0.1f;
+        return;
+    }
+
+
+    int mouseX, mouseY;
+    SDL_GetMouseState(&mouseX, &mouseY);
+
+    pozitie_grid = pozitie_grid / rata_zoom;
+    RefreshUI();
+}
+
 
 void InititalizareUIManager() {
 
@@ -96,12 +126,15 @@ void DeseneazaComponenta(Componenta* comp) {
 
     //Ajustam pozitia punctelor de conexiune
     if (comp) {
+        
         ActualizeazaGraficaComponenta(comp);
         comp->grafica->Desenare(renderer);
         
         for (auto& pct : comp->puncte_conexiune)
         {
+
             DeseneazaButon(pct->buton);
+
         }
     }
 
@@ -121,9 +154,9 @@ void ActualizeazaGraficaComponenta(Componenta* comp) {
         Vector2 v = (pct->pozitie_relativa * Grid::MARIME_CELULA * factor_zoom);
         Vector2 pozGrafica = comp->grafica->pozitie;
         Vector2 m = Vector2(Grid::MARIME_CELULA * factor_zoom, Grid::MARIME_CELULA * factor_zoom) / 2 - v;
+        pct->buton->ListaElementeGrafice.front()->pozitie = pozGrafica - m;
         pct->buton->pozitie = pozGrafica - m;
-        pct->buton->marime = factor_zoom;
-
+        pct->buton->ListaElementeGrafice.front()->marime = factor_zoom;
     }
 }
 
@@ -131,14 +164,18 @@ void ActualizeazaGraficaConector(Conector* con) {
     Path* path_conector = (Path*)con->grafica;
     path_conector->pozitii.clear();
 
-    //Obtine al doilea element din lista de pozitii
+    //adauga pozitia butonului conector de la care a plecat
+    Vector2 poz_start_conex_ecran = con->start_conexiune->buton->pozitie;
+    path_conector->pozitii.push_back(poz_start_conex_ecran);
 
-    Vector2 pozCelula2;
-    if (con->pozitii.size() >= 2) {
+    //Obtine al doilea element din lista de pozitii
+    Vector2 poz_cel_2_grid;
+    Vector2 poz_cel_1_grid = con->start_conexiune->parinte->GetPozitie();
+    if (con->pozitii.size() >= 1) {
         int i = 0;
         for (auto poz : con->pozitii) {
-            if (i == 1) {
-                pozCelula2 = poz;
+            if (i == 0) {
+                poz_cel_2_grid = poz;
                 break;
             }
             i++;
@@ -147,8 +184,9 @@ void ActualizeazaGraficaConector(Conector* con) {
     else {
         return;
     }
-    //printf("\n pozitie con: %f %f \n pozitie grid con %f %f \n", PozitieGridLaPozitieEcran(PozitieEcranLaPozitieGrid(con->GetPozitie())).x, PozitieGridLaPozitieEcran(PozitieEcranLaPozitieGrid(con->GetPozitie())).y, pozCelula2.x, pozCelula2.y, dirLaUrmatorulPunct.x, dirLaUrmatorulPunct.y);
-    Vector2 dirLaUrmatorulPunct = con->pozitii.front() - pozCelula2;
+
+    //Conecteaza la urmatorul punct ocolind desenul propriu printr-o generalizare a traseului-------------
+    Vector2 dirLaUrmatorulPunct = poz_cel_1_grid - poz_cel_2_grid;
 
     float distanta = sqrt(dirLaUrmatorulPunct.x * dirLaUrmatorulPunct.x + dirLaUrmatorulPunct.y * dirLaUrmatorulPunct.y);
 
@@ -158,16 +196,23 @@ void ActualizeazaGraficaConector(Conector* con) {
 
     Vector2 dirLaPunctIntermediar = dirLaUrmatorulPunct * Grid::MARIME_CELULA * 0.4f * factor_zoom;
 
-
     Vector2 testVector = Vector2((float)0, Grid::MARIME_CELULA/2 * factor_zoom);
-
-    path_conector->pozitii.push_back(con->start_conexiune->buton->pozitie);
-    path_conector->pozitii.push_back(con->start_conexiune->buton->pozitie + dirLaPunctIntermediar);
 
     Vector2 dirIntermediar2 = dirLaUrmatorulPunct * Grid::MARIME_CELULA/2 * factor_zoom;
 
-    path_conector->pozitii.push_back(PozitieGridLaPozitieEcran(con->pozitii.front()) + dirIntermediar2);
+    
 
+    if (dirLaUrmatorulPunct.x == 1 || dirLaUrmatorulPunct.x == -1)
+    {
+        path_conector->pozitii.push_back(PozitieGridLaPozitieEcran(poz_cel_1_grid) + dirIntermediar2);
+        path_conector->pozitii.push_back(poz_start_conex_ecran + dirLaPunctIntermediar);
+    }
+    else {
+        path_conector->pozitii.push_back(poz_start_conex_ecran + dirLaPunctIntermediar);
+        path_conector->pozitii.push_back(PozitieGridLaPozitieEcran(poz_cel_1_grid) + dirIntermediar2);
+    }
+
+    //------------------------------------
 
     for (auto pozitie : con->pozitii) {
         if (pozitie == con->pozitii.front())continue;
@@ -274,7 +319,7 @@ Vector2 PozitieMouseInGrid() {
     float zoomedCellSize = Grid::MARIME_CELULA * factor_zoom;
     Vector2 gridSize = Vector2(Grid::GRID_CELULE_LATIME * zoomedCellSize, Grid::GRID_CELULE_INALTIME * zoomedCellSize);
     Vector2 gridCenter = Vector2(gridSize.x / 2, gridSize.y / 2);
-    Vector2 screenCenter = Vector2(LATIME / 2 + pozitie_grid.x, INALTIME / 2 + pozitie_grid.y);
+    Vector2 screenCenter = GetCentruEcran();
 
     int mouseX, mouseY;
     SDL_GetMouseState(&mouseX,&mouseY);
@@ -293,11 +338,20 @@ Vector2 PozitieMouseInGrid() {
     return positionInGrid;
 
 }
-
+Vector2 GetCentruEcran() {
+    return Vector2(LATIME / 2 + pozitie_grid.x, INALTIME / 2 + pozitie_grid.y);
+}
 
 bool VerificaColiziune(Vector2 pozitie_in_grid) {
     for (auto comp: toate_componentele)
     {
+        if (Conector* conector = dynamic_cast<Conector*>(comp)) {
+            for (auto poz : conector->pozitii) {
+                if (poz == pozitie_in_grid) {
+                    return true;
+                }
+            }
+        }
         if (comp->GetPozitie().x == pozitie_in_grid.x && comp->GetPozitie().y == pozitie_in_grid.y) {
             return true;
         }

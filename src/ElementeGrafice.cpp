@@ -1,13 +1,13 @@
 #include "ElementeGrafice.h"
 
 
-Buton::Buton(const char* _text, SDL_Color _culoare, const char* _nume, Vector2 _pozitie, Vector2 _dimensiuni)
+Buton::Buton(Vector2 _pozitie, Vector2 _dimensiuni)
 {
 	pozitie = _pozitie;
 	dimensiuni = _dimensiuni;
 	marime = 1;
 }
-Buton::Buton(const char* _text, SDL_Color _culoare, const char* _nume, Vector2 _pozitie, Vector2 _dimensiuni, ClickFunct actiune)
+Buton::Buton(Vector2 _pozitie, Vector2 _dimensiuni, ClickFunct actiune)
 {
 	pozitie = _pozitie;
 	dimensiuni = _dimensiuni;
@@ -56,7 +56,6 @@ void ImagineGrafica::Desenare(SDL_Renderer* rend) {
 
 void TextGrafic::Desenare(SDL_Renderer* rend) {
 	if (text != NULL && text != "") {
-
 		TTF_Font* font = TTF_OpenFont("Fonts/ShareTech.ttf", 24);
 		if (font == NULL) {
 			font = TTF_OpenFont("Fonts/aril.ttf", 24);
@@ -68,12 +67,27 @@ void TextGrafic::Desenare(SDL_Renderer* rend) {
 		SDL_Surface* textSurface = TTF_RenderText_Solid(font, text, SDL_Color{ 255, 255, 255, 255 });
 		SDL_Texture* textTexture = SDL_CreateTextureFromSurface(rend, textSurface);
 
+		Vector2 dimensiuni_reale = dimensiuni * marime;
+
+		SDL_Rect textRect = {};
+		if (dimensiuni_reale.y < dimensiuni_reale.x) {
+						
+			float textRatio = (float)textSurface->w / (float)textSurface->h;
+
+			textRect.h = dimensiuni_reale.y;
+			textRect.w = textRatio * dimensiuni_reale.y;
+		}
+		else {
+			float textRatio = (float)textSurface->h / (float)textSurface->w;
+
+			textRect.w = dimensiuni_reale.x;
+			textRect.h = textRatio * dimensiuni_reale.x;
+		}
+
 		SDL_FreeSurface(textSurface);
 
-		SDL_Rect textRect;
-
-		textRect.w = textSurface->w;
-		textRect.h = textSurface->h;
+		textRect.x = pozitie.x - textRect.w/2;
+		textRect.y = pozitie.y - textRect.h/2;
 
 		SDL_RenderCopy(rend, textTexture, NULL, &textRect);
 	}
@@ -86,7 +100,9 @@ void Path::Desenare(SDL_Renderer* rend){
 	Vector2 pozAnterior;
 
 	bool prima = true;
+	printf("drawing conector cu %d \n", pozitii.size());
 	for (auto poz : pozitii) {
+		printf("pozitie %f, %f \n", poz.x, poz.y);
 		if (prima) {
 			prima = false;
 		}

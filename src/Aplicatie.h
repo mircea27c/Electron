@@ -19,9 +19,7 @@ class Aplicatie
 
 	void InchidereAplicatie();
 
-	static void ZoomIn();
 
-	static void ZoomOut();
 
 	void InitializareUI();
 
@@ -30,4 +28,6 @@ class Aplicatie
 	float ParteFractionara(float nr);
 
 	void Ruleaza();
+
+	void SelecteazaComponenta(int index);
 }; 

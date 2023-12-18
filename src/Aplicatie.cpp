@@ -28,66 +28,67 @@ void Aplicatie::InchidereAplicatie() {
     SDL_Quit();
 }
 
-void Aplicatie::ZoomIn() {
-
-    factor_zoom *= rata_zoom;
-    if (factor_zoom > 10) {
-        factor_zoom = 10;
-        return;
-    }
-    RefreshUI();
-}
-
-void Aplicatie::ZoomOut() {
-
-    factor_zoom /= rata_zoom;
-    if (factor_zoom < 0.1f) {
-        factor_zoom = 0.1f;
-        return;
-    }
-    RefreshUI();
-}
-
 void Aplicatie::InitializareUI() {
     //register buttons
 
     InititalizareUIManager();
     desenator_conectori::InitializareDesenatorConectori();
 
-    Buton* zoomInBtn = new Buton("+", SDL_Color{ 255,255,255,255 }, "", Vector2(80, INALTIME - 60), Vector2(60, 30), ZoomIn);
+    for (int i = 0; i < 10; i++)
+    {
+        auto functie_selectare_comp = [i]() -> void {
+
+            return;
+        };
+        //arrayTest[i] = functie_selectare_comp;
+
+    }
+
+    Buton* zoomInBtn = new Buton(Vector2(80, INALTIME - 60), Vector2(60, 30), ZoomIn);
     
     DreptunghiGrafic* bg_btn = new DreptunghiGrafic();
-    bg_btn->culoare = SDL_Color{ 150,150,150,255 };
+    bg_btn->culoare = SDL_Color{ 80,80,80,255 };
     bg_btn->dimensiuni = Vector2(60, 30);
     bg_btn->pozitie = Vector2(80, INALTIME - 60);
-    bg_btn->marime = 1; 
-    DreptunghiGrafic* bg_btn5 = new DreptunghiGrafic();
-    bg_btn5->culoare = SDL_Color{ 0,255,0,255 };
-    bg_btn5->dimensiuni = Vector2(30, 30);
-    bg_btn5->pozitie = Vector2(80, INALTIME - 60);
-    bg_btn5->marime = 1;
+    bg_btn->marime = 1;
+
+    TextGrafic* text_btn1 = new TextGrafic();
+    text_btn1->culoare = SDL_Color{ 255,255,255,255 };
+    text_btn1->dimensiuni = Vector2(50, 20);
+    text_btn1->pozitie = Vector2(80, INALTIME - 60);
+    text_btn1->marime = 1;
+    text_btn1->text = "+";
 
     zoomInBtn->AdaugaElementGrafic(bg_btn);
-    zoomInBtn->AdaugaElementGrafic(bg_btn5);
+    zoomInBtn->AdaugaElementGrafic(text_btn1);
 
-    Buton* zoomOutBtn = new Buton("-", SDL_Color{ 255,255,255,255 }, "", Vector2(160, INALTIME - 60), Vector2(60, 30), ZoomIn);
+    Buton* zoomOutBtn = new Buton( Vector2(160, INALTIME - 60), Vector2(60, 30), ZoomOut);
 
     DreptunghiGrafic* bg_btn2 = new DreptunghiGrafic();
-    bg_btn2->culoare = SDL_Color{ 150,150,150,255 };
+    bg_btn2->culoare = SDL_Color{ 80,80,80,80 };
     bg_btn2->dimensiuni = Vector2(60, 30);
     bg_btn2->pozitie = Vector2(160, INALTIME - 60);
     bg_btn2->marime = 1;
 
-    zoomOutBtn->AdaugaElementGrafic(bg_btn2);
+    TextGrafic* text_btn2 = new TextGrafic();
+    text_btn2->culoare = SDL_Color{ 255,255,255,255 };
+    text_btn2->dimensiuni = Vector2(50, 20);
+    text_btn2->pozitie = Vector2(160, INALTIME - 60);
+    text_btn2->marime = 1;
+    text_btn2->text = "-";
 
-    Buton* placeButton = new Buton("component", SDL_Color{ 255,255,255,255 }, "", Vector2(300, INALTIME - 60), Vector2(100, 30), StartPlasare);
+    zoomOutBtn->AdaugaElementGrafic(bg_btn2);
+    zoomOutBtn->AdaugaElementGrafic(text_btn2);
+
+    Buton* placeButton = new Buton(Vector2(300, INALTIME - 60), Vector2(100, 30), StartPlasare);
 
     DreptunghiGrafic* bg_btn3 = new DreptunghiGrafic();
-    bg_btn3->culoare = SDL_Color{ 150,150,150,255 };
+    bg_btn3->culoare = SDL_Color{ 80,80,80,80 };
     bg_btn3->dimensiuni = Vector2(100, 30);
     bg_btn3->pozitie = Vector2(300, INALTIME - 60);
     bg_btn3->marime = 1;
 
+<<<<<<< HEAD
     ImagineGrafica* bg_btn4 = new ImagineGrafica();
     bg_btn4->path = "Desenecomponente/rezistor.bmp";
     bg_btn4->culoare = SDL_Color{ 150,150,150,255 };
@@ -97,6 +98,9 @@ void Aplicatie::InitializareUI() {
     
     placeButton->AdaugaElementGrafic(bg_btn4);
     zoomOutBtn->AdaugaElementGrafic(bg_btn3);
+=======
+    placeButton->AdaugaElementGrafic(bg_btn3);
+>>>>>>> 26cd6969b1637eebc92229e56c0ad28e5b693395
 
     InregistrareButon(zoomInBtn);
     InregistrareButon(zoomOutBtn);
