@@ -32,10 +32,12 @@ void DreptunghiGrafic::Desenare(SDL_Renderer* rend) {
 }
 
 void ImagineGrafica::Desenare(SDL_Renderer* rend) {
-	SDL_Surface* imagine_surface = SDL_LoadBMP("Imagini/Cactus.png");
+	SDL_Surface* imagine_surface = SDL_LoadBMP(path);
 
 	if (imagine_surface == nullptr) {
 		printf("Loading image error");
+		printf(SDL_GetError());
+		printf("\n");
 		return;
 	}
 

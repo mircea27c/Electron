@@ -29,7 +29,7 @@ public:
 class ImagineGrafica : public ElementGrafic {
 public:
 	Vector2 dimensiuni;
-	char* path;
+	const char* path;
 
 	virtual void Desenare(SDL_Renderer* rend)override;
 };

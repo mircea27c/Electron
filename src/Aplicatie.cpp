@@ -1,7 +1,15 @@
 #include "Aplicatie.h"
 void Aplicatie::StartPlasare() {
+    ImagineGrafica* bg_btn4 = new ImagineGrafica();
+    bg_btn4->path = "Desenecomponente/rezistor.bmp";
+    bg_btn4->culoare = SDL_Color{ 150,150,150,255 };
+    bg_btn4->dimensiuni = Vector2(50, 50);
+    bg_btn4->pozitie = Vector2(300, INALTIME - 60);
+    bg_btn4->marime = 1;
+
     Componenta* comp = new Componenta();
     SelectareComponenta(comp);
+    comp->grafica = bg_btn4;
 }
 
 bool Aplicatie::InitializareAplicatie() {
@@ -80,7 +88,19 @@ void Aplicatie::InitializareUI() {
     bg_btn3->pozitie = Vector2(300, INALTIME - 60);
     bg_btn3->marime = 1;
 
-    placeButton->AdaugaElementGrafic(bg_btn3);
+
+    ImagineGrafica* bg_btn4 = new ImagineGrafica();
+    bg_btn4->path = "Desenecomponente/rezistor.bmp";
+    bg_btn4->culoare = SDL_Color{ 150,150,150,255 };
+    bg_btn4->dimensiuni = Vector2(100, 30);
+    bg_btn4->pozitie = Vector2(300, INALTIME - 60);
+    bg_btn4->marime = 1;
+    
+    placeButton->AdaugaElementGrafic(bg_btn4);
+    zoomOutBtn->AdaugaElementGrafic(bg_btn3);
+
+   
+
 
     InregistrareButon(zoomInBtn);
     InregistrareButon(zoomOutBtn);
