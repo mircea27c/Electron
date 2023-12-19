@@ -8,7 +8,7 @@
 
 #define MARIME_COMPONENTE Grid::MARIME_CELULA * 0.9f
 
-static std::array<Componenta*,1> tipuri_componente;
+static std::array<Componenta*,9> tipuri_componente;
 static Componenta* tip_comp_selectat = NULL;
 
 

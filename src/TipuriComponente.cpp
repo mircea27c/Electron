@@ -104,10 +104,15 @@ void InitializareTipuriComponente() {
 	tranzistor->puncte_conexiune.push_back(new PunctConexiune(Vector2(0.2, 0.5f), tranzistor, STANGA));
 
 	
-	if (rezistor == NULL)printf("rezistor e null");
-
 	tipuri_componente[0] = rezistor;
-	if (tipuri_componente[0] == NULL)printf("rezistor bagat in array e null");
+	tipuri_componente[1] = intrerupator;
+	tipuri_componente[2] = andGate;
+	tipuri_componente[3] = capacitor;
+	tipuri_componente[4] = dioda2linii;
+	tipuri_componente[5] = diodacerc;
+	tipuri_componente[6] = impamantare;
+	tipuri_componente[7] = sursavoltaj;
+	tipuri_componente[8] = tranzistor;
 
 }
 void SelecteazaComponenta(int index) {
