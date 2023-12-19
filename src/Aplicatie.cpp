@@ -23,8 +23,8 @@ void Aplicatie::InitializareUI() {
 
     InititalizareUIManager();
     desenator_conectori::InitializareDesenatorConectori();
+    editor_componente::InitializareEditor();
 
-    
 
     Buton* zoomInBtn = new Buton(Vector2(40, INALTIME - 60), Vector2(60, 30), ZoomIn);
     
@@ -309,6 +309,8 @@ void Aplicatie::InitializareUI() {
     InregistrareButon(tranzistor);
     DeseneazaToateButoanele();
 
+    
+
     RefreshUI();
 }
 
@@ -319,12 +321,13 @@ void Aplicatie::ProcesareClick(SDL_Event* actiune_mouse) {
     switch (actiune_mouse->type) {
     case SDL_MOUSEBUTTONDOWN:
         if (actiune_mouse->button.button == SDL_BUTTON_LEFT) {
+            editor_componente::ProcesareClick(x,y);
             ProcesareClickPlasare();
             ProceseazaClickPuncteConexiune(Vector2(x,y));
             ProcesareButoane(Vector2(x, y));
         }
         if (actiune_mouse->button.button == SDL_BUTTON_RIGHT) {
-            Vector2 mouseInGrid = PozitieMouseInGrid(x,y);
+            Vector2 mouseInGrid = PozitieMouseInGrid();
             cout << mouseInGrid.x << " " << mouseInGrid.y << endl;
         }
         if (actiune_mouse->button.button == SDL_BUTTON_MIDDLE) {

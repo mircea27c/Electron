@@ -11,6 +11,7 @@
 
 typedef void(*ClickFunct)();
 
+class WindowGrafic;
 
 class ElementGrafic {
 public:
@@ -105,4 +106,17 @@ public:
 
 	void Desenare(SDL_Renderer* rend) override;
 
+};
+
+//clasa asta e un grup de elemente grafice la un loc
+class WindowGrafic {
+public:
+	std::list<ElementGrafic*> elem_grafice;
+	std::list<Buton*> butoane;
+
+	WindowGrafic();
+
+	void AdaugaElementGrafic(ElementGrafic* element);
+
+	void AdaugaButon(Buton* btn);
 };

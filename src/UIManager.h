@@ -22,10 +22,14 @@ static SDL_Window* window;
 static SDL_Renderer* renderer;
 
 static std::list<Componenta*> toate_componentele;
+static std::list<WindowGrafic*> toate_windowurile;
 static std::list<Buton*> toate_butoanele;
 
 typedef void (*PctConexSelectatCallback)(PunctConexiune*);
+typedef void (*RefreshUICallback)();
+
 extern PctConexSelectatCallback callback_slectare_pct_conex;
+extern list<RefreshUICallback> refresh_ui_listeners;
 
 void ZoomIn();
 void ZoomOut();
@@ -38,18 +42,24 @@ void RefreshUI();
 void DeseneazaComponente();
 void DeseneazaComponenta(Componenta* comp);
 
+void DeseneazaWindowGrafic(WindowGrafic* window);
+void DeseneazaWindowuriGrafice();
+void InregistreazaWindowGrafic(WindowGrafic* window);
+void EliminaWindowGrafic(WindowGrafic* window);
+
 void ActualizeazaGraficaComponenta(Componenta* comp);
 void ActualizeazaGraficaConector(Conector* con);
 
 void DeseneazaGrid(int grosime);
 Vector2 PozitieGridLaPozitieEcran(Vector2 grid_poz);
 Vector2 PozitieEcranLaPozitieGrid(Vector2 ecran_poz);
-Vector2 PozitieMouseInGrid(int x, int y);
+Vector2 PozitieMouseInGrid();
 Vector2 GetCentruEcran();
 
 bool ButonApasat(Buton* btn, Vector2 clickPos);
 
 void InregistrareButon(Buton* buton_new);
+void EliminaButon(Buton* buton);
 
 void ProcesareButoane(Vector2 poz_click);
 
@@ -57,48 +67,12 @@ void DeseneazaButon(Buton* btn);
 void DeseneazaToateButoanele();
 
 bool VerificaColiziune(Vector2 pozitie_in_grid);
+Componenta* VerificaColiziuneComponenta(Vector2 pozitie_in_grid);
 
 void SelecteazaPunctConexiune(PunctConexiune* pct);
 void ProceseazaClickPuncteConexiune(Vector2 poz_click);
 
-inline bool SuntCeluleAdiacente(Vector2 poz1, Vector2 poz2) {
-	
-	return (abs(poz1.x - poz2.x) + abs(poz1.y - poz2.y) == 1);
-}
-inline Vector2 CelulaAdiacentaInDir(Vector2 poz, ORIENTARE dir) {
-	switch (dir)
-	{
-	case STANGA:
-		return Vector2(poz.x - 1, poz.y);
-		break;
-	case DREAPTA:
-		return Vector2(poz.x + 1, poz.y);
-		break;
-	case SUS:
-		return Vector2(poz.x, poz.y + 1);
-		break;
-	case JOS:
-		return Vector2(poz.x, poz.y - 1);
-		break;
-	default:
-		break;
-	}
-}
+bool SuntCeluleAdiacente(Vector2 poz1, Vector2 poz2);
+Vector2 CelulaAdiacentaInDir(Vector2 poz, ORIENTARE dir);
 
-inline PunctConexiune* MousePestePuctConexiune(Vector2 poz_mouse) {
-	for (auto& comp : toate_componentele)
-	{
-		if (comp) { // Check if comp is not null
-			for (auto& pct : comp->puncte_conexiune)
-			{
-				if (pct->output == NULL) {
-					if (ButonApasat(pct->buton, poz_mouse)) {
-						return pct;
-					}
-				}
-			}
-		}
-
-	}
-	return NULL;
-}
+PunctConexiune* MousePestePuctConexiune(Vector2 poz_mouse);

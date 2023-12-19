@@ -14,6 +14,8 @@ TTF_Font* font;
 PunctConexiune* pct_conex_selectat;
 PctConexSelectatCallback callback_slectare_pct_conex;
 
+list<RefreshUICallback> refresh_ui_listeners;
+
 
 SDL_Renderer* GetCurrentRenderer() {
     return renderer;
@@ -88,8 +90,10 @@ void InchidereUIManager() {
 
 
 void InregistreazaComponenta(Componenta* comp) {
+    printf("am inregistrat componenta ");
     toate_componentele.push_back(comp);
 }
+
 void ShowTabelDetalii(Componenta* comp) {
     
 }
@@ -99,11 +103,23 @@ void RefreshUI() {
     SDL_RenderClear(renderer);
 
 
+
     DeseneazaGrid(2);
     DeseneazaComponente();
     DeseneazaToateButoanele();
 
+    //facem callback pentru UI-ul refreshuit
+    for (auto& callback : refresh_ui_listeners) {
+        callback();
+    }
+    DeseneazaWindowuriGrafice();
+
+
+
     SDL_RenderPresent(renderer);
+
+
+    
     //ShowTabelDetalii(comp);
 }
 
@@ -178,6 +194,7 @@ void ActualizeazaGraficaConector(Conector* con) {
     Vector2 poz_start_conex_ecran = con->start_conexiune->buton->pozitie;
     path_conector->pozitii.push_back(poz_start_conex_ecran);
 
+
     //Obtine al doilea element din lista de pozitii
     Vector2 poz_cel_2_grid;
     Vector2 poz_cel_1_grid = con->start_conexiune->parinte->GetPozitie();
@@ -192,7 +209,12 @@ void ActualizeazaGraficaConector(Conector* con) {
         }
     }
     else {
+
         return;
+
+        if (con->final_conexiune != NULL) {
+            path_conector->pozitii.push_back(con->final_conexiune->buton->pozitie);
+        }
     }
 
     //Conecteaza la urmatorul punct ocolind desenul propriu printr-o generalizare a traseului-------------
@@ -227,6 +249,11 @@ void ActualizeazaGraficaConector(Conector* con) {
     for (auto pozitie : con->pozitii) {
         if (pozitie == con->pozitii.front())continue;
         path_conector->pozitii.push_back(PozitieGridLaPozitieEcran(pozitie));
+    }
+
+
+    if (con->final_conexiune != NULL) {
+        path_conector->pozitii.push_back(con->final_conexiune->buton->pozitie);
     }
 }
 void DeseneazaGrid(int grosime) {
@@ -324,7 +351,7 @@ Vector2 PozitieEcranLaPozitieGrid(Vector2 ecran_poz) {
     return cell;
 }
 
-Vector2 PozitieMouseInGrid(int mouseX, int mouseY) {
+Vector2 PozitieMouseInGrid() {
 
     float zoomedCellSize = Grid::MARIME_CELULA * factor_zoom;
     Vector2 gridSize = Vector2(Grid::GRID_CELULE_LATIME * zoomedCellSize, Grid::GRID_CELULE_INALTIME * zoomedCellSize);
@@ -333,6 +360,9 @@ Vector2 PozitieMouseInGrid(int mouseX, int mouseY) {
 
     Vector2 offset_grid = gridSize / 2 - screenCenter;
     //aici am calculat matematic inversa functiei din drawcomponent care converteste din pozitie in grid, in pozitie pe ecran
+    int mouseX = 0, mouseY = 0;
+    SDL_GetMouseState(&mouseX, &mouseY);
+
     Vector2 positionInGrid = (Vector2(mouseX, mouseY) + offset_grid) / zoomedCellSize;
 
     if (positionInGrid.x < 0 || positionInGrid.x > Grid::GRID_CELULE_LATIME - 1  || positionInGrid.y < 0 || positionInGrid.y > Grid::GRID_CELULE_INALTIME - 1) {
@@ -366,6 +396,16 @@ bool VerificaColiziune(Vector2 pozitie_in_grid) {
     return false;
 }
 
+Componenta* VerificaColiziuneComponenta(Vector2 pozitie_in_grid) {
+    for (auto comp : toate_componentele)
+    {
+        if (comp->GetPozitie().x == pozitie_in_grid.x && comp->GetPozitie().y == pozitie_in_grid.y) {
+            return comp;
+        }
+    }
+    return NULL;
+}
+
 void SelecteazaPunctConexiune(PunctConexiune* pct) {
 
     if (pct_conex_selectat != NULL)pct_conex_selectat->buton->dimensiuni = Vector2(15, 15);
@@ -395,6 +435,11 @@ bool ButonApasat(Buton* btn, Vector2 clickPos) {
 void InregistrareButon(Buton* buton_new) {
     toate_butoanele.push_back(buton_new);
 }
+
+void EliminaButon(Buton* buton) {
+    toate_butoanele.remove(buton);
+}
+
 
 void ProcesareButoane(Vector2 poz_click) {
     //functia asta va fi apelata doar cand se apasa click
@@ -441,5 +486,70 @@ void ProceseazaClickPuncteConexiune(Vector2 poz_click) {
     }
 
 }
+bool SuntCeluleAdiacente(Vector2 poz1, Vector2 poz2) {
 
-//Procesare grafica------------------
+    return (abs(poz1.x - poz2.x) + abs(poz1.y - poz2.y) == 1);
+}
+Vector2 CelulaAdiacentaInDir(Vector2 poz, ORIENTARE dir) {
+    switch (dir)
+    {
+    case STANGA:
+        return Vector2(poz.x - 1, poz.y);
+        break;
+    case DREAPTA:
+        return Vector2(poz.x + 1, poz.y);
+        break;
+    case SUS:
+        return Vector2(poz.x, poz.y + 1);
+        break;
+    case JOS:
+        return Vector2(poz.x, poz.y - 1);
+        break;
+    default:
+        break;
+    }
+}
+
+PunctConexiune* MousePestePuctConexiune(Vector2 poz_mouse) {
+
+    for (auto& comp : toate_componentele)
+    {
+        if (comp) {
+            for (auto& pct : comp->puncte_conexiune)
+            {
+                if (pct->output == NULL) {
+                    if (ButonApasat(pct->buton, poz_mouse)) {
+                        return pct;
+                    }
+                }
+            }
+        }
+
+    }
+    return NULL;
+}
+
+void DeseneazaWindowuriGrafice() {
+    for (auto& window : toate_windowurile) {
+        DeseneazaWindowGrafic(window);
+    }
+}
+
+void DeseneazaWindowGrafic(WindowGrafic* window) {
+    for (auto& element : window->elem_grafice) {
+        element->Desenare(renderer);
+    }
+}
+
+void InregistreazaWindowGrafic(WindowGrafic* window) {
+    toate_windowurile.push_back(window);
+    for (auto& btn : window->butoane) {
+        InregistrareButon(btn);
+    }
+}
+void EliminaWindowGrafic(WindowGrafic* window) {
+    toate_windowurile.remove(window);
+    for (auto& btn : window->butoane) {
+        EliminaButon(btn);
+    }
+}

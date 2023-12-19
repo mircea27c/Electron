@@ -30,17 +30,13 @@ void desenator_conectori::InitializareDesenatorConectori() {
 
 void desenator_conectori::ProcesareFinalizareConectare(int mouse_x, int mouse_y) {
 	PunctConexiune* pct_sub_mouse = MousePestePuctConexiune(Vector2(mouse_x, mouse_y));
-	printf("coordonate mouse %f %f \n", mouse_x, mouse_y);
+
 	if (pct_sub_mouse != NULL) {
-		printf("punct sub mouse NU este null \n");
 		conector_desenat->final_conexiune = pct_sub_mouse;
 		pct_sub_mouse->output = conector_desenat;
 		StopConectare();
 
 		RefreshUI();
-	}
-	else {
-		printf("punct sub mouse este NULL \n");
 	}
 }
 
@@ -53,7 +49,9 @@ void desenator_conectori::ProcesareConectare() {
 
 	SDL_GetMouseState(&x,&y);
 
-	Vector2 gridPos = PozitieMouseInGrid(x,y);
+
+	Vector2 gridPos = PozitieMouseInGrid();
+
 	if (grid_ultim_x == gridPos.x && grid_ultim_y == gridPos.y) {
 		//daca suntem in aceeasi celula nu mai procesam nimic legat de schimbarea celulei, dar verificam daca mouseul este peste vreun pct conexiune
 

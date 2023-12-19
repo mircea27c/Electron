@@ -98,8 +98,6 @@ void TextGrafic::Desenare(SDL_Renderer* rend) {
 }
 
 void Path::Desenare(SDL_Renderer* rend){
-	SDL_SetRenderDrawColor(rend, 230,230,230,255);
-
 
 	Vector2 pozAnterior;
 	bool prima = true;
@@ -109,8 +107,20 @@ void Path::Desenare(SDL_Renderer* rend){
 		}
 		else {
 			//SDL_RenderDrawLine(rend, pozAnterior.x, pozAnterior.y, poz.x, poz.y );
-			DeseneazaLinie(rend, pozAnterior, poz, (int)(5*marime) > 1 ? (int)(5*marime):1, SDL_Color{200,200,200,200});
+			DeseneazaLinie(rend, pozAnterior, poz, (int)(5*marime) > 1 ? (int)(5*marime):1, culoare);
 		}
 		pozAnterior = poz;
 	}
+}
+
+void WindowGrafic::AdaugaElementGrafic(ElementGrafic* element) {
+	elem_grafice.push_back(element);
+}
+
+void WindowGrafic::AdaugaButon(Buton* btn) {
+	butoane.push_back(btn);
+}
+
+WindowGrafic::WindowGrafic() {
+	
 }

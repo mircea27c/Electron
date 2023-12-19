@@ -8,6 +8,7 @@
 #include "pozitionatorComponente.h"
 #include "desenatorConectori.h"
 #include "TipuriComponente.h" 
+#include "EditorComponente.h" 
 class Aplicatie
 {public:
 	bool middle_btn_apasat=false;

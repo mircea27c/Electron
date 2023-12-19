@@ -32,14 +32,7 @@ void ProcesarePlasare() {
 	if (!se_plaseaza)return;
 	if (component_selectat == NULL || component_preview == NULL)return;
 
-
-	int x = 0, y = 0;
-
-
-	SDL_GetMouseState(&x, &y);
-	printf("pozitie mouse %f %f\n", x, y);
-
-	Vector2 gridPos = PozitieMouseInGrid(x,y);
+	Vector2 gridPos = PozitieMouseInGrid();
 	if (grid_ultim_x != gridPos.x || grid_ultim_y != gridPos.y) {
 		RefreshUI();
 	}
@@ -70,10 +63,7 @@ void ProcesareClickPlasare() {
 	
 	if (!se_plaseaza)return;
 
-	int x = 0, y = 0;
-
-	SDL_GetMouseState(&x, &y);
-	Vector2 gridPos = PozitieMouseInGrid(x,y);
+	Vector2 gridPos = PozitieMouseInGrid();
 	if (gridPos.x == -1)return;
 	if (VerificaColiziune(gridPos)) {
 		return;

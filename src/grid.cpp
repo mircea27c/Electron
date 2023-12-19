@@ -13,5 +13,6 @@ public:
 	#define CUL_PCT_CONEX_LIBER SDL_Color{ 100,100,255,255};
 	#define CUL_PCT_CONEX_OCUPAT SDL_Color{ 50,50,200,255};
 
+	#define CUL_SELECTIE SDL_Color{ 230,230,150,255};
 
 };
