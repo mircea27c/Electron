@@ -15,16 +15,12 @@ void SelectareComponentaPozitionare(int index) {
 	component_selectat->id = "componenta valida \n";
 
 	if (component_preview == NULL) {
-		ImagineGrafica* rezistor = new ImagineGrafica();
-		rezistor->dimensiuni = Vector2(MARIME_COMPONENTE, MARIME_COMPONENTE);
-		rezistor->path="Desenecomponente/rezistor.bmp";
-        component_preview = rezistor;
-		/*/DreptunghiGrafic* dreptunghi_preview = new DreptunghiGrafic();
-		dreptunghi_preview->culoare = SDL_Color{ 180,180,180,255 };
-		dreptunghi_preview->dimensiuni = Vector2(50,50);
-
-		component_preview = dreptunghi_preview;*/
+		ImagineGrafica* imagine_preview = new ImagineGrafica();
+		imagine_preview->dimensiuni = Vector2(MARIME_COMPONENTE, MARIME_COMPONENTE);
+        component_preview = imagine_preview;
 	}
+	component_preview->path = ((ImagineGrafica*)component_selectat->grafica)->path;
+	
 	se_plaseaza = true;
 }
 

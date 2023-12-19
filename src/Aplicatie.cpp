@@ -321,10 +321,10 @@ void Aplicatie::ProcesareClick(SDL_Event* actiune_mouse) {
     switch (actiune_mouse->type) {
     case SDL_MOUSEBUTTONDOWN:
         if (actiune_mouse->button.button == SDL_BUTTON_LEFT) {
-            editor_componente::ProcesareClick(x,y);
             ProcesareClickPlasare();
             ProceseazaClickPuncteConexiune(Vector2(x,y));
             ProcesareButoane(Vector2(x, y));
+            editor_componente::ProcesareClick(x,y);
         }
         if (actiune_mouse->button.button == SDL_BUTTON_RIGHT) {
             Vector2 mouseInGrid = PozitieMouseInGrid();

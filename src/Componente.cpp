@@ -44,3 +44,4 @@ PunctConexiune::PunctConexiune(PunctConexiune* model)
 void Componenta::Print() {
 	
 }
+

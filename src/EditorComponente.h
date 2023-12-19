@@ -7,8 +7,11 @@ namespace editor_componente {
 	static Componenta* componenta_selectata;
 
 	static WindowGrafic* caseta_selectie;
-	static WindowGrafic* panou_informatii;
 	static Path* path_caseta_selectie;
+
+	static WindowGrafic* panou_info;
+	static TextGrafic* panou_info_text;
+	static ImagineGrafica* panou_info_img;
 
 	void InitializareEditor();
 
@@ -16,10 +19,14 @@ namespace editor_componente {
 
 	void ActualizeazaConturCaseta();
 
+	void ActualizeazaPanouInformatii();
+
 	void DeselectareComponenta();
 
 	void RecalculeazaGrafica();
 
 	void ProcesareClick(int x, int y);
+
+	void StergeComponentaSelectata();
 
 }

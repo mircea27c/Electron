@@ -38,6 +38,7 @@ SDL_Renderer* GetCurrentRenderer();
 void InititalizareUIManager();
 void InchidereUIManager();
 void InregistreazaComponenta(Componenta* comp);
+void EliminaComponenta(Componenta* comp);
 void RefreshUI();
 void DeseneazaComponente();
 void DeseneazaComponenta(Componenta* comp);

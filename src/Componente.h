@@ -66,7 +66,8 @@ public:
 
 		pozitie_in_grid = Vector2();
 	}
-	
+
+
 	void SetPozitie(Vector2 pozitie);
 	Vector2 GetPozitie();
 

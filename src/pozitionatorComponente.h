@@ -4,7 +4,7 @@
 
 
 static Componenta* component_selectat = NULL;
-static ElementGrafic* component_preview = NULL;
+static ImagineGrafica* component_preview = NULL;
 
 static int grid_ultim_x;
 static int grid_ultim_y;

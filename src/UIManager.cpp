@@ -94,6 +94,11 @@ void InregistreazaComponenta(Componenta* comp) {
     toate_componentele.push_back(comp);
 }
 
+void EliminaComponenta(Componenta* comp) {
+    toate_componentele.remove(comp);
+}
+
+
 void ShowTabelDetalii(Componenta* comp) {
     
 }
@@ -106,7 +111,6 @@ void RefreshUI() {
 
     DeseneazaGrid(2);
     DeseneazaComponente();
-    DeseneazaToateButoanele();
 
     //facem callback pentru UI-ul refreshuit
     for (auto& callback : refresh_ui_listeners) {
@@ -114,6 +118,7 @@ void RefreshUI() {
     }
     DeseneazaWindowuriGrafice();
 
+    DeseneazaToateButoanele();
 
 
     SDL_RenderPresent(renderer);
@@ -549,6 +554,7 @@ void InregistreazaWindowGrafic(WindowGrafic* window) {
 }
 void EliminaWindowGrafic(WindowGrafic* window) {
     toate_windowurile.remove(window);
+    if (window->butoane.empty())return;
     for (auto& btn : window->butoane) {
         EliminaButon(btn);
     }
