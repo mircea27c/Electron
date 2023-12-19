@@ -180,15 +180,15 @@
     </Font>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="bin\Desenecomponente\and gate.bmp" />
+    <Image Include="bin\Desenecomponente\andgate.bmp" />
     <Image Include="bin\Desenecomponente\capacitor.bmp" />
-    <Image Include="bin\Desenecomponente\dioda cu 2 linii.bmp" />
-    <Image Include="bin\Desenecomponente\dioda cu cerc.bmp" />
-    <Image Include="bin\Desenecomponente\impantare.bmp" />
+    <Image Include="bin\Desenecomponente\dioda2linii.bmp" />
+    <Image Include="bin\Desenecomponente\diodacerc.bmp" />
+    <Image Include="bin\Desenecomponente\impamantare.bmp" />
     <Image Include="bin\Desenecomponente\intrerupator.bmp" />
     <Image Include="bin\Desenecomponente\rezistor.bmp" />
-    <Image Include="bin\Desenecomponente\sursa voltaj.bmp" />
-    <Image Include="bin\Desenecomponente\tranzistor npn.bmp" />
+    <Image Include="bin\Desenecomponente\sursavoltaj.bmp" />
+    <Image Include="bin\Desenecomponente\tranzistor.bmp" />
     <Image Include="bin\Imagini\Cactus.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
