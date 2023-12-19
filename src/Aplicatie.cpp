@@ -82,7 +82,8 @@ void Aplicatie::InitializareUI() {
     bg_btn4->dimensiuni = Vector2(100, 30);
     bg_btn4->pozitie = Vector2(225, INALTIME - 60);
     bg_btn4->marime = 1;
-
+    //placeButton->AdaugaElementGrafic(bg_btn4);
+    zoomOutBtn->AdaugaElementGrafic(bg_btn3);
     rezistor->AdaugaElementGrafic(bg_btn3);
     rezistor->AdaugaElementGrafic(bg_btn4);
 
@@ -323,7 +324,7 @@ void Aplicatie::ProcesareClick(SDL_Event* actiune_mouse) {
             ProcesareButoane(Vector2(x, y));
         }
         if (actiune_mouse->button.button == SDL_BUTTON_RIGHT) {
-            Vector2 mouseInGrid = PozitieMouseInGrid();
+            Vector2 mouseInGrid = PozitieMouseInGrid(x,y);
             cout << mouseInGrid.x << " " << mouseInGrid.y << endl;
         }
         if (actiune_mouse->button.button == SDL_BUTTON_MIDDLE) {

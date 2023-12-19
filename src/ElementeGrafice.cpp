@@ -20,7 +20,7 @@ void Buton::ActionareClick()
 }
 
 void ElementGrafic::Desenare(SDL_Renderer* rend) {
-	
+	printf("Desenand element grafic gol ");
 }
 
 void DreptunghiGrafic::Desenare(SDL_Renderer* rend) {
@@ -34,6 +34,7 @@ void DreptunghiGrafic::Desenare(SDL_Renderer* rend) {
 void ImagineGrafica::Desenare(SDL_Renderer* rend) {
 	SDL_Surface* imagine_surface = SDL_LoadBMP(path);
 
+
 	if (imagine_surface == nullptr) {
 		printf("Loading image error");
 		printf(SDL_GetError());
@@ -42,13 +43,16 @@ void ImagineGrafica::Desenare(SDL_Renderer* rend) {
 	}
 
 	SDL_Texture* image_textura = SDL_CreateTextureFromSurface(rend, imagine_surface);
-	SDL_FreeSurface(imagine_surface); // Free the surface, as it's no longer needed
+	SDL_FreeSurface(imagine_surface);
 	if (image_textura == nullptr) {
 		printf("SDL_CreateTextureFromSurface Error: ");
-		// Error handling code...
 	}    
 
-	SDL_Rect dest_rect = SDL_Rect{(int)(pozitie.x - dimensiuni.x/2), (int)(pozitie.y - dimensiuni.y/2), (int)dimensiuni.x,(int)dimensiuni.y};
+	SDL_SetTextureColorMod(image_textura, culoare.r, culoare.g, culoare.b);
+
+	Vector2 dimensiuni_reale = dimensiuni * marime;
+
+	SDL_Rect dest_rect = SDL_Rect{(int)(pozitie.x - dimensiuni_reale.x/2), (int)(pozitie.y - dimensiuni_reale.y/2), (int)dimensiuni_reale.x,(int)dimensiuni_reale.y};
 
 	SDL_RenderCopy(rend, image_textura, NULL, &dest_rect);
 
@@ -98,17 +102,14 @@ void Path::Desenare(SDL_Renderer* rend){
 
 
 	Vector2 pozAnterior;
-
 	bool prima = true;
-	printf("drawing conector cu %d \n", pozitii.size());
 	for (auto poz : pozitii) {
-		printf("pozitie %f, %f \n", poz.x, poz.y);
 		if (prima) {
 			prima = false;
 		}
 		else {
-			SDL_RenderDrawLine(rend, pozAnterior.x, pozAnterior.y, poz.x, poz.y );
-			//DeseneazaLinie(rend, pozAnterior, poz, 5);
+			//SDL_RenderDrawLine(rend, pozAnterior.x, pozAnterior.y, poz.x, poz.y );
+			DeseneazaLinie(rend, pozAnterior, poz, (int)(5*marime) > 1 ? (int)(5*marime):1, SDL_Color{200,200,200,200});
 		}
 		pozAnterior = poz;
 	}

@@ -44,9 +44,8 @@ void ActualizeazaGraficaConector(Conector* con);
 void DeseneazaGrid(int grosime);
 Vector2 PozitieGridLaPozitieEcran(Vector2 grid_poz);
 Vector2 PozitieEcranLaPozitieGrid(Vector2 ecran_poz);
-Vector2 PozitieMouseInGrid();
+Vector2 PozitieMouseInGrid(int x, int y);
 Vector2 GetCentruEcran();
-Vector2 GetCentruGrid();
 
 bool ButonApasat(Buton* btn, Vector2 clickPos);
 
@@ -84,4 +83,22 @@ inline Vector2 CelulaAdiacentaInDir(Vector2 poz, ORIENTARE dir) {
 	default:
 		break;
 	}
+}
+
+inline PunctConexiune* MousePestePuctConexiune(Vector2 poz_mouse) {
+	for (auto& comp : toate_componentele)
+	{
+		if (comp) { // Check if comp is not null
+			for (auto& pct : comp->puncte_conexiune)
+			{
+				if (pct->output == NULL) {
+					if (ButonApasat(pct->buton, poz_mouse)) {
+						return pct;
+					}
+				}
+			}
+		}
+
+	}
+	return NULL;
 }

@@ -128,6 +128,7 @@ void DeseneazaComponenta(Componenta* comp) {
     if (comp) {
         
         ActualizeazaGraficaComponenta(comp);
+
         comp->grafica->Desenare(renderer);
         
         for (auto& pct : comp->puncte_conexiune)
@@ -157,6 +158,15 @@ void ActualizeazaGraficaComponenta(Componenta* comp) {
         pct->buton->ListaElementeGrafice.front()->pozitie = pozGrafica - m;
         pct->buton->pozitie = pozGrafica - m;
         pct->buton->ListaElementeGrafice.front()->marime = factor_zoom;
+
+        if (pct->output != NULL) {
+            pct->buton->ListaElementeGrafice.front()->culoare = CUL_PCT_CONEX_OCUPAT;
+            ((DreptunghiGrafic*)pct->buton->ListaElementeGrafice.front())->dimensiuni = Vector2(Grid::MARIME_PCT_CONEX_OCUPAT, Grid::MARIME_PCT_CONEX_OCUPAT);
+        }
+        else {
+            pct->buton->ListaElementeGrafice.front()->culoare = CUL_PCT_CONEX_LIBER;
+            ((DreptunghiGrafic*)pct->buton->ListaElementeGrafice.front())->dimensiuni = Vector2(Grid::MARIME_PCT_CONEX_LIBER, Grid::MARIME_PCT_CONEX_LIBER);
+        }
     }
 }
 
@@ -314,15 +324,12 @@ Vector2 PozitieEcranLaPozitieGrid(Vector2 ecran_poz) {
     return cell;
 }
 
-Vector2 PozitieMouseInGrid() {
+Vector2 PozitieMouseInGrid(int mouseX, int mouseY) {
 
     float zoomedCellSize = Grid::MARIME_CELULA * factor_zoom;
     Vector2 gridSize = Vector2(Grid::GRID_CELULE_LATIME * zoomedCellSize, Grid::GRID_CELULE_INALTIME * zoomedCellSize);
     Vector2 gridCenter = Vector2(gridSize.x / 2, gridSize.y / 2);
     Vector2 screenCenter = GetCentruEcran();
-
-    int mouseX, mouseY;
-    SDL_GetMouseState(&mouseX,&mouseY);
 
     Vector2 offset_grid = gridSize / 2 - screenCenter;
     //aici am calculat matematic inversa functiei din drawcomponent care converteste din pozitie in grid, in pozitie pe ecran

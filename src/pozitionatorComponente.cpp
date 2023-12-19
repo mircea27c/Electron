@@ -11,10 +11,12 @@ void SelectareComponentaPozitionare(int index) {
 		return;
 	}
 
-	component_selectat = new Componenta( GetComponentaSelectata());
+	component_selectat = new Componenta(GetComponentaSelectata());
+	component_selectat->id = "componenta valida \n";
+
 	if (component_preview == NULL) {
 		ImagineGrafica* rezistor = new ImagineGrafica();
-		rezistor->dimensiuni = Vector2(50, 50);
+		rezistor->dimensiuni = Vector2(MARIME_COMPONENTE, MARIME_COMPONENTE);
 		rezistor->path="Desenecomponente/rezistor.bmp";
         component_preview = rezistor;
 		/*/DreptunghiGrafic* dreptunghi_preview = new DreptunghiGrafic();
@@ -30,7 +32,14 @@ void ProcesarePlasare() {
 	if (!se_plaseaza)return;
 	if (component_selectat == NULL || component_preview == NULL)return;
 
-	Vector2 gridPos = PozitieMouseInGrid();
+
+	int x = 0, y = 0;
+
+
+	SDL_GetMouseState(&x, &y);
+	printf("pozitie mouse %f %f\n", x, y);
+
+	Vector2 gridPos = PozitieMouseInGrid(x,y);
 	if (grid_ultim_x != gridPos.x || grid_ultim_y != gridPos.y) {
 		RefreshUI();
 	}
@@ -60,12 +69,17 @@ void ProcesarePlasare() {
 void ProcesareClickPlasare() {
 	
 	if (!se_plaseaza)return;
-	Vector2 gridPos = PozitieMouseInGrid();
+
+	int x = 0, y = 0;
+
+	SDL_GetMouseState(&x, &y);
+	Vector2 gridPos = PozitieMouseInGrid(x,y);
 	if (gridPos.x == -1)return;
 	if (VerificaColiziune(gridPos)) {
 		return;
 	}
 	component_selectat->SetPozitie(gridPos);
+
 	InregistreazaComponenta(component_selectat);
 	component_selectat = NULL;
 	se_plaseaza = false;

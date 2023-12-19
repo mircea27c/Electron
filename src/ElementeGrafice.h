@@ -3,6 +3,7 @@
 #include <SDL_ttf.h> 
 #include <list>
 #include <iostream>
+#include <math.h>
 #include "Vector2.h" 
 #include "unelteDesenare.h"
 
@@ -31,8 +32,8 @@ public:
 	Vector2 dimensiuni;
 	void Desenare(SDL_Renderer* rend) override;
 	inline ElementGrafic* Clonare() override {
-		DreptunghiGrafic* element = (DreptunghiGrafic*)ElementGrafic::Clonare();
-		element->dimensiuni = element->dimensiuni;
+		DreptunghiGrafic* element = new DreptunghiGrafic(*this);
+		element->dimensiuni = dimensiuni;
 
 		return element;
 	}
@@ -45,8 +46,10 @@ public:
 
 	virtual void Desenare(SDL_Renderer* rend)override;
 	inline ElementGrafic* Clonare() override {
-		ImagineGrafica* element = (ImagineGrafica*)ElementGrafic::Clonare();
-		element->dimensiuni = element->dimensiuni;
+		ImagineGrafica* element = new ImagineGrafica(*this);
+		element->dimensiuni = dimensiuni;
+		element->path = path;
+
 
 		return element;
 	}
@@ -59,7 +62,7 @@ public:
 
 	virtual void Desenare(SDL_Renderer* rend)override;
 	inline ElementGrafic* Clonare() override {
-		TextGrafic* element = (TextGrafic*)ElementGrafic::Clonare();
+		TextGrafic* element = new TextGrafic(*this);
 		dimensiuni = element->dimensiuni;
 		text = element->text;
 

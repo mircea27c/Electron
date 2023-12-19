@@ -1,14 +1,12 @@
 #include "TipuriComponente.h"
 
-#define MARIME_COMPONENTE 50
-
 
 void InitializareTipuriComponente() {
 	printf("Initializare succes \n");
 	Componenta* rezistor = new Componenta();
 
 	ImagineGrafica* img_rezistor = new ImagineGrafica();
-	img_rezistor->dimensiuni = Vector2(MARIME_COMPONENTE, MARIME_COMPONENTE);
+	img_rezistor->dimensiuni = Vector2(MARIME_COMPONENTE , MARIME_COMPONENTE);
 	img_rezistor->path = "Desenecomponente/rezistor.bmp";
 	rezistor->grafica = img_rezistor;
 	//adauga un pct conexiune la 0.8 (80%) din marimea celulei (de la stanga la dreapta) si 0.5 (50%) adica mijloc de sus in jos (sau invers)
