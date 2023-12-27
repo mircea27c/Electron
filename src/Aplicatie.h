@@ -19,8 +19,6 @@ class Aplicatie
 
 	void InchidereAplicatie();
 
-
-
 	void InitializareUI();
 
 	void ProcesareClick(SDL_Event* actiune_mouse);

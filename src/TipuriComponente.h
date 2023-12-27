@@ -15,4 +15,5 @@ static Componenta* tip_comp_selectat = NULL;
 void InitializareTipuriComponente();
 
 void SelecteazaComponenta(int index);
-Componenta* GetComponentaSelectata();
+Componenta* GetComponentaSelectata(); 
+void AdaugaPuncteConexiune(Componenta* comp, PunctConexiune* pct, PunctConexiune* pct2, PunctConexiune* pct3, PunctConexiune* pct4);

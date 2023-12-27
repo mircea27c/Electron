@@ -9,7 +9,6 @@ float rata_zoom = 1.2f;
 
 Vector2 pozitie_grid;
 
-TTF_Font* font;
 
 PunctConexiune* pct_conex_selectat;
 PctConexSelectatCallback callback_slectare_pct_conex;
@@ -90,7 +89,6 @@ void InchidereUIManager() {
 
 
 void InregistreazaComponenta(Componenta* comp) {
-    printf("am inregistrat componenta ");
     toate_componentele.push_back(comp);
 }
 
@@ -107,12 +105,11 @@ void RefreshUI() {
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
 
-
-
     DeseneazaGrid(2);
+
     DeseneazaComponente();
 
-    //facem callback pentru UI-ul refreshuit
+    ////facem callback pentru UI-ul refreshuit
     for (auto& callback : refresh_ui_listeners) {
         callback();
     }
@@ -120,10 +117,7 @@ void RefreshUI() {
 
     DeseneazaToateButoanele();
 
-
     SDL_RenderPresent(renderer);
-
-
     
     //ShowTabelDetalii(comp);
 }
@@ -152,12 +146,11 @@ void DeseneazaComponenta(Componenta* comp) {
 
         comp->grafica->Desenare(renderer);
         
-        for (auto& pct : comp->puncte_conexiune)
+        for (int i = 0; i < comp->nr_pct_conexiune; i++)
         {
-
-            DeseneazaButon(pct->buton);
-
+            DeseneazaButon(comp->puncte_conexiune[i].buton);
         }
+
     }
 
 }
@@ -165,102 +158,178 @@ void DeseneazaComponenta(Componenta* comp) {
 void ActualizeazaGraficaComponenta(Componenta* comp) {
     comp->grafica->marime = factor_zoom;
     comp->grafica->pozitie = PozitieGridLaPozitieEcran(comp->GetPozitie());
+    switch (comp->rotatie)
+    {
+    case DREAPTA:
+        comp->grafica->rotatie = 0;
+        break;
+    case JOS:
+        comp->grafica->rotatie = 90;
+        break;
+    case STANGA:
+        comp->grafica->rotatie = 180;
+        break;
+    case SUS:
+        comp->grafica->rotatie = 270;
+        break;
+    default:
+        comp->grafica->rotatie = 0;
+        break;
+    }
 
     if (Conector* conector = dynamic_cast<Conector*>(comp)) {
         ActualizeazaGraficaConector(conector);
     }
 
-    for (auto& pct : comp->puncte_conexiune)
+    for (int i = 0; i < comp->nr_pct_conexiune; i++)
     {
-        //recalculeaza pozitia punctului de conexiune
-        Vector2 v = (pct->pozitie_relativa * Grid::MARIME_CELULA * factor_zoom);
-        Vector2 pozGrafica = comp->grafica->pozitie;
-        Vector2 m = Vector2(Grid::MARIME_CELULA * factor_zoom, Grid::MARIME_CELULA * factor_zoom) / 2 - v;
-        pct->buton->ListaElementeGrafice.front()->pozitie = pozGrafica - m;
-        pct->buton->pozitie = pozGrafica - m;
-        pct->buton->ListaElementeGrafice.front()->marime = factor_zoom;
+        ActualizeazaGraficaPctConex(comp, &comp->puncte_conexiune[i]);
+    }
+}
 
-        if (pct->output != NULL) {
-            pct->buton->ListaElementeGrafice.front()->culoare = CUL_PCT_CONEX_OCUPAT;
-            ((DreptunghiGrafic*)pct->buton->ListaElementeGrafice.front())->dimensiuni = Vector2(Grid::MARIME_PCT_CONEX_OCUPAT, Grid::MARIME_PCT_CONEX_OCUPAT);
-        }
-        else {
-            pct->buton->ListaElementeGrafice.front()->culoare = CUL_PCT_CONEX_LIBER;
-            ((DreptunghiGrafic*)pct->buton->ListaElementeGrafice.front())->dimensiuni = Vector2(Grid::MARIME_PCT_CONEX_LIBER, Grid::MARIME_PCT_CONEX_LIBER);
-        }
+void ActualizeazaGraficaPctConex(Componenta* comp, PunctConexiune* pct)
+{
+    Vector2 poz_rotita;
+
+    switch (comp->rotatie)
+    {
+    case DREAPTA:
+        poz_rotita = pct->pozitie_relativa;
+        break;
+    case STANGA:
+        poz_rotita = Vector2(1 - pct->pozitie_relativa.x, 1 - pct->pozitie_relativa.y);
+        break;
+    case SUS:
+        poz_rotita = Vector2(pct->pozitie_relativa.y, 1 - pct->pozitie_relativa.x);
+        break;
+    case JOS:
+        poz_rotita = Vector2(1- pct->pozitie_relativa.y, pct->pozitie_relativa.x);
+        break; 
+    default:
+        pct->pozitie_relativa;
+        break;
+    }
+
+    Vector2 v = (poz_rotita * Grid::MARIME_CELULA * factor_zoom);
+
+
+    Vector2 pozGrafica = comp->grafica->pozitie;
+    Vector2 m = Vector2(Grid::MARIME_CELULA * factor_zoom, Grid::MARIME_CELULA * factor_zoom) / 2 - v;
+    pct->buton->ListaElementeGrafice.front()->pozitie = pozGrafica - m;
+    pct->buton->pozitie = pozGrafica - m;
+    pct->buton->ListaElementeGrafice.front()->marime = factor_zoom;
+
+    if (pct->conector != NULL) {
+        pct->buton->ListaElementeGrafice.front()->culoare = CUL_PCT_CONEX_OCUPAT;
+        ((DreptunghiGrafic*)pct->buton->ListaElementeGrafice.front())->dimensiuni = Vector2(Grid::MARIME_PCT_CONEX_OCUPAT, Grid::MARIME_PCT_CONEX_OCUPAT);
+    }
+    else {
+        pct->buton->ListaElementeGrafice.front()->culoare = CUL_PCT_CONEX_LIBER;
+        ((DreptunghiGrafic*)pct->buton->ListaElementeGrafice.front())->dimensiuni = Vector2(Grid::MARIME_PCT_CONEX_LIBER, Grid::MARIME_PCT_CONEX_LIBER);
     }
 }
 
 void ActualizeazaGraficaConector(Conector* con) {
-    Path* path_conector = (Path*)con->grafica;
-    path_conector->pozitii.clear();
+    //incerc sa adaug conectorul de start daca exista
+    Path* grafica = (Path*)con->grafica;
+    grafica->pozitii.clear();
 
-    //adauga pozitia butonului conector de la care a plecat
-    Vector2 poz_start_conex_ecran = con->start_conexiune->buton->pozitie;
-    path_conector->pozitii.push_back(poz_start_conex_ecran);
+    if (con->start_conexiune != NULL) {
+        Vector2 poz_ecran_pct = con->start_conexiune->buton->pozitie;
+        grafica->pozitii.push_back(poz_ecran_pct);
 
-
-    //Obtine al doilea element din lista de pozitii
-    Vector2 poz_cel_2_grid;
-    Vector2 poz_cel_1_grid = con->start_conexiune->parinte->GetPozitie();
-    if (con->pozitii.size() >= 1) {
-        int i = 0;
-        for (auto poz : con->pozitii) {
-            if (i == 0) {
-                poz_cel_2_grid = poz;
-                break;
-            }
-            i++;
-        }
-    }
-    else {
-
-        return;
-
-        if (con->final_conexiune != NULL) {
-            path_conector->pozitii.push_back(con->final_conexiune->buton->pozitie);
+        if (!con->pozitii.empty()) {
+            DeseneazaLegaturaPctLaConector(con->start_conexiune, con->pozitii.front(), grafica);
         }
     }
 
-    //Conecteaza la urmatorul punct ocolind desenul propriu printr-o generalizare a traseului-------------
-    Vector2 dirLaUrmatorulPunct = poz_cel_1_grid - poz_cel_2_grid;
-
-    float distanta = sqrt(dirLaUrmatorulPunct.x * dirLaUrmatorulPunct.x + dirLaUrmatorulPunct.y * dirLaUrmatorulPunct.y);
-
-    dirLaUrmatorulPunct = dirLaUrmatorulPunct / distanta;
-    dirLaUrmatorulPunct.x *= -1;
-    dirLaUrmatorulPunct.y *= -1;
-
-    Vector2 dirLaPunctIntermediar = dirLaUrmatorulPunct * Grid::MARIME_CELULA * 0.4f * factor_zoom;
-
-    Vector2 testVector = Vector2((float)0, Grid::MARIME_CELULA/2 * factor_zoom);
-
-    Vector2 dirIntermediar2 = dirLaUrmatorulPunct * Grid::MARIME_CELULA/2 * factor_zoom;
-
-    
-
-    if (dirLaUrmatorulPunct.x == 1 || dirLaUrmatorulPunct.x == -1)
+    //adaug restul pozitiilor
+    for (auto &poz: con->pozitii)
     {
-        path_conector->pozitii.push_back(PozitieGridLaPozitieEcran(poz_cel_1_grid) + dirIntermediar2);
-        path_conector->pozitii.push_back(poz_start_conex_ecran + dirLaPunctIntermediar);
-    }
-    else {
-        path_conector->pozitii.push_back(poz_start_conex_ecran + dirLaPunctIntermediar);
-        path_conector->pozitii.push_back(PozitieGridLaPozitieEcran(poz_cel_1_grid) + dirIntermediar2);
-    }
-
-    //------------------------------------
-
-    for (auto pozitie : con->pozitii) {
-        if (pozitie == con->pozitii.front())continue;
-        path_conector->pozitii.push_back(PozitieGridLaPozitieEcran(pozitie));
+        grafica->pozitii.push_back(PozitieGridLaPozitieEcran(poz));
     }
 
 
+    //incer sa adaug conector final daca exista
     if (con->final_conexiune != NULL) {
-        path_conector->pozitii.push_back(con->final_conexiune->buton->pozitie);
+        Vector2 poz_ecran_pct = con->final_conexiune->buton->pozitie;
+        grafica->pozitii.push_back(poz_ecran_pct);
+
+        if (!con->pozitii.empty()) {
+            DeseneazaLegaturaPctLaConector(con->start_conexiune, con->pozitii.back(), grafica);
+        }
     }
 }
+
+void DeseneazaLegaturaPctLaConector(PunctConexiune* pct, Vector2 g_poz_conector /* g_ = pozitie in grid*/, Path* grafica) {
+    Vector2 g_poz_pct = pct->parinte->GetPozitie();
+    Vector2 e_poz_pct = PozitieGridLaPozitieEcran(g_poz_pct);
+    
+    Vector2 dir_fwd = g_poz_conector - g_poz_pct;
+    Vector2 dir_dreapta = Vector2(dir_fwd.y, -dir_fwd.x);
+
+    ORIENTARE orientare_rotita_pct = (ORIENTARE)(((int)pct->orientare + (int)pct->parinte->rotatie)%4);
+
+    ORIENTARE orientare_spre_dest = DREAPTA;
+
+    Vector2 mij_margine_pct = e_poz_pct;
+
+    float marime_cel_scalata = Grid::MARIME_CELULA * factor_zoom;
+
+    switch (orientare_rotita_pct)
+    {
+    case DREAPTA:
+        mij_margine_pct.x += 0.4 * marime_cel_scalata;
+        break;
+    case JOS:
+        mij_margine_pct.y += 0.4 * marime_cel_scalata;
+        break;
+    case STANGA:
+        mij_margine_pct.x -= 0.4 * marime_cel_scalata;
+        break;
+    case SUS:
+        mij_margine_pct.y -= 0.4 * marime_cel_scalata;
+        break;
+    default:
+        break;
+    }
+
+    if (g_poz_conector.x > g_poz_pct.x) {
+        orientare_spre_dest = DREAPTA;
+    }
+    else if(g_poz_conector.x < g_poz_pct.x){
+        orientare_spre_dest = STANGA;
+    }else  if (g_poz_conector.y> g_poz_pct.y) {
+        orientare_spre_dest = JOS;
+    }
+    else if (g_poz_conector.y < g_poz_pct.y) {
+        orientare_spre_dest = SUS;
+    }
+    
+    int abs_dif = std::abs((int)orientare_spre_dest - (int)orientare_rotita_pct);
+    int semn_dif = (int)orientare_spre_dest - (int)orientare_rotita_pct;
+
+    printf("orientare punct %d, orientare componenta  %d, directia la urmator %d", (int)pct->orientare,(int)pct->parinte->rotatie, (int)orientare_spre_dest );
+
+    switch (abs_dif) {
+    case 0:
+        //aceeasi directie
+        return;
+        break;
+    case 2:
+        //directie opusa
+        grafica->pozitii.push_back(mij_margine_pct + (dir_fwd * 0.1f * marime_cel_scalata + (dir_dreapta * 0.4f * marime_cel_scalata)));
+        grafica->pozitii.push_back(mij_margine_pct + (dir_fwd * 0.9f * marime_cel_scalata + (dir_dreapta * 0.4f * marime_cel_scalata)));
+        break;
+    case 1:
+        //stanga sau dreapta
+        grafica->pozitii.push_back(mij_margine_pct + (dir_fwd * 0.1f * marime_cel_scalata + (dir_dreapta * 0.4f * marime_cel_scalata * semn_dif)));
+        grafica->pozitii.push_back(mij_margine_pct + (dir_fwd * 0.5f * marime_cel_scalata + (dir_dreapta * 0.4f * marime_cel_scalata * semn_dif)));
+        break;
+    }
+}
+
+
 void DeseneazaGrid(int grosime) {
 
     SDL_SetRenderDrawColor(renderer, 15,15,15,255);
@@ -438,16 +507,33 @@ bool ButonApasat(Buton* btn, Vector2 clickPos) {
 }
 
 void InregistrareButon(Buton* buton_new) {
-    toate_butoanele.push_back(buton_new);
+    coada_actiuni_lista_butoane.push(ActiuneListaButoane{ADAUGA ,buton_new});
 }
 
 void EliminaButon(Buton* buton) {
-    toate_butoanele.remove(buton);
+    coada_actiuni_lista_butoane.push(ActiuneListaButoane{ELIMINA ,buton});
 }
 
+void ProcesareActiuniListaButoane() {
+    if (coada_actiuni_lista_butoane.empty())return;
+    
+    while (!coada_actiuni_lista_butoane.empty()) {
+        ActiuneListaButoane temp = coada_actiuni_lista_butoane.front();
+
+        if (temp.tip_actiune == ADAUGA) {
+            toate_butoanele.push_back(temp.buton);
+        }
+        else {
+            toate_butoanele.remove(temp.buton);
+        }
+
+        coada_actiuni_lista_butoane.pop();
+    }
+
+    RefreshUI();
+}
 
 void ProcesareButoane(Vector2 poz_click) {
-    //functia asta va fi apelata doar cand se apasa click
 
     for (auto& btn : toate_butoanele) {
         //verificam daca clickul este pe vreunul dintre butoane
@@ -480,10 +566,10 @@ void ProceseazaClickPuncteConexiune(Vector2 poz_click) {
     {   
         
         if (comp) { // Check if comp is not null
-            for (auto& pct : comp->puncte_conexiune)
+            for (int i = 0; i < comp->nr_pct_conexiune;i++)
             {
-                if (pct && ButonApasat(pct->buton, poz_click)) {
-                    SelecteazaPunctConexiune(pct);
+                if (ButonApasat(comp->puncte_conexiune[i].buton, poz_click)) {
+                    SelecteazaPunctConexiune(&comp->puncte_conexiune[i]);
                 }
             }
         }
@@ -520,11 +606,11 @@ PunctConexiune* MousePestePuctConexiune(Vector2 poz_mouse) {
     for (auto& comp : toate_componentele)
     {
         if (comp) {
-            for (auto& pct : comp->puncte_conexiune)
+            for (int i = 0; i < comp->nr_pct_conexiune; i++)
             {
-                if (pct->output == NULL) {
-                    if (ButonApasat(pct->buton, poz_mouse)) {
-                        return pct;
+                if (comp->puncte_conexiune[i].conector == NULL) {
+                    if (ButonApasat(comp->puncte_conexiune[i].buton, poz_mouse)) {
+                        return &comp->puncte_conexiune[i];
                     }
                 }
             }

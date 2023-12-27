@@ -321,6 +321,7 @@ void Aplicatie::ProcesareClick(SDL_Event* actiune_mouse) {
     switch (actiune_mouse->type) {
     case SDL_MOUSEBUTTONDOWN:
         if (actiune_mouse->button.button == SDL_BUTTON_LEFT) {
+
             ProcesareClickPlasare();
             ProceseazaClickPuncteConexiune(Vector2(x,y));
             ProcesareButoane(Vector2(x, y));
@@ -380,6 +381,14 @@ void Aplicatie::Ruleaza()
     SDL_Event actiune_input;
 
     while (running) {
+
+        //functia asta va fi apelata doar cand se apasa click
+
+        //inainte de procesarea urmatorului click se actualizeaza lista de butoane
+        //pentru a evita posibilitatea ca lista sa fie modificata in timp ce se trece prin e
+        //de ex un buton care are functionalitatea de a se elimina din lista va modifica lista in timp ce este parcursa
+        //deci adaugarea si eliminarea butoanelor se va face doar inainte de procearea lor
+        ProcesareActiuniListaButoane();
 
         while (SDL_PollEvent(&actiune_input) != 0) {
             if (actiune_input.type == SDL_QUIT) {

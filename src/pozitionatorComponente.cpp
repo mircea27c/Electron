@@ -1,18 +1,16 @@
 #include "pozitionatorComponente.h"
 
 void SelectareComponentaPozitionare(int index) {
-	printf("indexul este %d si se selecteaza componenta\n ", index);
 	SelecteazaComponenta(index);
 
 	Componenta* comp = GetComponentaSelectata();
 
 	if (comp == NULL) {
-		printf("comp e nula pula");
+		printf("comp e nula");
 		return;
 	}
 
 	component_selectat = new Componenta(GetComponentaSelectata());
-	component_selectat->id = "componenta valida \n";
 
 	if (component_preview == NULL) {
 		ImagineGrafica* imagine_preview = new ImagineGrafica();
@@ -20,6 +18,7 @@ void SelectareComponentaPozitionare(int index) {
         component_preview = imagine_preview;
 	}
 	component_preview->path = ((ImagineGrafica*)component_selectat->grafica)->path;
+	component_selectat->id = component_preview->path;
 	
 	se_plaseaza = true;
 }

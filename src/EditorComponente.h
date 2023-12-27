@@ -15,6 +15,8 @@ namespace editor_componente {
 
 	void InitializareEditor();
 
+	Buton* CreazaButon(Vector2 pozitie, Vector2 dimensiuni, const char* text, SDL_Color culoare, SDL_Color culoare_text, ClickFunct actiune);
+
 	void SelectareComponenta(Componenta* comp);
 
 	void ActualizeazaConturCaseta();
@@ -28,5 +30,5 @@ namespace editor_componente {
 	void ProcesareClick(int x, int y);
 
 	void StergeComponentaSelectata();
-
+	void RotesteComponentaSelectata();
 }

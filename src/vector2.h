@@ -14,14 +14,32 @@ public:
         x = _x;
         y = _y;
     }
-    Vector2 operator+ (Vector2& termen) {
+    Vector2 operator+ (const Vector2& termen) const {
         Vector2 rezultat = Vector2(x + termen.x, y + termen.y);
         return rezultat;
     }
-    Vector2 operator- (Vector2& termen) {
+
+    Vector2 operator- (Vector2& termen) const{
+        Vector2 rezultat = Vector2(x - termen.x, y - termen.y);
+        return rezultat;
+    }    
+    Vector2 operator+ (const Vector2& termen) {
+        Vector2 rezultat = Vector2(x + termen.x, y + termen.y);
+        return rezultat;
+    }
+
+    Vector2 operator- (Vector2& termen){
         Vector2 rezultat = Vector2(x - termen.x, y - termen.y);
         return rezultat;
     }
+    Vector2 operator/ (float& numar)const{
+        Vector2 rezultat = Vector2(x / numar, y / numar);
+        return rezultat;
+    }
+    Vector2 operator* (float& numar) const{
+        Vector2 rezultat = Vector2(x * numar, y * numar);
+        return rezultat;
+    }  
     Vector2 operator/ (float& numar){
         Vector2 rezultat = Vector2(x / numar, y / numar);
         return rezultat;

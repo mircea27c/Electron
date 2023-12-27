@@ -146,7 +146,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\Conector.cpp" />
     <ClCompile Include="src\EditorComponente.cpp" />
     <ClCompile Include="src\Aplicatie.cpp" />
     <ClCompile Include="src\Componente.cpp" />
@@ -160,7 +159,6 @@
     <ClCompile Include="src\TipuriComponente.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Conector.h" />
     <ClInclude Include="src\EditorComponente.h" />
     <ClInclude Include="src\Aplicatie.h" />
     <ClInclude Include="src\Componente.h" />

@@ -56,29 +56,53 @@ void editor_componente::InitializareEditor() {
 	panou_info->AdaugaElementGrafic(panou_info_text);
 	panou_info->AdaugaElementGrafic(panou_info_img);
 
-	Buton* buton_stergere = new Buton(Vector2(panou_info_img->pozitie.x, panou_info_img->pozitie.y + padding+ panou_info_img->dimensiuni.y/2), Vector2(panou_info_img->dimensiuni.x, 60.0f), StergeComponentaSelectata);
-	DreptunghiGrafic* bg_btn_sters = new DreptunghiGrafic();
-	bg_btn_sters->marime = 1;
-	bg_btn_sters->dimensiuni = buton_stergere->dimensiuni;
-	bg_btn_sters->pozitie = buton_stergere->pozitie;
-	bg_btn_sters->culoare = SDL_Color{ 128,41,29 };
 
-	TextGrafic* text_btn_sters = new TextGrafic();
-	text_btn_sters->marime = 1;
-	text_btn_sters->dimensiuni = buton_stergere->dimensiuni;
-	text_btn_sters->pozitie = buton_stergere->pozitie;
-	text_btn_sters->text = "Sterge";
-	text_btn_sters->culoare = SDL_Color{ 219,121,107};
+	//CREAREA BUTOANELOR DE EDITARE
 
-	buton_stergere->AdaugaElementGrafic(bg_btn_sters);
-	buton_stergere->AdaugaElementGrafic(text_btn_sters);
-	buton_stergere->marime = 1;
+	int nr_btn = 3;//3 butoane
+	float latime_btn = (latime_caseta_fixa - 2 * padding - (nr_btn - 1) * padding) / (float)nr_btn;
+	float inaltime_btn = 60;
 
-	panou_info->AdaugaButon(buton_stergere);
+	float poz_x_1 = LATIME - latime_caseta_fixa + padding*1 + latime_btn / 2 + latime_btn * 0;
+	float poz_x_2 = LATIME - latime_caseta_fixa + padding*2 + latime_btn / 2 + latime_btn * 1;
+	float poz_x_3 = LATIME - latime_caseta_fixa + padding*3 + latime_btn / 2 + latime_btn * 2;
+
+	float poz_y = panou_info_img->pozitie.y + padding + panou_info_img->dimensiuni.y / 2;
+
+	Buton* btn_stergere = CreazaButon(Vector2(poz_x_1, poz_y), Vector2(latime_btn, inaltime_btn), "Sterge", SDL_Color{ 128,41,29 }, SDL_Color{ 228,141,129 }, StergeComponentaSelectata);
+	Buton* btn_rotatie = CreazaButon(Vector2(poz_x_2, poz_y), Vector2(latime_btn, inaltime_btn), "Roteste", SDL_Color{ 150,150,200 }, SDL_Color{ 255,255,255 }, RotesteComponentaSelectata);
+
+
+	panou_info->AdaugaButon(btn_stergere);
+	panou_info->AdaugaButon(btn_rotatie);
 
 	refresh_ui_listeners.push_back(RecalculeazaGrafica);
 }
+Buton* editor_componente::CreazaButon(Vector2 pozitie, Vector2 dimensiuni, const char* text, SDL_Color culoare,SDL_Color culoare_text, ClickFunct actiune)
+{
+	Buton* buton_nou = new Buton(pozitie, dimensiuni, actiune);
+	DreptunghiGrafic* bg_btn_sters = new DreptunghiGrafic();
+	bg_btn_sters->marime = 1;
+	bg_btn_sters->dimensiuni = dimensiuni;
+	bg_btn_sters->pozitie = pozitie;
+	bg_btn_sters->culoare = culoare;
+
+	TextGrafic* text_btn_sters = new TextGrafic();
+	text_btn_sters->marime = 1;
+	text_btn_sters->dimensiuni = dimensiuni;
+	text_btn_sters->pozitie = pozitie;
+	text_btn_sters->text = text;
+	text_btn_sters->culoare = culoare_text;
+
+	buton_nou->AdaugaElementGrafic(bg_btn_sters);
+	buton_nou->AdaugaElementGrafic(text_btn_sters);
+	buton_nou->marime = 1;
+
+	return buton_nou;
+}
 void editor_componente::SelectareComponenta(Componenta* comp) {
+	if (componenta_selectata != NULL)DeselectareComponenta();
+
 	componenta_selectata = comp;
 	ActualizeazaConturCaseta();
 	ActualizeazaPanouInformatii();
@@ -140,18 +164,33 @@ void editor_componente::ProcesareClick(int x, int y) {
 
 	Componenta* componenta_apasata = VerificaColiziuneComponenta(poz_mouse);
 
+	if (Conector* conector = dynamic_cast<Conector*>(componenta_apasata)) {
+		DeselectareComponenta();
+		return;
+	}
 	if (componenta_apasata != NULL) {
 		SelectareComponenta(componenta_apasata);
-	}
-	else {
-		if (componenta_selectata != NULL) {
-			DeselectareComponenta();
-		}
 	}
 }
 
 void editor_componente::StergeComponentaSelectata(){
 	if (componenta_selectata == NULL)return;
 	EliminaComponenta(componenta_selectata);
-	//delete componenta_selectata;
+		
+	//elimina toti conectorii componentei
+	for (int i = 0; i < componenta_selectata->nr_pct_conexiune; i++)
+	{
+		if (componenta_selectata->puncte_conexiune[i].conector != NULL) {
+			EliminaComponenta(componenta_selectata->puncte_conexiune[i].conector);
+		}
+	}
+
+	delete componenta_selectata;
+	DeselectareComponenta();
+}
+
+void editor_componente::RotesteComponentaSelectata() {
+	if (componenta_selectata == NULL)return;
+	componenta_selectata->rotatie=(ORIENTARE)((componenta_selectata->rotatie + 1)% 4);
+	RefreshUI();
 }

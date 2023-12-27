@@ -4,6 +4,7 @@
 #include <SDL_ttf.h>
 #include <iostream>
 #include <list>
+#include <queue>
 #include "grid.cpp"
 #include "vector2.h"
 #include "Componente.h"
@@ -23,6 +24,18 @@ static SDL_Renderer* renderer;
 
 static std::list<Componenta*> toate_componentele;
 static std::list<WindowGrafic*> toate_windowurile;
+
+enum ActiuneLista
+{
+	ADAUGA,
+	ELIMINA
+};
+struct ActiuneListaButoane{
+	ActiuneLista tip_actiune;
+	Buton* buton;
+};
+
+static std::queue<ActiuneListaButoane> coada_actiuni_lista_butoane;
 static std::list<Buton*> toate_butoanele;
 
 typedef void (*PctConexSelectatCallback)(PunctConexiune*);
@@ -49,6 +62,7 @@ void InregistreazaWindowGrafic(WindowGrafic* window);
 void EliminaWindowGrafic(WindowGrafic* window);
 
 void ActualizeazaGraficaComponenta(Componenta* comp);
+void ActualizeazaGraficaPctConex(Componenta* comp, PunctConexiune* pct);
 void ActualizeazaGraficaConector(Conector* con);
 
 void DeseneazaGrid(int grosime);
@@ -61,6 +75,7 @@ bool ButonApasat(Buton* btn, Vector2 clickPos);
 
 void InregistrareButon(Buton* buton_new);
 void EliminaButon(Buton* buton);
+void ProcesareActiuniListaButoane();
 
 void ProcesareButoane(Vector2 poz_click);
 
@@ -77,3 +92,5 @@ bool SuntCeluleAdiacente(Vector2 poz1, Vector2 poz2);
 Vector2 CelulaAdiacentaInDir(Vector2 poz, ORIENTARE dir);
 
 PunctConexiune* MousePestePuctConexiune(Vector2 poz_mouse);
+
+void DeseneazaLegaturaPctLaConector(PunctConexiune* pct, Vector2 g_poz_conector, Path* grafica);

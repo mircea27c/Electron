@@ -2,12 +2,16 @@
 #include <SDL.h> 
 #include <SDL_ttf.h> 
 #include <list>
+#include <vector>
 #include <iostream>
 #include <math.h>
 #include "Vector2.h" 
 #include "unelteDesenare.h"
 
 #pragma region Elemente Grafice
+
+static std::vector<SDL_Texture*> textures;
+static TTF_Font* font;
 
 typedef void(*ClickFunct)();
 
@@ -17,6 +21,8 @@ class ElementGrafic {
 public:
 	Vector2 pozitie;
 	float marime;
+	int rotatie;
+
 	SDL_Color culoare = SDL_Color{ 255,255,255,255 };
 
 	virtual void Desenare(SDL_Renderer* rend);

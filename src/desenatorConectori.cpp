@@ -1,6 +1,6 @@
 #include "desenatorConectori.h"
 void desenator_conectori::StartConectare(PunctConexiune* pct_start) {
-	if (pct_start->output != NULL) {
+	if (pct_start->conector != NULL) {
 		//momentan return 
 		printf("pct de conex pe care ai apasat are deja un cablu atasat. daca nu-l vezi e o problema la randare \n");
 		return;
@@ -11,9 +11,11 @@ void desenator_conectori::StartConectare(PunctConexiune* pct_start) {
 
 	Path* path = new Path();
 	conector_desenat->grafica = path;
-	pct_start->output = conector_desenat;
+	pct_start->conector = conector_desenat;
 
 	se_deseneaza_conector = true;
+
+	conector_desenat->id = "conector";
 
 	InregistreazaComponenta(conector_desenat);
 }
@@ -33,7 +35,7 @@ void desenator_conectori::ProcesareFinalizareConectare(int mouse_x, int mouse_y)
 
 	if (pct_sub_mouse != NULL) {
 		conector_desenat->final_conexiune = pct_sub_mouse;
-		pct_sub_mouse->output = conector_desenat;
+		pct_sub_mouse->conector = conector_desenat;
 		StopConectare();
 
 		RefreshUI();
@@ -44,6 +46,7 @@ void desenator_conectori::ProcesareFinalizareConectare(int mouse_x, int mouse_y)
 void desenator_conectori::ProcesareConectare() {
 	if (!se_deseneaza_conector)return;
 	if (conector_desenat == NULL)return;
+
 
 	int x = 0, y = 0;
 
@@ -87,6 +90,7 @@ void desenator_conectori::ProcesareConectare() {
 			Vector2 adiacenta_blocata = CelulaAdiacentaInDir(poz_start, conector_desenat->start_conexiune->orientare);
 
 			//nu uita sa decomentezi verificarea celului adiancente blocate si sa o faci sa mearga
+
 			if (SuntCeluleAdiacente(poz_start, gridPos) /*&& !(gridPos == adiacenta_blocata)*/ && !VerificaColiziune(gridPos)) {
 
 				conector_desenat->pozitii.push_back(gridPos);
