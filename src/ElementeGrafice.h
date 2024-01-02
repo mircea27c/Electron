@@ -43,7 +43,7 @@ public:
 class ImagineGrafica : public ElementGrafic {
 public:
 	Vector2 dimensiuni;
-	const char* path;
+	const char *path;
 
 	virtual void Desenare(SDL_Renderer* rend)override;
 	inline ElementGrafic* Clonare() override {
@@ -85,7 +85,7 @@ public:
 	Buton(Vector2 _pozitie, Vector2 _dimensiuni);
 	Buton(Vector2 _pozitie, Vector2 _dimensiuni, ClickFunct actiune);
 
-	ClickFunct actiune_click;
+	 ClickFunct actiune_click;
 
 	std::list <ElementGrafic*>ListaElementeGrafice;
 
