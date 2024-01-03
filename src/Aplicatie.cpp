@@ -90,7 +90,7 @@ void Aplicatie::InitializareUI() {
     Buton* rezistor = new Buton(Vector2(225, INALTIME - 60), Vector2(50, 50));//vect2 100 30
 
     auto fct_select_rezistor = []() {
-        SelectareComponentaPozitionare(0);
+        pozitionator_componente::SelectareComponentaPozitionare(0);
     };
     rezistor->actiune_click = fct_select_rezistor;
 
@@ -115,7 +115,7 @@ void Aplicatie::InitializareUI() {
     Buton* intrerupator = new Buton(Vector2(335, INALTIME - 60), Vector2(50, 50));
 
     auto fct_select_intrerupator = []() {
-        SelectareComponentaPozitionare(1);
+        pozitionator_componente::SelectareComponentaPozitionare(1);
         };
 
     intrerupator->actiune_click = fct_select_intrerupator;
@@ -142,7 +142,7 @@ void Aplicatie::InitializareUI() {
     Buton* andGate = new Buton(Vector2(445, INALTIME - 60), Vector2(50, 50));
 
    auto fct_select_andGate = []() {
-       SelectareComponentaPozitionare(2);
+       pozitionator_componente::SelectareComponentaPozitionare(2);
        };
 
    andGate->actiune_click = fct_select_andGate;
@@ -168,7 +168,7 @@ void Aplicatie::InitializareUI() {
     Buton* capacitor = new Buton(Vector2(555, INALTIME - 60), Vector2(50, 50));
 
     auto fct_select_capacitor = []() {
-        SelectareComponentaPozitionare(3);
+        pozitionator_componente::SelectareComponentaPozitionare(3);
         };
 
     capacitor->actiune_click = fct_select_capacitor;
@@ -194,7 +194,7 @@ void Aplicatie::InitializareUI() {
     Buton* dioda2linii = new Buton(Vector2(665, INALTIME - 60), Vector2(50, 50));
 
     auto fct_select_dioda2linii = []() {
-        SelectareComponentaPozitionare(4);
+        pozitionator_componente::SelectareComponentaPozitionare(4);
         };
 
     dioda2linii->actiune_click = fct_select_dioda2linii;
@@ -220,7 +220,7 @@ void Aplicatie::InitializareUI() {
     Buton* diodacerc = new Buton(Vector2(775, INALTIME - 60), Vector2(50, 50));
 
     auto fct_select_diodacerc = []() {
-        SelectareComponentaPozitionare(5);
+        pozitionator_componente::SelectareComponentaPozitionare(5);
         };
 
     diodacerc->actiune_click = fct_select_diodacerc;
@@ -246,7 +246,7 @@ void Aplicatie::InitializareUI() {
     Buton* impamantare = new Buton(Vector2(885, INALTIME - 60), Vector2(50, 50));
 
     auto fct_select_impamantare = []() {
-        SelectareComponentaPozitionare(6);
+        pozitionator_componente::SelectareComponentaPozitionare(6);
         };
 
     impamantare->actiune_click = fct_select_impamantare;
@@ -272,7 +272,7 @@ void Aplicatie::InitializareUI() {
     Buton* sursavoltaj = new Buton(Vector2(995, INALTIME - 60), Vector2(50, 50));
 
     auto fct_select_sursavoltaj = []() {
-        SelectareComponentaPozitionare(7);
+        pozitionator_componente::SelectareComponentaPozitionare(7);
         };
 
     sursavoltaj->actiune_click = fct_select_sursavoltaj;
@@ -298,7 +298,7 @@ void Aplicatie::InitializareUI() {
     Buton* tranzistor = new Buton(Vector2(1105, INALTIME - 60), Vector2(50, 50));
 
     auto fct_select_tranzistor = []() {
-        SelectareComponentaPozitionare(8);
+        pozitionator_componente::SelectareComponentaPozitionare(8);
         };
 
     tranzistor->actiune_click = fct_select_tranzistor;
@@ -346,7 +346,7 @@ void Aplicatie::ProcesareClick(SDL_Event* actiune_mouse) {
     switch (actiune_mouse->type) {
     case SDL_MOUSEBUTTONDOWN:
         if (actiune_mouse->button.button == SDL_BUTTON_LEFT) {
-            ProcesareClickPlasare();
+            pozitionator_componente::ProcesareClickPlasare();
             ProceseazaClickPuncteConexiune(Vector2(x,y));
             ProcesareButoane(Vector2(x, y));
             editor_componente::ProcesareClick(x,y);
@@ -406,6 +406,8 @@ void Aplicatie::Ruleaza()
 
     while (running) {
 
+        ProcesareActiuniListaButoane();
+
         while (SDL_PollEvent(&actiune_input) != 0) {
             if (actiune_input.type == SDL_QUIT) {
                 running = false;
@@ -415,7 +417,7 @@ void Aplicatie::Ruleaza()
             }
         }
 
-        ProcesarePlasare();
+        pozitionator_componente::ProcesarePlasare();
         desenator_conectori::ProcesareConectare();
 
         SDL_Delay(5);

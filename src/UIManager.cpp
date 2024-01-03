@@ -107,12 +107,15 @@ void RefreshUI() {
 
     DeseneazaGrid(2);
 
+
     DeseneazaComponente();
 
     ////facem callback pentru UI-ul refreshuit
     for (auto& callback : refresh_ui_listeners) {
         callback();
     }
+    
+
     DeseneazaWindowuriGrafice();
 
     DeseneazaToateButoanele();
@@ -238,9 +241,6 @@ void ActualizeazaGraficaConector(Conector* con) {
         Vector2 poz_ecran_pct = con->start_conexiune->buton->pozitie;
         grafica->pozitii.push_back(poz_ecran_pct);
 
-        if (!con->pozitii.empty()) {
-            DeseneazaLegaturaPctLaConector(con->start_conexiune, con->pozitii.front(), grafica);
-        }
     }
 
     //adaug restul pozitiilor
@@ -254,79 +254,75 @@ void ActualizeazaGraficaConector(Conector* con) {
     if (con->final_conexiune != NULL) {
         Vector2 poz_ecran_pct = con->final_conexiune->buton->pozitie;
         grafica->pozitii.push_back(poz_ecran_pct);
-
-        if (!con->pozitii.empty()) {
-            DeseneazaLegaturaPctLaConector(con->start_conexiune, con->pozitii.back(), grafica);
-        }
     }
 }
 
 void DeseneazaLegaturaPctLaConector(PunctConexiune* pct, Vector2 g_poz_conector /* g_ = pozitie in grid*/, Path* grafica) {
-    Vector2 g_poz_pct = pct->parinte->GetPozitie();
-    Vector2 e_poz_pct = PozitieGridLaPozitieEcran(g_poz_pct);
-    
-    Vector2 dir_fwd = g_poz_conector - g_poz_pct;
-    Vector2 dir_dreapta = Vector2(dir_fwd.y, -dir_fwd.x);
+    //Vector2 g_poz_pct = pct->parinte->GetPozitie();
+    //Vector2 e_poz_pct = PozitieGridLaPozitieEcran(g_poz_pct);
+    //
+    //Vector2 dir_fwd = g_poz_conector - g_poz_pct;
+    //Vector2 dir_dreapta = Vector2(dir_fwd.y, -dir_fwd.x);
 
-    ORIENTARE orientare_rotita_pct = (ORIENTARE)(((int)pct->orientare + (int)pct->parinte->rotatie)%4);
+    //ORIENTARE orientare_rotita_pct = (ORIENTARE)(((int)pct->orientare + (int)pct->parinte->rotatie)%4);
 
-    ORIENTARE orientare_spre_dest = DREAPTA;
+    //ORIENTARE orientare_spre_dest = DREAPTA;
 
-    Vector2 mij_margine_pct = e_poz_pct;
+    //Vector2 mij_margine_pct = e_poz_pct;
 
-    float marime_cel_scalata = Grid::MARIME_CELULA * factor_zoom;
+    //float marime_cel_scalata = Grid::MARIME_CELULA * factor_zoom;
 
-    switch (orientare_rotita_pct)
-    {
-    case DREAPTA:
-        mij_margine_pct.x += 0.4 * marime_cel_scalata;
-        break;
-    case JOS:
-        mij_margine_pct.y += 0.4 * marime_cel_scalata;
-        break;
-    case STANGA:
-        mij_margine_pct.x -= 0.4 * marime_cel_scalata;
-        break;
-    case SUS:
-        mij_margine_pct.y -= 0.4 * marime_cel_scalata;
-        break;
-    default:
-        break;
-    }
+    //switch (orientare_rotita_pct)
+    //{
+    //case DREAPTA:
+    //    mij_margine_pct.x += 0.4 * marime_cel_scalata;
+    //    break;
+    //case JOS:
+    //    mij_margine_pct.y += 0.4 * marime_cel_scalata;
+    //    break;
+    //case STANGA:
+    //    mij_margine_pct.x -= 0.4 * marime_cel_scalata;
+    //    break;
+    //case SUS:
+    //    mij_margine_pct.y -= 0.4 * marime_cel_scalata;
+    //    break;
+    //default:
+    //    break;
+    //}
 
-    if (g_poz_conector.x > g_poz_pct.x) {
-        orientare_spre_dest = DREAPTA;
-    }
-    else if(g_poz_conector.x < g_poz_pct.x){
-        orientare_spre_dest = STANGA;
-    }else  if (g_poz_conector.y> g_poz_pct.y) {
-        orientare_spre_dest = JOS;
-    }
-    else if (g_poz_conector.y < g_poz_pct.y) {
-        orientare_spre_dest = SUS;
-    }
-    
-    int abs_dif = std::abs((int)orientare_spre_dest - (int)orientare_rotita_pct);
-    int semn_dif = (int)orientare_spre_dest - (int)orientare_rotita_pct;
+    //if (g_poz_conector.x > g_poz_pct.x) {
+    //    orientare_spre_dest = DREAPTA;
+    //}
+    //else if(g_poz_conector.x < g_poz_pct.x){
+    //    orientare_spre_dest = STANGA;
+    //}else  if (g_poz_conector.y> g_poz_pct.y) {
+    //    orientare_spre_dest = JOS;
+    //}
+    //else if (g_poz_conector.y < g_poz_pct.y) {
+    //    orientare_spre_dest = SUS;
+    //}
+    //
+    //int abs_dif = std::abs((int)orientare_spre_dest - (int)orientare_rotita_pct);
+    //int semn_dif = (int)orientare_spre_dest - (int)orientare_rotita_pct;
 
-    printf("orientare punct %d, orientare componenta  %d, directia la urmator %d", (int)pct->orientare,(int)pct->parinte->rotatie, (int)orientare_spre_dest );
+    //printf("orientare punct %d, orientare componenta  %d, directia la urmator %d", (int)pct->orientare,(int)pct->parinte->rotatie, (int)orientare_spre_dest );
 
-    switch (abs_dif) {
-    case 0:
-        //aceeasi directie
-        return;
-        break;
-    case 2:
-        //directie opusa
-        grafica->pozitii.push_back(mij_margine_pct + (dir_fwd * 0.1f * marime_cel_scalata + (dir_dreapta * 0.4f * marime_cel_scalata)));
-        grafica->pozitii.push_back(mij_margine_pct + (dir_fwd * 0.9f * marime_cel_scalata + (dir_dreapta * 0.4f * marime_cel_scalata)));
-        break;
-    case 1:
-        //stanga sau dreapta
-        grafica->pozitii.push_back(mij_margine_pct + (dir_fwd * 0.1f * marime_cel_scalata + (dir_dreapta * 0.4f * marime_cel_scalata * semn_dif)));
-        grafica->pozitii.push_back(mij_margine_pct + (dir_fwd * 0.5f * marime_cel_scalata + (dir_dreapta * 0.4f * marime_cel_scalata * semn_dif)));
-        break;
-    }
+    //switch (abs_dif) {
+    //case 0:
+    //    //aceeasi directie
+    //    return;
+    //    break;
+    //case 2:
+    //    //directie opusa
+    //    grafica->pozitii.push_back(mij_margine_pct + (dir_fwd * 0.1f * marime_cel_scalata + (dir_dreapta * 0.4f * marime_cel_scalata)));
+    //    grafica->pozitii.push_back(mij_margine_pct + (dir_fwd * 0.9f * marime_cel_scalata + (dir_dreapta * 0.4f * marime_cel_scalata)));
+    //    break;
+    //case 1:
+    //    //stanga sau dreapta
+    //    grafica->pozitii.push_back(mij_margine_pct + (dir_fwd * 0.1f * marime_cel_scalata + (dir_dreapta * 0.4f * marime_cel_scalata * semn_dif)));
+    //    grafica->pozitii.push_back(mij_margine_pct + (dir_fwd * 0.5f * marime_cel_scalata + (dir_dreapta * 0.4f * marime_cel_scalata * semn_dif)));
+    //    break;
+    //}
 }
 
 
@@ -517,6 +513,7 @@ void EliminaButon(Buton* buton) {
 void ProcesareActiuniListaButoane() {
     if (coada_actiuni_lista_butoane.empty())return;
     
+
     while (!coada_actiuni_lista_butoane.empty()) {
         ActiuneListaButoane temp = coada_actiuni_lista_butoane.front();
 
@@ -534,7 +531,6 @@ void ProcesareActiuniListaButoane() {
 }
 
 void ProcesareButoane(Vector2 poz_click) {
-
     for (auto& btn : toate_butoanele) {
         //verificam daca clickul este pe vreunul dintre butoane
         //daca e, il consideram apasat
