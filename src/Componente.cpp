@@ -58,7 +58,7 @@ PunctConexiune::PunctConexiune(Vector2 _poz_rel, Componenta* _parinte, ORIENTARE
 
 	parinte = _parinte;
 	pozitie_relativa = _poz_rel;
-	buton = new Buton(Vector2(0, 0), Vector2(15, 15));
+	buton = new Buton(Vector2(0,0), Vector2(15, 15));
 
 	DreptunghiGrafic* bg_btn = new DreptunghiGrafic();
 	bg_btn->culoare = SDL_Color{ 100,100,255,255 };
