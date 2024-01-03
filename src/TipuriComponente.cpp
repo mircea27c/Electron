@@ -13,8 +13,8 @@ void CreazaComponenta(const char *path, Vector2 dimensiuni, Vector2 pct1, Vector
 
 	componenta->puncte_conexiune = new PunctConexiune[2];
 	componenta->nr_pct_conexiune = 2;
-	componenta->puncte_conexiune[0] = PunctConexiune(pct1, componenta, DREAPTA);
-	componenta->puncte_conexiune[1] = PunctConexiune(pct2, componenta, STANGA);
+	componenta->puncte_conexiune[0] = PunctConexiune(pct1, componenta, DREAPTA, PunctConexiune::OUTPUT);
+	componenta->puncte_conexiune[1] = PunctConexiune(pct2, componenta, STANGA, PunctConexiune::INPUT);
 
 	componenta->id = index_componenta;
 	tipuri_componente[index_componenta] = componenta;

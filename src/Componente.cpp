@@ -53,19 +53,19 @@ void Componenta::SetPozitie(Vector2 pozitie)
 	pozitie_in_grid = pozitie;
 }
 
-PunctConexiune::PunctConexiune(Vector2 _poz_rel, Componenta* _parinte, ORIENTARE _orientare)
+PunctConexiune::PunctConexiune(Vector2 _poz_rel, Componenta* _parinte, ORIENTARE _orientare, PCT_CONEX_TIP _tip)
 {
 
 	parinte = _parinte;
 	pozitie_relativa = _poz_rel;
 	buton = new Buton(Vector2(0,0), Vector2(15, 15));
+	tip = _tip;
 
 	DreptunghiGrafic* bg_btn = new DreptunghiGrafic();
-	bg_btn->culoare = SDL_Color{ 100,100,255,255 };
+	bg_btn->culoare = CUL_PCT_CONEX_INPUT;
 	bg_btn->dimensiuni = buton->dimensiuni;
 	bg_btn->pozitie = Vector2(25, 15);
 	bg_btn->marime = 1;
-
 
 	buton->AdaugaElementGrafic(bg_btn);
 
@@ -79,10 +79,12 @@ PunctConexiune::PunctConexiune(PunctConexiune* model)
 	buton = new Buton(Vector2(0, 0), Vector2(Grid::MARIME_PCT_CONEX_LIBER, Grid::MARIME_PCT_CONEX_LIBER));
 
 	DreptunghiGrafic* bg_btn = new DreptunghiGrafic();
-	bg_btn->culoare = CUL_PCT_CONEX_LIBER;
+	bg_btn->culoare =CUL_PCT_CONEX_INPUT;
 	bg_btn->dimensiuni = buton->dimensiuni;
 	bg_btn->pozitie = Vector2(25, 15);
 	bg_btn->marime = 1;
+
+	tip = model->tip;
 
 	buton->AdaugaElementGrafic(bg_btn);
 
@@ -98,10 +100,12 @@ void PunctConexiune::Clonare(PunctConexiune* copie) {
 	copie->buton = buton;
 
 	DreptunghiGrafic* bg_btn = new DreptunghiGrafic();
-	bg_btn->culoare = CUL_PCT_CONEX_LIBER;
+	bg_btn->culoare = CUL_PCT_CONEX_INPUT;
 	bg_btn->dimensiuni = buton->dimensiuni;
 	bg_btn->pozitie = Vector2(25, 15);
 	bg_btn->marime = 1;
+
+	copie->tip = tip;
 
 	copie->buton->AdaugaElementGrafic(bg_btn);
 

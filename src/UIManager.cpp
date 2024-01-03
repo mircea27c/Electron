@@ -227,7 +227,11 @@ void ActualizeazaGraficaPctConex(Componenta* comp, PunctConexiune* pct)
         ((DreptunghiGrafic*)pct->buton->ListaElementeGrafice.front())->dimensiuni = Vector2(Grid::MARIME_PCT_CONEX_OCUPAT, Grid::MARIME_PCT_CONEX_OCUPAT);
     }
     else {
-        pct->buton->ListaElementeGrafice.front()->culoare = CUL_PCT_CONEX_LIBER;
+        if (pct->tip == PunctConexiune::INPUT) {
+            pct->buton->ListaElementeGrafice.front()->culoare =CUL_PCT_CONEX_INPUT;
+        }else if (pct->tip == PunctConexiune::OUTPUT){
+            pct->buton->ListaElementeGrafice.front()->culoare = CUL_PCT_CONEX_OUTPUT;
+        }
         ((DreptunghiGrafic*)pct->buton->ListaElementeGrafice.front())->dimensiuni = Vector2(Grid::MARIME_PCT_CONEX_LIBER, Grid::MARIME_PCT_CONEX_LIBER);
     }
 }
@@ -323,6 +327,11 @@ void DeseneazaLegaturaPctLaConector(PunctConexiune* pct, Vector2 g_poz_conector 
     //    grafica->pozitii.push_back(mij_margine_pct + (dir_fwd * 0.5f * marime_cel_scalata + (dir_dreapta * 0.4f * marime_cel_scalata * semn_dif)));
     //    break;
     //}
+}
+
+std::list<Componenta*> GetToateComponentele()
+{
+    return toate_componentele;
 }
 
 

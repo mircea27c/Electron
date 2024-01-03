@@ -8,8 +8,13 @@
 #include "desenatorConectori.h"
 #include "TipuriComponente.h" 
 #include "EditorComponente.h" 
+#include "SimulatorCircuit.h" 
 class Aplicatie
 {public:
+	SimulatorCircuit simulator;
+
+	Buton* CreareButon(Vector2 pozitie, Vector2 dimensiune, SDL_Color culoare_buton, SDL_Color culoare_componenta, const char* path_imagine, int index_btn);
+	void Simuleaza();
 	bool middle_btn_apasat=false;
 
     Vector2 mouse_ultima_poz;
@@ -27,3 +32,4 @@ class Aplicatie
 	void Ruleaza();
 
 }; 
+

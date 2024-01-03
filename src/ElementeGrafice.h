@@ -5,6 +5,7 @@
 #include <vector>
 #include <iostream>
 #include <math.h>
+#include <functional>
 #include "Vector2.h" 
 #include "unelteDesenare.h"
 
@@ -13,8 +14,7 @@
 static std::vector<SDL_Texture*> textures;
 static TTF_Font* font;
 
-typedef void(*ClickFunct)();
-
+typedef std::function<void()> ClickFunct;
 class WindowGrafic;
 
 class ElementGrafic {

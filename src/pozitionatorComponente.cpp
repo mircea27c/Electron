@@ -22,6 +22,30 @@ void pozitionator_componente::SelectareComponentaPozitionare(int index) {
 	se_plaseaza = true;
 }
 
+void pozitionator_componente::SelectareComponentaPozitionare(Componenta* comp) {
+	SelectareComponentaPozitionare(comp->id);
+	component_selectat->rotatie = comp->rotatie;
+	switch (comp->rotatie)
+	{
+	case DREAPTA:
+		component_preview->rotatie = 0;
+		break;
+	case JOS:
+		component_preview->rotatie = 90;
+		break;
+	case STANGA:
+		component_preview->rotatie = 180;
+		break;
+	case SUS:
+		component_preview->rotatie = 270;
+		break;
+	default:
+		component_preview->rotatie = 0;
+		break;
+	}
+}
+
+
 void pozitionator_componente::ProcesarePlasare() {
 	if (!se_plaseaza)return;
 	if (component_selectat == NULL || component_preview == NULL)return;

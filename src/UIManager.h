@@ -94,3 +94,4 @@ Vector2 CelulaAdiacentaInDir(Vector2 poz, ORIENTARE dir);
 PunctConexiune* MousePestePuctConexiune(Vector2 poz_mouse);
 
 void DeseneazaLegaturaPctLaConector(PunctConexiune* pct, Vector2 g_poz_conector, Path* grafica);
+std::list<Componenta*> GetToateComponentele();

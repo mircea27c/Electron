@@ -14,9 +14,16 @@ namespace editor_componente {
 	static TextGrafic* panou_info_text;
 	static ImagineGrafica* panou_info_img;
 
+	static int latime_caseta_info;
+	static int inaltime_caseta_info;
+	static int latime_btn;
+	static int inaltime_btn;
+	static int nr_btn;
+	static int padding;
+
 	void InitializareEditor();
 
-	Buton* CreazaButon(Vector2 pozitie, Vector2 dimensiuni, const char* text, SDL_Color culoare, SDL_Color culoare_text, ClickFunct actiune);
+	Buton* CreazaButon(Vector2 pozitie, Vector2 dimensiuni, const char* path, SDL_Color culoare, SDL_Color culoare_text, ClickFunct actiune);
 
 	void SelectareComponenta(Componenta* comp);
 

@@ -7,80 +7,49 @@ WindowGrafic* caseta_selectie;
 Path* path_caseta_selectie;
 
 WindowGrafic* panou_info;
-TextGrafic* panou_info_text;
-ImagineGrafica* panou_info_img;
 
 
 void editor_componente::InitializareEditor() {
+
+	//CREAREA BUTOANELOR DE EDITARE
+	inaltime_caseta_info = 80;
+	latime_caseta_info = 220;
+	padding = 10;
+	
+	
 	path_caseta_selectie = new Path();
 	path_caseta_selectie->culoare = CUL_SELECTIE;
 
 	caseta_selectie = new WindowGrafic();
 	caseta_selectie->AdaugaElementGrafic(path_caseta_selectie);
 
-	int latime_caseta_fixa = 300;
-	int padding = 25;
-	float inaltime_caseta_relativa = 0.5;
 
-	SDL_Color cul_secund = SDL_Color{ 65,61,77 };
-	SDL_Color cul_primar = SDL_Color{ 92,88,107 };
+	SDL_Color cul_primar = SDL_Color{ 25,25,25,25 };
 
 	DreptunghiGrafic* bg_panou_info = new DreptunghiGrafic();
-	bg_panou_info->culoare = cul_secund;
+	bg_panou_info->culoare = cul_primar;
 	bg_panou_info->marime = 1;
-	bg_panou_info->dimensiuni = Vector2((float)latime_caseta_fixa, INALTIME * inaltime_caseta_relativa);
-	bg_panou_info->pozitie = Vector2((float)(LATIME - latime_caseta_fixa / 2), INALTIME * inaltime_caseta_relativa / 2);
-
-	DreptunghiGrafic* caseta_nume = new DreptunghiGrafic();
-	caseta_nume->culoare = cul_primar;
-	caseta_nume->marime = 1;
-	caseta_nume->dimensiuni = Vector2(latime_caseta_fixa - padding * 2, INALTIME * 0.05);
-	caseta_nume->pozitie = Vector2(LATIME - latime_caseta_fixa / 2, padding + INALTIME * 0.025);
-
-	panou_info_text = new TextGrafic();
-	panou_info_text->culoare = SDL_Color{ 255,255,255,255 };
-	panou_info_text->marime = 1;
-	panou_info_text->dimensiuni = caseta_nume->dimensiuni;
-	panou_info_text->pozitie = caseta_nume->pozitie;
-
-
-	panou_info_img = new ImagineGrafica();
-	panou_info_img->marime = 1;
-	panou_info_img->dimensiuni = Vector2((float)latime_caseta_fixa - padding * 2, (float)latime_caseta_fixa - padding * 2);
-	panou_info_img->pozitie = Vector2((float)(LATIME - latime_caseta_fixa / 2), padding + INALTIME * 0.025 + padding + panou_info_img->dimensiuni.x / 2);
-
+	bg_panou_info->dimensiuni = Vector2((float)latime_caseta_info, (float)inaltime_caseta_info);
 
 	panou_info = new WindowGrafic();
 	panou_info->AdaugaElementGrafic(bg_panou_info);
-	panou_info->AdaugaElementGrafic(caseta_nume);
-	panou_info->AdaugaElementGrafic(panou_info_text);
-	panou_info->AdaugaElementGrafic(panou_info_img);
 
 
-	//CREAREA BUTOANELOR DE EDITARE
+	nr_btn = 3;//3 butoane
+	latime_btn = (latime_caseta_info - (nr_btn + 1) * padding )/ nr_btn;
+	inaltime_btn = inaltime_caseta_info - 2 * padding;
 
-	int nr_btn = 3;//3 butoane
-	float latime_btn = (latime_caseta_fixa - 2 * padding - (nr_btn - 1) * padding) / (float)nr_btn;
-	float inaltime_btn = 60;
+	Buton* btn_stergere = CreazaButon(Vector2(0, 0), Vector2(latime_btn, inaltime_btn), "Iconite/delete_icon.bmp", SDL_Color{ 70,49,49,255 }, SDL_Color{ 178,178,178 ,255 }, StergeComponentaSelectata);
+	Buton* btn_rotatie = CreazaButon(Vector2(0, 0), Vector2(latime_btn, inaltime_btn), "Iconite/rotate_icon.bmp", SDL_Color{ 49,49,49,255 }, SDL_Color{ 178,178,178,255 }, RotesteComponentaSelectata);
+	Buton* btn_mutare = CreazaButon(Vector2(0, 0), Vector2(latime_btn, inaltime_btn), "Iconite/move_icon.bmp", SDL_Color{ 49,49,49,255 }, SDL_Color{ 178,178,178,255 }, MutaComponentaSelectata);
 
-	float poz_x_1 = LATIME - latime_caseta_fixa + padding * 1 + latime_btn / 2 + latime_btn * 0;
-	float poz_x_2 = LATIME - latime_caseta_fixa + padding * 2 + latime_btn / 2 + latime_btn * 1;
-	float poz_x_3 = LATIME - latime_caseta_fixa + padding * 3 + latime_btn / 2 + latime_btn * 2;
-
-	float poz_y = panou_info_img->pozitie.y + padding + panou_info_img->dimensiuni.y / 2;
-
-	Buton* btn_stergere = CreazaButon(Vector2(poz_x_1, poz_y), Vector2(latime_btn, inaltime_btn), "Sterge", SDL_Color{ 128,41,29 }, SDL_Color{ 228,141,129 }, StergeComponentaSelectata);
-	Buton* btn_rotatie = CreazaButon(Vector2(poz_x_2, poz_y), Vector2(latime_btn, inaltime_btn), "Roteste", SDL_Color{ 150,150,200 }, SDL_Color{ 255,255,255 }, RotesteComponentaSelectata);
-	Buton* btn_mutare = CreazaButon(Vector2(poz_x_3, poz_y), Vector2(latime_btn, inaltime_btn), "Muta", SDL_Color{ 100,120,170 }, SDL_Color{ 255,255,255 }, MutaComponentaSelectata);
-
-
-	panou_info->AdaugaButon(btn_stergere);
-	panou_info->AdaugaButon(btn_rotatie);
 	panou_info->AdaugaButon(btn_mutare);
+	panou_info->AdaugaButon(btn_rotatie);
+	panou_info->AdaugaButon(btn_stergere);
 
 	refresh_ui_listeners.push_back(RecalculeazaGrafica);
 }
-Buton* editor_componente::CreazaButon(Vector2 pozitie, Vector2 dimensiuni, const char* text, SDL_Color culoare, SDL_Color culoare_text, ClickFunct actiune)
+Buton* editor_componente::CreazaButon(Vector2 pozitie, Vector2 dimensiuni, const char* path, SDL_Color culoare, SDL_Color culoare_text, ClickFunct actiune)
 {
 	Buton* buton_nou = new Buton(pozitie, dimensiuni, actiune);
 	DreptunghiGrafic* bg_btn_sters = new DreptunghiGrafic();
@@ -89,15 +58,15 @@ Buton* editor_componente::CreazaButon(Vector2 pozitie, Vector2 dimensiuni, const
 	bg_btn_sters->pozitie = pozitie;
 	bg_btn_sters->culoare = culoare;
 
-	TextGrafic* text_btn_sters = new TextGrafic();
-	text_btn_sters->marime = 1;
-	text_btn_sters->dimensiuni = dimensiuni;
-	text_btn_sters->pozitie = pozitie;
-	text_btn_sters->text = text;
-	text_btn_sters->culoare = culoare_text;
+	ImagineGrafica* img_btn = new ImagineGrafica();
+	img_btn->marime = 1;
+	img_btn->dimensiuni = dimensiuni + Vector2(-10,-10);
+	img_btn->pozitie = pozitie;
+	img_btn->path = path;
+	img_btn->culoare = culoare_text;
 
 	buton_nou->AdaugaElementGrafic(bg_btn_sters);
-	buton_nou->AdaugaElementGrafic(text_btn_sters);
+	buton_nou->AdaugaElementGrafic(img_btn);
 	buton_nou->marime = 1;
 
 	return buton_nou;
@@ -142,22 +111,42 @@ void editor_componente::ActualizeazaConturCaseta() {
 }
 
 void editor_componente::ActualizeazaPanouInformatii() {
-	const char* path_componenta = ((ImagineGrafica*)componenta_selectata->grafica)->path;
-	panou_info_img->path = path_componenta;
 
-	const char* start_nume = strchr(path_componenta, '/');
-	const char* end_nume = strchr(start_nume, '.');
+	if (componenta_selectata == NULL)return;
 
-	int lungime = end_nume - start_nume - 1;
-	char* text_nume = new char[lungime + 1];
-	strncpy(text_nume, start_nume + 1, lungime);
-	panou_info_text->text = text_nume;
-	text_nume[lungime] = '\0';
+	int y_poz = componenta_selectata->grafica->pozitie.y + Grid::MARIME_CELULA * factor_zoom * 0.5f + inaltime_caseta_info / 2;
+	int x_poz = componenta_selectata->grafica->pozitie.x;
+
+	int start_x = x_poz - latime_caseta_info / 2;
+
+	for (auto& el : panou_info->elem_grafice)
+	{
+		el->pozitie.x = x_poz;
+		el->pozitie.y = y_poz;
+	}
+
+	int i = 0;
+	for (auto &btn: panou_info->butoane)
+	{
+		
+		btn->pozitie.x = start_x +  (i + 1) * padding + latime_btn / 2 + i * latime_btn;
+		btn->pozitie.y = y_poz;
+	
+		for (auto &el: btn->ListaElementeGrafice)
+		{
+			el->pozitie.x = btn->pozitie.x;
+			el->pozitie.y = btn->pozitie.y;
+		}
+
+		i++;
+	}
+
+
 }
 
 void editor_componente::RecalculeazaGrafica() {
 	ActualizeazaConturCaseta();
-	ActualizeazaConturCaseta();
+	ActualizeazaPanouInformatii();
 }
 
 void editor_componente::ProcesareClick(int x, int y) {
@@ -205,6 +194,6 @@ void editor_componente::RotesteComponentaSelectata() {
 
 void editor_componente::MutaComponentaSelectata() {
 	if (componenta_selectata == NULL)return;
+	pozitionator_componente::SelectareComponentaPozitionare(componenta_selectata);
 	StergeComponentaSelectata();
-	pozitionator_componente::SelectareComponentaPozitionare(0);
 }

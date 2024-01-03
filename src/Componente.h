@@ -18,6 +18,11 @@ class PunctConexiune;
 class PunctConexiune {
 private:
 public:
+	enum PCT_CONEX_TIP {
+		INPUT, OUTPUT
+	};
+
+	PCT_CONEX_TIP tip;
 	ORIENTARE orientare;
 
 	Componenta* parinte;
@@ -27,7 +32,7 @@ public:
 	Vector2 pozitie_relativa;
 	Buton* buton;
 
-	PunctConexiune(Vector2 _poz_rel, Componenta* _parinte, ORIENTARE _orientare);
+	PunctConexiune(Vector2 _poz_rel, Componenta* _parinte, ORIENTARE _orientare, PCT_CONEX_TIP _tip);
 	PunctConexiune(PunctConexiune* model);
 	PunctConexiune(); 
 	void Clonare(PunctConexiune* copie);

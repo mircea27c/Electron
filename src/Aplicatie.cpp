@@ -10,6 +10,8 @@ bool Aplicatie::InitializareAplicatie() {
 
     InitializareTipuriComponente();
 
+    simulator = SimulatorCircuit();
+
     return true;
 }
 
@@ -18,25 +20,31 @@ void Aplicatie::InchidereAplicatie() {
     SDL_Quit();
 }
 
-/* Buton* creare_buton(Vector2 pozitie, Vector2 dimensiune, const char* path_imagine, std::function<void()> actiune_click) {
+ Buton* Aplicatie::CreareButon(Vector2 pozitie, Vector2 dimensiune,SDL_Color culoare_buton, SDL_Color culoare_componenta, const char* path_imagine,int index_btn) {
     Buton* buton = new Buton(pozitie, dimensiune);
     ImagineGrafica* imagine = new ImagineGrafica();
     imagine->path = path_imagine;
-    imagine->culoare = SDL_Color{ 150,150,150,255 };
+    imagine->culoare = culoare_componenta;
     imagine->dimensiuni = dimensiune;
     imagine->pozitie = pozitie;
     imagine->marime = 1;
     DreptunghiGrafic* fundal = new DreptunghiGrafic();
-    fundal->culoare = SDL_Color{ 80,80,80,80 };
+    fundal->culoare = culoare_buton;
     fundal->dimensiuni = dimensiune;
     fundal->pozitie = pozitie;
     fundal->marime = 1;
     buton->AdaugaElementGrafic(fundal);
     buton->AdaugaElementGrafic(imagine);
-   buton->actiune_click = actiune_click;
+
+
+    auto actiune_click = [=]() {
+        pozitionator_componente::SelectareComponentaPozitionare(index_btn);
+    };
+
+    buton->actiune_click = actiune_click;
     InregistrareButon(buton);
     return buton;
-}*/
+}
 
 
 void Aplicatie::InitializareUI() {
@@ -46,15 +54,25 @@ void Aplicatie::InitializareUI() {
     desenator_conectori::InitializareDesenatorConectori();
     editor_componente::InitializareEditor();
 
-   // Buton* intrerupator = creare_buton(Vector2(335, INALTIME - 60), Vector2(50, 50), "Desenecomponente/intrerupator.bmp", {
-   // SelectareComponentaPozitionare(1);
-     //   });
+    SDL_Color culoare_btn = {60,60,60};
+    SDL_Color culoare_comp = {150,150,150 };
 
+    WindowGrafic* footer_butoane = new WindowGrafic();
 
-    Buton* zoomInBtn = new Buton(Vector2(40, INALTIME - 60), Vector2(60, 30), ZoomIn);
+    DreptunghiGrafic* bg_footer = new DreptunghiGrafic();
+    bg_footer->dimensiuni = Vector2((float)LATIME, (float)(60 + MARIME_COMPONENTE/2 + (60 - MARIME_COMPONENTE/2)));
+    bg_footer->marime = 1;
+    bg_footer->pozitie = Vector2(LATIME / 2.0f, INALTIME - bg_footer->dimensiuni.y / 2);
+    bg_footer->culoare = SDL_Color{30,30,30};
+
+    footer_butoane->AdaugaElementGrafic(bg_footer);
+
+    auto fct_simulare = [this]() {simulator.Simuleaza(GetToateComponentele()); RefreshUI(); };
+
+    Buton* zoomInBtn = new Buton(Vector2(40, INALTIME - 60), Vector2(60, 30), fct_simulare);
     
     DreptunghiGrafic* bg_btn = new DreptunghiGrafic();
-    bg_btn->culoare = SDL_Color{ 80,80,80,255 };
+    bg_btn->culoare = culoare_btn;
     bg_btn->dimensiuni = Vector2(60, 30);
     bg_btn->pozitie = Vector2(40, INALTIME - 60);
     bg_btn->marime = 1;
@@ -64,7 +82,7 @@ void Aplicatie::InitializareUI() {
     text_btn1->dimensiuni = Vector2(50, 20);
     text_btn1->pozitie = Vector2(40, INALTIME - 60);
     text_btn1->marime = 1;
-    text_btn1->text = "+";
+    text_btn1->text = "Simuleaza";
 
     zoomInBtn->AdaugaElementGrafic(bg_btn);
     zoomInBtn->AdaugaElementGrafic(text_btn1);
@@ -72,7 +90,7 @@ void Aplicatie::InitializareUI() {
     Buton* zoomOutBtn = new Buton( Vector2(120, INALTIME - 60), Vector2(60, 30), ZoomOut);
 
     DreptunghiGrafic* bg_btn2 = new DreptunghiGrafic();
-    bg_btn2->culoare = SDL_Color{ 80,80,80,80 };
+    bg_btn2->culoare = culoare_btn;
     bg_btn2->dimensiuni = Vector2(60, 30);
     bg_btn2->pozitie = Vector2(120, INALTIME - 60);
     bg_btn2->marime = 1;
@@ -87,254 +105,40 @@ void Aplicatie::InitializareUI() {
     zoomOutBtn->AdaugaElementGrafic(bg_btn2);
     zoomOutBtn->AdaugaElementGrafic(text_btn2);
 
-    Buton* rezistor = new Buton(Vector2(225, INALTIME - 60), Vector2(50, 50));//vect2 100 30
-
-    auto fct_select_rezistor = []() {
-        pozitionator_componente::SelectareComponentaPozitionare(0);
-    };
-    rezistor->actiune_click = fct_select_rezistor;
-
     DreptunghiGrafic* bg_btn3 = new DreptunghiGrafic();
-    bg_btn3->culoare = SDL_Color{ 80,80,80,80 };
-    bg_btn3->dimensiuni = Vector2(50, 50);
+    bg_btn3->culoare = culoare_btn;
+    bg_btn3->dimensiuni = zoomOutBtn->dimensiuni;
     bg_btn3->pozitie = Vector2(225, INALTIME - 60);
     bg_btn3->marime = 1;
 
-
-    ImagineGrafica* bg_btn4 = new ImagineGrafica();
-    bg_btn4->path = "Desenecomponente/rezistor.bmp";
-    bg_btn4->culoare = SDL_Color{ 150,150,150,255 };
-    bg_btn4->dimensiuni = Vector2(50, 50);
-    bg_btn4->pozitie = Vector2(225, INALTIME - 60);
-    bg_btn4->marime = 1;
-    //placeButton->AdaugaElementGrafic(bg_btn4);
     zoomOutBtn->AdaugaElementGrafic(bg_btn3);
-    rezistor->AdaugaElementGrafic(bg_btn3);
-    rezistor->AdaugaElementGrafic(bg_btn4);
 
-    Buton* intrerupator = new Buton(Vector2(335, INALTIME - 60), Vector2(50, 50));
-
-    auto fct_select_intrerupator = []() {
-        pozitionator_componente::SelectareComponentaPozitionare(1);
-        };
-
-    intrerupator->actiune_click = fct_select_intrerupator;
-
-    DreptunghiGrafic* bg_btn5 = new DreptunghiGrafic();
-
-    bg_btn5->culoare = SDL_Color{ 80,80,80,80 };
-    bg_btn5->dimensiuni = Vector2(50, 50);
-    bg_btn5->pozitie = Vector2(335, INALTIME - 60);
-    bg_btn5->marime = 1;
-
-    ImagineGrafica* bg_btn6 = new ImagineGrafica();
-
-    bg_btn6->path = "Desenecomponente/intrerupator.bmp";
-    bg_btn6->culoare = SDL_Color{ 150,150,150,255 };
-    bg_btn6->dimensiuni = Vector2(50, 50);
-    bg_btn6->pozitie = Vector2(335, INALTIME - 60);
-    bg_btn6->marime = 1;
-
-    intrerupator->AdaugaElementGrafic(bg_btn5);
-    intrerupator->AdaugaElementGrafic(bg_btn6); 
-   
-
-    Buton* andGate = new Buton(Vector2(445, INALTIME - 60), Vector2(50, 50));
-
-   auto fct_select_andGate = []() {
-       pozitionator_componente::SelectareComponentaPozitionare(2);
-       };
-
-   andGate->actiune_click = fct_select_andGate;
-
-    DreptunghiGrafic* bg_btn7 = new DreptunghiGrafic();
-
-    bg_btn7->culoare = SDL_Color{ 80,80,80,80 };
-    bg_btn7->dimensiuni = Vector2(50, 50);
-    bg_btn7->pozitie = Vector2(445, INALTIME - 60);
-    bg_btn7->marime = 1;
-
-    ImagineGrafica* bg_btn8 = new ImagineGrafica();
-
-    bg_btn8->path = "Desenecomponente/andgate.bmp";
-    bg_btn8->culoare = SDL_Color{ 150,150,150,255 };
-    bg_btn8->dimensiuni = Vector2(50, 50);
-    bg_btn8->pozitie = Vector2(445, INALTIME - 60);
-    bg_btn8->marime = 1;
-
-    andGate->AdaugaElementGrafic(bg_btn7);
-    andGate->AdaugaElementGrafic(bg_btn8);
-
-    Buton* capacitor = new Buton(Vector2(555, INALTIME - 60), Vector2(50, 50));
-
-    auto fct_select_capacitor = []() {
-        pozitionator_componente::SelectareComponentaPozitionare(3);
-        };
-
-    capacitor->actiune_click = fct_select_capacitor;
-
-    DreptunghiGrafic* bg_btn9 = new DreptunghiGrafic();
-
-    bg_btn9->culoare = SDL_Color{ 80,80,80,80 };
-    bg_btn9->dimensiuni = Vector2(50, 50);
-    bg_btn9->pozitie = Vector2(555, INALTIME - 60);
-    bg_btn9->marime = 1;
-
-    ImagineGrafica* bg_btn10 = new ImagineGrafica();
-
-    bg_btn10->path = "Desenecomponente/capacitor.bmp";
-    bg_btn10->culoare = SDL_Color{ 150,150,150,255 };
-    bg_btn10->dimensiuni = Vector2(50, 50);
-    bg_btn10->pozitie = Vector2(555, INALTIME - 60);
-    bg_btn10->marime = 1;
-
-    capacitor->AdaugaElementGrafic(bg_btn9);
-    capacitor->AdaugaElementGrafic(bg_btn10);
-
-    Buton* dioda2linii = new Buton(Vector2(665, INALTIME - 60), Vector2(50, 50));
-
-    auto fct_select_dioda2linii = []() {
-        pozitionator_componente::SelectareComponentaPozitionare(4);
-        };
-
-    dioda2linii->actiune_click = fct_select_dioda2linii;
-
-    DreptunghiGrafic* bg_btn11 = new DreptunghiGrafic();
-
-    bg_btn11->culoare = SDL_Color{ 80,80,80,80 };
-    bg_btn11->dimensiuni = Vector2(50, 50);
-    bg_btn11->pozitie = Vector2(665, INALTIME - 60);
-    bg_btn11->marime = 1;
-
-    ImagineGrafica* bg_btn12 = new ImagineGrafica();
-
-    bg_btn12->path = "Desenecomponente/dioda2linii.bmp";
-    bg_btn12->culoare = SDL_Color{ 150,150,150,255 };
-    bg_btn12->dimensiuni = Vector2(50, 50);
-    bg_btn12->pozitie = Vector2(665, INALTIME - 60);
-    bg_btn12->marime = 1;
-
-    dioda2linii->AdaugaElementGrafic(bg_btn11);
-    dioda2linii->AdaugaElementGrafic(bg_btn12);
-
-    Buton* diodacerc = new Buton(Vector2(775, INALTIME - 60), Vector2(50, 50));
-
-    auto fct_select_diodacerc = []() {
-        pozitionator_componente::SelectareComponentaPozitionare(5);
-        };
-
-    diodacerc->actiune_click = fct_select_diodacerc;
-
-    DreptunghiGrafic* bg_btn13 = new DreptunghiGrafic();
-
-    bg_btn13->culoare = SDL_Color{ 80,80,80,80 };
-    bg_btn13->dimensiuni = Vector2(50, 50);
-    bg_btn13->pozitie = Vector2(775, INALTIME - 60);
-    bg_btn13->marime = 1;
-
-    ImagineGrafica* bg_btn14 = new ImagineGrafica();
-
-    bg_btn14->path = "Desenecomponente/diodacerc.bmp";
-    bg_btn14->culoare = SDL_Color{ 150,150,150,255 };
-    bg_btn14->dimensiuni = Vector2(50, 50);
-    bg_btn14->pozitie = Vector2(775, INALTIME - 60);
-    bg_btn14->marime = 1;
-
-    diodacerc->AdaugaElementGrafic(bg_btn13);
-    diodacerc->AdaugaElementGrafic(bg_btn14);
-
-    Buton* impamantare = new Buton(Vector2(885, INALTIME - 60), Vector2(50, 50));
-
-    auto fct_select_impamantare = []() {
-        pozitionator_componente::SelectareComponentaPozitionare(6);
-        };
-
-    impamantare->actiune_click = fct_select_impamantare;
-
-    DreptunghiGrafic* bg_btn15 = new DreptunghiGrafic();
-
-    bg_btn15->culoare = SDL_Color{ 80,80,80,80 };
-    bg_btn15->dimensiuni = Vector2(50, 50);
-    bg_btn15->pozitie = Vector2(885, INALTIME - 60);
-    bg_btn15->marime = 1;
-
-    ImagineGrafica* bg_btn16 = new ImagineGrafica();
-
-    bg_btn16->path = "Desenecomponente/impamantare.bmp";
-    bg_btn16->culoare = SDL_Color{ 150,150,150,255 };
-    bg_btn16->dimensiuni = Vector2(50, 50);
-    bg_btn16->pozitie = Vector2(885, INALTIME - 60);
-    bg_btn16->marime = 1;
-
-    impamantare->AdaugaElementGrafic(bg_btn15);
-    impamantare->AdaugaElementGrafic(bg_btn16);
-
-    Buton* sursavoltaj = new Buton(Vector2(995, INALTIME - 60), Vector2(50, 50));
-
-    auto fct_select_sursavoltaj = []() {
-        pozitionator_componente::SelectareComponentaPozitionare(7);
-        };
-
-    sursavoltaj->actiune_click = fct_select_sursavoltaj;
-
-    DreptunghiGrafic* bg_btn17 = new DreptunghiGrafic();
-
-    bg_btn17->culoare = SDL_Color{ 80,80,80,80 };
-    bg_btn17->dimensiuni = Vector2(50, 50);
-    bg_btn17->pozitie = Vector2(995, INALTIME - 60);
-    bg_btn17->marime = 1;
-
-    ImagineGrafica* bg_btn18 = new ImagineGrafica();
-
-    bg_btn18->path = "Desenecomponente/sursavoltaj.bmp";
-    bg_btn18->culoare = SDL_Color{ 150,150,150,255 };
-    bg_btn18->dimensiuni = Vector2(50, 50);
-    bg_btn18->pozitie = Vector2(995, INALTIME - 60);
-    bg_btn18->marime = 1;
-
-    sursavoltaj->AdaugaElementGrafic(bg_btn17);
-    sursavoltaj->AdaugaElementGrafic(bg_btn18);
-
-    Buton* tranzistor = new Buton(Vector2(1105, INALTIME - 60), Vector2(50, 50));
-
-    auto fct_select_tranzistor = []() {
-        pozitionator_componente::SelectareComponentaPozitionare(8);
-        };
-
-    tranzistor->actiune_click = fct_select_tranzistor;
-
-    DreptunghiGrafic* bg_btn19 = new DreptunghiGrafic();
-
-    bg_btn19->culoare = SDL_Color{ 80,80,80,80 };
-    bg_btn19->dimensiuni = Vector2(50, 50);
-    bg_btn19->pozitie = Vector2(1105, INALTIME - 60);
-    bg_btn19->marime = 1;
-
-    ImagineGrafica* bg_btn20 = new ImagineGrafica();
-
-    bg_btn20->path = "Desenecomponente/tranzistor.bmp";
-    bg_btn20->culoare = SDL_Color{ 150,150,150,255 };
-    bg_btn20->dimensiuni = Vector2(50, 50);
-    bg_btn20->pozitie = Vector2(1105, INALTIME - 60);
-    bg_btn20->marime = 1;
-
-    tranzistor->AdaugaElementGrafic(bg_btn19);
-    tranzistor->AdaugaElementGrafic(bg_btn20);
-
-    InregistrareButon(zoomInBtn);
-    InregistrareButon(zoomOutBtn);
-    InregistrareButon(rezistor);
-    InregistrareButon(intrerupator);
-    InregistrareButon(andGate);
-    InregistrareButon(capacitor);
-    InregistrareButon(dioda2linii);
-    InregistrareButon(diodacerc);
-    InregistrareButon(impamantare);
-    InregistrareButon(sursavoltaj);
-    InregistrareButon(tranzistor);
-    DeseneazaToateButoanele();
-
+    int marime_buton = 80;
+
+
+    Buton* rezistor = CreareButon(Vector2(225, INALTIME - 60), Vector2(marime_buton, marime_buton), culoare_btn, culoare_comp, "Desenecomponente/rezistor.bmp", 0);
+    Buton* intrerupator = CreareButon(Vector2(335, INALTIME - 60), Vector2(marime_buton, marime_buton), culoare_btn, culoare_comp, "Desenecomponente/intrerupator.bmp", 1);
+    Buton* andGate = CreareButon(Vector2(445, INALTIME - 60), Vector2(marime_buton, marime_buton), culoare_btn, culoare_comp, "Desenecomponente/andgate.bmp", 2);
+    Buton* capacitor = CreareButon(Vector2(555, INALTIME - 60), Vector2(marime_buton, marime_buton), culoare_btn, culoare_comp, "Desenecomponente/capacitor.bmp", 3);
+    Buton* dioda2linii = CreareButon(Vector2(665, INALTIME - 60), Vector2(marime_buton, marime_buton), culoare_btn, culoare_comp, "Desenecomponente/dioda2linii.bmp", 4);
+    Buton* diodacerc = CreareButon(Vector2(775, INALTIME - 60), Vector2(marime_buton, marime_buton), culoare_btn, culoare_comp, "Desenecomponente/diodacerc.bmp", 5);
+    Buton* impamantare = CreareButon(Vector2(885, INALTIME - 60), Vector2(marime_buton, marime_buton), culoare_btn, culoare_comp, "Desenecomponente/impamantare.bmp", 6);
+    Buton* sursavoltaj = CreareButon(Vector2(995, INALTIME - 60), Vector2(marime_buton, marime_buton), culoare_btn, culoare_comp, "Desenecomponente/sursavoltaj.bmp", 7);
+    Buton* tranzistor = CreareButon(Vector2(1105, INALTIME - 60), Vector2(marime_buton, marime_buton), culoare_btn, culoare_comp, "Desenecomponente/tranzistor.bmp", 8);
     
+    InregistrareButon(zoomInBtn);
+    footer_butoane->AdaugaButon(zoomOutBtn);
+    footer_butoane->AdaugaButon(rezistor);
+    footer_butoane->AdaugaButon(intrerupator);
+    footer_butoane->AdaugaButon(andGate);
+    footer_butoane->AdaugaButon(capacitor);
+    footer_butoane->AdaugaButon(dioda2linii);
+    footer_butoane->AdaugaButon(diodacerc);
+    footer_butoane->AdaugaButon(impamantare);
+    footer_butoane->AdaugaButon(sursavoltaj);
+    footer_butoane->AdaugaButon(tranzistor);
+    
+    InregistreazaWindowGrafic(footer_butoane);
 
     RefreshUI();
 }

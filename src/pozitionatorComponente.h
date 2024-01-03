@@ -13,6 +13,8 @@ namespace pozitionator_componente {
 
 	void SelectareComponentaPozitionare(int index);
 
+	void SelectareComponentaPozitionare(Componenta* comp);
+
 	void ProcesarePlasare();
 
 	void ProcesareClickPlasare();
