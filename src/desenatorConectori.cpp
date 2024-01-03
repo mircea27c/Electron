@@ -15,7 +15,7 @@ void desenator_conectori::StartConectare(PunctConexiune* pct_start) {
 
 	se_deseneaza_conector = true;
 
-	conector_desenat->id = "conector";
+	conector_desenat->id = -2;
 
 	InregistreazaComponenta(conector_desenat);
 }

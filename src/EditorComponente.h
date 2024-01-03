@@ -1,5 +1,6 @@
 #pragma once
 #include <SDL.h>
+#include "pozitionatorComponente.h"
 #include "UIManager.h"
 #include "vector2.h"
 
@@ -30,5 +31,7 @@ namespace editor_componente {
 	void ProcesareClick(int x, int y);
 
 	void StergeComponentaSelectata();
+	void StergeLegaturiComponenta(Componenta* comp);
 	void RotesteComponentaSelectata();
+	void MutaComponentaSelectata();
 }

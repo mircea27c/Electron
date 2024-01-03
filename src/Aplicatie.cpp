@@ -27,7 +27,7 @@ void Aplicatie::InitializareUI() {
 
 
     Buton* zoomInBtn = new Buton(Vector2(40, INALTIME - 60), Vector2(60, 30), ZoomIn);
-    
+
     DreptunghiGrafic* bg_btn = new DreptunghiGrafic();
     bg_btn->culoare = SDL_Color{ 80,80,80,255 };
     bg_btn->dimensiuni = Vector2(60, 30);
@@ -44,7 +44,7 @@ void Aplicatie::InitializareUI() {
     zoomInBtn->AdaugaElementGrafic(bg_btn);
     zoomInBtn->AdaugaElementGrafic(text_btn1);
 
-    Buton* zoomOutBtn = new Buton( Vector2(120, INALTIME - 60), Vector2(60, 30), ZoomOut);
+    Buton* zoomOutBtn = new Buton(Vector2(120, INALTIME - 60), Vector2(60, 30), ZoomOut);
 
     DreptunghiGrafic* bg_btn2 = new DreptunghiGrafic();
     bg_btn2->culoare = SDL_Color{ 80,80,80,80 };
@@ -65,7 +65,7 @@ void Aplicatie::InitializareUI() {
     Buton* rezistor = new Buton(Vector2(225, INALTIME - 60), Vector2(100, 30));
 
     auto fct_select_rezistor = []() {
-        SelectareComponentaPozitionare(0);
+        pozitionator_componente::SelectareComponentaPozitionare(0);
     };
     rezistor->actiune_click = fct_select_rezistor;
 
@@ -90,8 +90,8 @@ void Aplicatie::InitializareUI() {
     Buton* intrerupator = new Buton(Vector2(335, INALTIME - 60), Vector2(100, 30));
 
     auto fct_select_intrerupator = []() {
-        SelectareComponentaPozitionare(1);
-        };
+        pozitionator_componente::SelectareComponentaPozitionare(1);
+    };
 
     intrerupator->actiune_click = fct_select_intrerupator;
 
@@ -111,16 +111,16 @@ void Aplicatie::InitializareUI() {
     bg_btn6->marime = 1;
 
     intrerupator->AdaugaElementGrafic(bg_btn5);
-    intrerupator->AdaugaElementGrafic(bg_btn6); 
-   
+    intrerupator->AdaugaElementGrafic(bg_btn6);
 
-   Buton* andGate = new Buton(Vector2(445, INALTIME - 60), Vector2(100, 30));
 
-   auto fct_select_andGate = []() {
-       SelectareComponentaPozitionare(2);
-       };
+    Buton* andGate = new Buton(Vector2(445, INALTIME - 60), Vector2(100, 30));
 
-   andGate->actiune_click = fct_select_andGate;
+    auto fct_select_andGate = []() {
+        pozitionator_componente::SelectareComponentaPozitionare(2);
+    };
+
+    andGate->actiune_click = fct_select_andGate;
 
     DreptunghiGrafic* bg_btn7 = new DreptunghiGrafic();
 
@@ -143,8 +143,8 @@ void Aplicatie::InitializareUI() {
     Buton* capacitor = new Buton(Vector2(555, INALTIME - 60), Vector2(100, 30));
 
     auto fct_select_capacitor = []() {
-        SelectareComponentaPozitionare(3);
-        };
+        pozitionator_componente::SelectareComponentaPozitionare(3);
+    };
 
     capacitor->actiune_click = fct_select_capacitor;
 
@@ -169,8 +169,8 @@ void Aplicatie::InitializareUI() {
     Buton* dioda2linii = new Buton(Vector2(665, INALTIME - 60), Vector2(100, 30));
 
     auto fct_select_dioda2linii = []() {
-        SelectareComponentaPozitionare(4);
-        };
+        pozitionator_componente::SelectareComponentaPozitionare(4);
+    };
 
     dioda2linii->actiune_click = fct_select_dioda2linii;
 
@@ -195,8 +195,8 @@ void Aplicatie::InitializareUI() {
     Buton* diodacerc = new Buton(Vector2(775, INALTIME - 60), Vector2(100, 30));
 
     auto fct_select_diodacerc = []() {
-        SelectareComponentaPozitionare(5);
-        };
+        pozitionator_componente::SelectareComponentaPozitionare(5);
+    };
 
     diodacerc->actiune_click = fct_select_diodacerc;
 
@@ -221,8 +221,8 @@ void Aplicatie::InitializareUI() {
     Buton* impamantare = new Buton(Vector2(885, INALTIME - 60), Vector2(100, 30));
 
     auto fct_select_impamantare = []() {
-        SelectareComponentaPozitionare(6);
-        };
+        pozitionator_componente::SelectareComponentaPozitionare(6);
+    };
 
     impamantare->actiune_click = fct_select_impamantare;
 
@@ -247,8 +247,8 @@ void Aplicatie::InitializareUI() {
     Buton* sursavoltaj = new Buton(Vector2(995, INALTIME - 60), Vector2(100, 30));
 
     auto fct_select_sursavoltaj = []() {
-        SelectareComponentaPozitionare(7);
-        };
+        pozitionator_componente::SelectareComponentaPozitionare(7);
+    };
 
     sursavoltaj->actiune_click = fct_select_sursavoltaj;
 
@@ -273,8 +273,8 @@ void Aplicatie::InitializareUI() {
     Buton* tranzistor = new Buton(Vector2(1105, INALTIME - 60), Vector2(100, 30));
 
     auto fct_select_tranzistor = []() {
-        SelectareComponentaPozitionare(8);
-        };
+        pozitionator_componente::SelectareComponentaPozitionare(8);
+    };
 
     tranzistor->actiune_click = fct_select_tranzistor;
 
@@ -309,7 +309,7 @@ void Aplicatie::InitializareUI() {
     InregistrareButon(tranzistor);
     DeseneazaToateButoanele();
 
-    
+
 
     RefreshUI();
 }
@@ -322,10 +322,10 @@ void Aplicatie::ProcesareClick(SDL_Event* actiune_mouse) {
     case SDL_MOUSEBUTTONDOWN:
         if (actiune_mouse->button.button == SDL_BUTTON_LEFT) {
 
-            ProcesareClickPlasare();
-            ProceseazaClickPuncteConexiune(Vector2(x,y));
+            pozitionator_componente::ProcesareClickPlasare();
+            ProceseazaClickPuncteConexiune(Vector2(x, y));
             ProcesareButoane(Vector2(x, y));
-            editor_componente::ProcesareClick(x,y);
+            editor_componente::ProcesareClick(x, y);
         }
         if (actiune_mouse->button.button == SDL_BUTTON_RIGHT) {
             Vector2 mouseInGrid = PozitieMouseInGrid();
@@ -376,7 +376,7 @@ void Aplicatie::Ruleaza()
 {
     InitializareAplicatie();
     InitializareUI();
- 
+
     bool running = true;
     SDL_Event actiune_input;
 
@@ -399,7 +399,7 @@ void Aplicatie::Ruleaza()
             }
         }
 
-        ProcesarePlasare();
+        pozitionator_componente::ProcesarePlasare();
         desenator_conectori::ProcesareConectare();
 
         SDL_Delay(5);

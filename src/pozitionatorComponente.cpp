@@ -1,6 +1,6 @@
 #include "pozitionatorComponente.h"
 
-void SelectareComponentaPozitionare(int index) {
+void pozitionator_componente::SelectareComponentaPozitionare(int index) {
 	SelecteazaComponenta(index);
 
 	Componenta* comp = GetComponentaSelectata();
@@ -15,15 +15,14 @@ void SelectareComponentaPozitionare(int index) {
 	if (component_preview == NULL) {
 		ImagineGrafica* imagine_preview = new ImagineGrafica();
 		imagine_preview->dimensiuni = Vector2(MARIME_COMPONENTE, MARIME_COMPONENTE);
-        component_preview = imagine_preview;
+		component_preview = imagine_preview;
 	}
 	component_preview->path = ((ImagineGrafica*)component_selectat->grafica)->path;
-	component_selectat->id = component_preview->path;
-	
+
 	se_plaseaza = true;
 }
 
-void ProcesarePlasare() {
+void pozitionator_componente::ProcesarePlasare() {
 	if (!se_plaseaza)return;
 	if (component_selectat == NULL || component_preview == NULL)return;
 
@@ -34,18 +33,18 @@ void ProcesarePlasare() {
 	//in functie de pozitia mouseului, determina celula din tabel in care se afla Componenta
 
 	if (gridPos.x != -1) {
-			
-			component_preview->pozitie = PozitieGridLaPozitieEcran(gridPos);
-			component_preview->marime = factor_zoom;
 
-			if (VerificaColiziune(gridPos)) {
-				component_preview->culoare = SDL_Color{ 200,0,0,255 };
-			}
-			else {
-				component_preview->culoare = SDL_Color{ 180,180,180,255 };
-			}
-			component_preview->Desenare(GetCurrentRenderer());
-			SDL_RenderPresent(GetCurrentRenderer());
+		component_preview->pozitie = PozitieGridLaPozitieEcran(gridPos);
+		component_preview->marime = factor_zoom;
+
+		if (VerificaColiziune(gridPos)) {
+			component_preview->culoare = SDL_Color{ 200,0,0,255 };
+		}
+		else {
+			component_preview->culoare = SDL_Color{ 180,180,180,255 };
+		}
+		component_preview->Desenare(GetCurrentRenderer());
+		SDL_RenderPresent(GetCurrentRenderer());
 	}
 
 
@@ -54,8 +53,8 @@ void ProcesarePlasare() {
 
 }
 
-void ProcesareClickPlasare() {
-	
+void pozitionator_componente::ProcesareClickPlasare() {
+
 	if (!se_plaseaza)return;
 
 	Vector2 gridPos = PozitieMouseInGrid();
@@ -71,3 +70,4 @@ void ProcesareClickPlasare() {
 
 	RefreshUI();
 }
+

@@ -39,7 +39,7 @@ class Componenta {
 
 public:
 
-	const char* id; //pentru debugging doar
+	int id; //pentru debugging doar
 
 	ORIENTARE rotatie;
 
@@ -50,6 +50,8 @@ public:
 	Componenta();
 	Componenta(Componenta* tip);
 	~Componenta();
+
+	void StergeLegaturi();
 
 	void SetPozitie(Vector2 pozitie);
 	Vector2 GetPozitie();

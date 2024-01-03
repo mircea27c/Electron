@@ -3,26 +3,26 @@
 Vector2 Componenta::GetPozitie() { return pozitie_in_grid; }
 
 Componenta::Componenta(Componenta* tip) {
-	id = "clona fara nume";
+	id = tip->id;
 
 	grafica = tip->grafica->Clonare();
 
 	puncte_conexiune = new PunctConexiune[tip->nr_pct_conexiune];
-	
+
 	nr_pct_conexiune = tip->nr_pct_conexiune;
-	
+
 	for (int i = 0; i < nr_pct_conexiune; i++)
 	{
 		tip->puncte_conexiune[i].Clonare(&puncte_conexiune[i]);
 		puncte_conexiune[i].parinte = this;
 	}
-	
+
 	rotatie = DREAPTA;
 
 	pozitie_in_grid = Vector2();
 }
 Componenta::Componenta() {
-	id = "componenta fara nume";
+	id = -1;
 	DreptunghiGrafic* dreptunghi = new DreptunghiGrafic();
 	dreptunghi->culoare = SDL_Color{ 255,255,255,255 };
 	dreptunghi->dimensiuni = Vector2(50, 50);
@@ -32,16 +32,19 @@ Componenta::Componenta() {
 	pozitie_in_grid = Vector2();
 }
 
-Componenta::~Componenta() {
+void Componenta::StergeLegaturi() {
 	for (int i = 0; i < nr_pct_conexiune; i++)
 	{
 
-		if (puncte_conexiune[i].conector != NULL) {			
+		if (puncte_conexiune[i].conector != NULL) {
 			delete puncte_conexiune[i].conector;
 			puncte_conexiune[i].conector = NULL;
 		}
-		printf("successfully disconnectat pct conex de la conector \n");
 	}
+}
+
+Componenta::~Componenta() {
+	StergeLegaturi();
 	//smth smth
 }
 
@@ -86,7 +89,7 @@ PunctConexiune::PunctConexiune(PunctConexiune* model)
 	orientare = model->orientare;
 }
 PunctConexiune::PunctConexiune() {
-}	
+}
 void PunctConexiune::Clonare(PunctConexiune* copie) {
 
 	copie->parinte = parinte;
@@ -106,17 +109,17 @@ void PunctConexiune::Clonare(PunctConexiune* copie) {
 }
 
 void Componenta::Print() {
-	
+
 }
 
 Conector::Conector() {
 	start_conexiune = NULL;
-	final_conexiune= NULL;
+	final_conexiune = NULL;
 }
 
 Conector::~Conector() {
 	if (start_conexiune != NULL) {
-		start_conexiune->conector= NULL;
+		start_conexiune->conector = NULL;
 		start_conexiune = NULL;
 	}
 	if (final_conexiune != NULL) {

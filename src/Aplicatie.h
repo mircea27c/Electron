@@ -5,7 +5,6 @@
 #include <functional>
 #include "vector2.h"
 #include "UIManager.h"
-#include "pozitionatorComponente.h"
 #include "desenatorConectori.h"
 #include "TipuriComponente.h" 
 #include "EditorComponente.h" 
