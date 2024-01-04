@@ -49,7 +49,7 @@ void SimulatorCircuit::Parcurge(Componenta* comp)
 					next_comp = con->start_conexiune->parinte;
 				}
 
-				if()
+				//if ()
 
 				de_vizitat.push(next_comp);
 			}

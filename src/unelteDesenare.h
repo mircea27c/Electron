@@ -5,7 +5,7 @@
 #include "math.h"
 
 
-inline void DeseneazaLinie(SDL_Renderer* renderer, Vector2 poz1, Vector2 poz2, int thickness, SDL_Color culoare) {
+ inline void DeseneazaLinie(SDL_Renderer* renderer, Vector2 poz1, Vector2 poz2, int thickness, SDL_Color culoare) {
 
     //SDL_SetRenderDrawColor(renderer, culoare.r, culoare.g, culoare.b, culoare.a);
 
@@ -31,3 +31,4 @@ inline void DeseneazaLinie(SDL_Renderer* renderer, Vector2 poz1, Vector2 poz2, i
 		SDL_RenderDrawLine(renderer, poz1.x + i, poz1.y + i, poz2.x + i, poz2.y + i);
 	}
 }
+

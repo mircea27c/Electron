@@ -17,7 +17,7 @@ class PunctConexiune;
 
 class PunctConexiune {
 private:
-public:
+public: 
 	enum PCT_CONEX_TIP {
 		INPUT, OUTPUT
 	};
