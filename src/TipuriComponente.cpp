@@ -1,6 +1,30 @@
-#include "TipuriComponente.h"
+﻿#include "TipuriComponente.h"
 
-void CreazaComponenta(const char *path, Vector2 dimensiuni, Vector2 pct1, Vector2 pct2) {
+void CreazaComponenta(const char* path, Vector2 dimensiuni, std::vector<PunctConexiune*> puncteConexiune) {
+	static int index_componenta = 0;
+
+	Componenta* componenta = new Componenta();
+
+	ImagineGrafica* img = new ImagineGrafica();
+	img->dimensiuni = dimensiuni;
+	img->path = path;
+	componenta->grafica = img;
+
+	componenta->nr_pct_conexiune = puncteConexiune.size();
+	componenta->puncte_conexiune = new PunctConexiune[componenta->nr_pct_conexiune];
+
+	for (int i = 0; i < componenta->nr_pct_conexiune; ++i) {
+		componenta->puncte_conexiune[i] = *puncteConexiune[i];
+	}
+
+	componenta->id = index_componenta;
+	tipuri_componente[index_componenta] = componenta;
+
+	index_componenta++;
+}
+ 
+
+/*void CreazaComponenta(const char* path, Vector2 dimensiuni, Vector2 pct1, Vector2 pct2) {
 		
 	static int index_componenta = 0;
 	
@@ -20,12 +44,88 @@ void CreazaComponenta(const char *path, Vector2 dimensiuni, Vector2 pct1, Vector
 	tipuri_componente[index_componenta] = componenta;
 
 	index_componenta++;
-}
+}*/
+
+  void InitializareTipuriComponente() {
+	  std::vector<PunctConexiune*> puncte;
+	  //rezistor
+	
+	puncte.push_back(new PunctConexiune(Vector2(0.89, 0.50f), nullptr, STANGA, PunctConexiune::INPUT));
+	puncte.push_back(new PunctConexiune(Vector2(0.11, 0.50f), nullptr, DREAPTA, PunctConexiune::OUTPUT));
+	
+CreazaComponenta("Desenecomponente/rezistor.bmp", Vector2(MARIME_COMPONENTE, MARIME_COMPONENTE), puncte);
+puncte.clear();
 
 
-void InitializareTipuriComponente() {
-	printf("Initializare succes \n");
-	CreazaComponenta("Desenecomponente/rezistor.bmp", Vector2(MARIME_COMPONENTE, MARIME_COMPONENTE), Vector2(0.89, 0.47f), Vector2(0.11, 0.47f));
+   puncte.push_back(new PunctConexiune(Vector2(0.14, 0.50f), nullptr, STANGA, PunctConexiune::INPUT));
+   puncte.push_back(new PunctConexiune(Vector2(0.88, 0.50f), nullptr, DREAPTA, PunctConexiune::OUTPUT));
+
+CreazaComponenta("Desenecomponente/intrerupator.bmp", Vector2(MARIME_COMPONENTE, MARIME_COMPONENTE), puncte);
+puncte.clear();
+
+//andgate
+puncte.push_back(new PunctConexiune(Vector2(0.14, 0.43f), nullptr, STANGA, PunctConexiune::INPUT));
+puncte.push_back(new PunctConexiune(Vector2(0.14, 0.57f), nullptr, STANGA, PunctConexiune::INPUT));
+puncte.push_back(new PunctConexiune(Vector2(0.85, 0.50f), nullptr, DREAPTA, PunctConexiune::OUTPUT));
+
+CreazaComponenta("Desenecomponente/andgate.bmp", Vector2(MARIME_COMPONENTE, MARIME_COMPONENTE), puncte);
+puncte.clear();
+
+//capacitor
+
+puncte.push_back(new PunctConexiune(Vector2(0.14, 0.51f), nullptr, STANGA, PunctConexiune::INPUT));
+puncte.push_back(new PunctConexiune(Vector2(0.88, 0.51f), nullptr, DREAPTA, PunctConexiune::OUTPUT));
+
+CreazaComponenta("Desenecomponente/capacitor.bmp", Vector2(MARIME_COMPONENTE, MARIME_COMPONENTE), puncte);
+puncte.clear();
+//dioda2linii
+
+puncte.push_back(new PunctConexiune(Vector2(0.14, 0.51f), nullptr, STANGA, PunctConexiune::INPUT));
+puncte.push_back(new PunctConexiune(Vector2(0.88, 0.51f), nullptr, DREAPTA, PunctConexiune::OUTPUT));
+
+CreazaComponenta("Desenecomponente/dioda2linii.bmp", Vector2(MARIME_COMPONENTE, MARIME_COMPONENTE), puncte);
+puncte.clear();
+
+//diodacerc
+
+puncte.push_back(new PunctConexiune(Vector2(0.14, 0.51f), nullptr, STANGA, PunctConexiune::INPUT));
+puncte.push_back(new PunctConexiune(Vector2(0.88, 0.51f), nullptr, DREAPTA, PunctConexiune::OUTPUT));
+
+CreazaComponenta("Desenecomponente/diodacerc.bmp", Vector2(MARIME_COMPONENTE, MARIME_COMPONENTE), puncte);
+puncte.clear();
+
+//impamantare
+puncte.push_back(new PunctConexiune(Vector2(0.5, 0.2f), nullptr, SUS, PunctConexiune::INPUT));
+
+CreazaComponenta("Desenecomponente/impamantare.bmp", Vector2(MARIME_COMPONENTE, MARIME_COMPONENTE), puncte);
+puncte.clear();
+
+//sursavoltaj
+puncte.push_back(new PunctConexiune(Vector2(0.5, 0.15f), nullptr, SUS, PunctConexiune::INPUT));
+puncte.push_back(new PunctConexiune(Vector2(0.5, 0.85f), nullptr, JOS, PunctConexiune::OUTPUT));
+
+CreazaComponenta("Desenecomponente/sursavoltaj.bmp", Vector2(MARIME_COMPONENTE, MARIME_COMPONENTE), puncte);
+puncte.clear();
+
+//tranzistor
+puncte.push_back(new PunctConexiune(Vector2(0.5, 0.2f), nullptr, SUS, PunctConexiune::OUTPUT));
+puncte.push_back(new PunctConexiune(Vector2(0.14, 0.53f), nullptr, STANGA, PunctConexiune::INPUT));
+puncte.push_back(new PunctConexiune(Vector2(0.88, 0.53f), nullptr, DREAPTA, PunctConexiune::INPUT));
+
+CreazaComponenta("Desenecomponente/tranzistor.bmp", Vector2(MARIME_COMPONENTE, MARIME_COMPONENTE), puncte);
+puncte.clear();
+
+	/* CreazaComponenta("Desenecomponente/intrerupator.bmp", Vector2(MARIME_COMPONENTE, MARIME_COMPONENTE), puncte);
+	CreazaComponenta("Desenecomponente/andgate.bmp", Vector2(MARIME_COMPONENTE, MARIME_COMPONENTE), puncte);
+	CreazaComponenta("Desenecomponente/capacitor.bmp", Vector2(MARIME_COMPONENTE, MARIME_COMPONENTE), puncte);
+	CreazaComponenta("Desenecomponente/dioda2linii.bmp", Vector2(MARIME_COMPONENTE, MARIME_COMPONENTE), puncte);
+	CreazaComponenta("Desenecomponente/diodacerc.bmp", Vector2(MARIME_COMPONENTE, MARIME_COMPONENTE), puncte);
+	CreazaComponenta("Desenecomponente/impamantare.bmp", Vector2(MARIME_COMPONENTE, MARIME_COMPONENTE), puncte);
+	CreazaComponenta("Desenecomponente/sursavoltaj.bmp", Vector2(MARIME_COMPONENTE, MARIME_COMPONENTE), puncte);
+	CreazaComponenta("Desenecomponente/tranzistor.bmp", Vector2(MARIME_COMPONENTE, MARIME_COMPONENTE), puncte);
+	*/
+
+ /*CreazaComponenta("Desenecomponente/rezistor.bmp", Vector2(MARIME_COMPONENTE, MARIME_COMPONENTE), Vector2(0.89, 0.47f), Vector2(0.11, 0.47f));
 	CreazaComponenta("Desenecomponente/intrerupator.bmp", Vector2(MARIME_COMPONENTE, MARIME_COMPONENTE), Vector2(0.88, 0.53f), Vector2(0.14, 0.53f));
 	CreazaComponenta("Desenecomponente/andgate.bmp", Vector2(MARIME_COMPONENTE, MARIME_COMPONENTE), Vector2(0.85, 0.50f), Vector2(0.20, 0.50f));
 	CreazaComponenta("Desenecomponente/capacitor.bmp", Vector2(MARIME_COMPONENTE, MARIME_COMPONENTE), Vector2(0.85, 0.50f), Vector2(0.12, 0.50f));
@@ -80,7 +180,7 @@ void InitializareTipuriComponente() {
 	};
 	tipuri_componente[9]->functie_procesare = procesare_splitter;
 
-
+	*/
 	/*Componenta* rezistor = new Componenta();
 
 		ImagineGrafica* img_rezistor = new ImagineGrafica();
