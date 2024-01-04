@@ -24,7 +24,6 @@ void CreazaComponenta(const char *path, Vector2 dimensiuni, Vector2 pct1, Vector
 
 
 void InitializareTipuriComponente() {
-
 	printf("Initializare succes \n");
 	CreazaComponenta("Desenecomponente/rezistor.bmp", Vector2(MARIME_COMPONENTE, MARIME_COMPONENTE), Vector2(0.89, 0.47f), Vector2(0.11, 0.47f));
 	CreazaComponenta("Desenecomponente/intrerupator.bmp", Vector2(MARIME_COMPONENTE, MARIME_COMPONENTE), Vector2(0.88, 0.53f), Vector2(0.14, 0.53f));
@@ -33,8 +32,53 @@ void InitializareTipuriComponente() {
 	CreazaComponenta("Desenecomponente/dioda2linii.bmp", Vector2(MARIME_COMPONENTE, MARIME_COMPONENTE), Vector2(0.90, 0.50f), Vector2(0.12, 0.50f));
 	CreazaComponenta("Desenecomponente/diodacerc.bmp", Vector2(MARIME_COMPONENTE, MARIME_COMPONENTE), Vector2(0.89, 0.50f), Vector2(0.11, 0.50f));
 	CreazaComponenta("Desenecomponente/impamantare.bmp", Vector2(MARIME_COMPONENTE, MARIME_COMPONENTE), Vector2(0.89, 0.55f), Vector2(0.12, 0.55f));
+	
 	CreazaComponenta("Desenecomponente/sursavoltaj.bmp", Vector2(MARIME_COMPONENTE, MARIME_COMPONENTE), Vector2(0.80, 0.50f), Vector2(0.20, 0.50f));
+	tipuri_componente[7]->generator_curent = true;
+	
 	CreazaComponenta("Desenecomponente/tranzistor.bmp", Vector2(MARIME_COMPONENTE, MARIME_COMPONENTE), Vector2(0.80, 0.50f), Vector2(0.20, 0.50f));
+	
+	tipuri_componente[8]->nr_pct_conexiune = 3;
+	tipuri_componente[8]->puncte_conexiune = new PunctConexiune[3];
+	tipuri_componente[8]->puncte_conexiune[2] = PunctConexiune(Vector2(0.72f, 0.22f), tipuri_componente[8], DREAPTA, PunctConexiune::OUTPUT);
+	tipuri_componente[8]->puncte_conexiune[1] = PunctConexiune(Vector2(0.72f, 0.78f), tipuri_componente[8], DREAPTA, PunctConexiune::INPUT);
+	tipuri_componente[8]->puncte_conexiune[0] = PunctConexiune(Vector2(0.3f, 0.5f), tipuri_componente[8], STANGA, PunctConexiune::INPUT);
+	auto procesare_tranzistor = [](Componenta* comp,bool* puncte_curent) -> bool* {
+		bool* output_valid = new bool[comp->nr_pct_conexiune];
+		for (int i = 0; i < comp->nr_pct_conexiune; i++)
+		{
+			output_valid[i] = false;
+		}
+
+		if (puncte_curent[0] && puncte_curent[1]) {
+			output_valid[2] = true;
+		}
+		else {
+			output_valid[2] = false;
+		}
+		return output_valid;
+	};
+	tipuri_componente[8]->functie_procesare = procesare_tranzistor;
+
+	CreazaComponenta("Desenecomponente/2splitter.bmp", Vector2(MARIME_COMPONENTE, MARIME_COMPONENTE), Vector2(0.80, 0.50f), Vector2(0.20, 0.50f));
+
+	tipuri_componente[9]->nr_pct_conexiune = 3;
+	tipuri_componente[9]->puncte_conexiune = new PunctConexiune[3];
+	tipuri_componente[9]->puncte_conexiune[0] = PunctConexiune(Vector2(0.5f, 0.8f), tipuri_componente[8], JOS, PunctConexiune::INPUT);
+	tipuri_componente[9]->puncte_conexiune[1] = PunctConexiune(Vector2(0.3f, 0.2f), tipuri_componente[8], STANGA, PunctConexiune::OUTPUT);
+	tipuri_componente[9]->puncte_conexiune[2] = PunctConexiune(Vector2(0.7f, 0.2f), tipuri_componente[8], DREAPTA, PunctConexiune::OUTPUT);
+	auto procesare_splitter = [](Componenta* comp, bool* puncte_curent) -> bool* {
+		bool* output_valid = new bool[comp->nr_pct_conexiune];
+		for (int i = 0; i < comp->nr_pct_conexiune; i++)
+		{
+			output_valid[i] = false;
+		}
+
+		output_valid[1]= puncte_curent[0];
+		output_valid[2]= puncte_curent[0];
+		return output_valid;
+	};
+	tipuri_componente[9]->functie_procesare = procesare_splitter;
 
 
 	/*Componenta* rezistor = new Componenta();
@@ -159,4 +203,9 @@ void SelecteazaComponenta(int index) {
 
 Componenta* GetComponentaSelectata() {
 	return tip_comp_selectat;
+}
+
+int NrTipuriComponente()
+{
+	return tipuri_componente.size();
 }

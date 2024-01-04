@@ -19,7 +19,11 @@ Componenta::Componenta(Componenta* tip) {
 
 	rotatie = DREAPTA;
 
+	generator_curent = tip->generator_curent;
+
 	pozitie_in_grid = Vector2();
+
+	functie_procesare = tip->functie_procesare;
 }
 Componenta::Componenta() {
 	id = -1;
@@ -28,8 +32,10 @@ Componenta::Componenta() {
 	dreptunghi->dimensiuni = Vector2(50, 50);
 	grafica = dreptunghi;
 	rotatie = DREAPTA;
+	generator_curent = false;
 
 	pozitie_in_grid = Vector2();
+	functie_procesare = NULL;
 }
 
 void Componenta::StergeLegaturi() {

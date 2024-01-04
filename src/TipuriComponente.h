@@ -8,7 +8,7 @@
 
 #define MARIME_COMPONENTE Grid::MARIME_CELULA * 0.9f
 
-static std::array<Componenta*,9> tipuri_componente;
+static std::array<Componenta*,10> tipuri_componente;
 static Componenta* tip_comp_selectat = NULL;
 
 
@@ -16,3 +16,5 @@ void InitializareTipuriComponente();
 
 void SelecteazaComponenta(int index);
 Componenta* GetComponentaSelectata(); 
+
+int NrTipuriComponente();

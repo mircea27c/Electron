@@ -11,10 +11,9 @@
 #include "SimulatorCircuit.h" 
 class Aplicatie
 {public:
-	SimulatorCircuit simulator;
+	SimulatorCircuit* simulator = NULL;
 
 	Buton* CreareButon(Vector2 pozitie, Vector2 dimensiune, SDL_Color culoare_buton, SDL_Color culoare_componenta, const char* path_imagine, int index_btn);
-	void Simuleaza();
 	bool middle_btn_apasat=false;
 
     Vector2 mouse_ultima_poz;

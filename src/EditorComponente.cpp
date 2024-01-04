@@ -13,7 +13,7 @@ void editor_componente::InitializareEditor() {
 
 	//CREAREA BUTOANELOR DE EDITARE
 	inaltime_caseta_info = 80;
-	latime_caseta_info = 220;
+	latime_caseta_info = 280;
 	padding = 10;
 	
 	
@@ -35,16 +35,18 @@ void editor_componente::InitializareEditor() {
 	panou_info->AdaugaElementGrafic(bg_panou_info);
 
 
-	nr_btn = 3;//3 butoane
+	nr_btn = 4;
 	latime_btn = (latime_caseta_info - (nr_btn + 1) * padding )/ nr_btn;
 	inaltime_btn = inaltime_caseta_info - 2 * padding;
 
 	Buton* btn_stergere = CreazaButon(Vector2(0, 0), Vector2(latime_btn, inaltime_btn), "Iconite/delete_icon.bmp", SDL_Color{ 70,49,49,255 }, SDL_Color{ 178,178,178 ,255 }, StergeComponentaSelectata);
 	Buton* btn_rotatie = CreazaButon(Vector2(0, 0), Vector2(latime_btn, inaltime_btn), "Iconite/rotate_icon.bmp", SDL_Color{ 49,49,49,255 }, SDL_Color{ 178,178,178,255 }, RotesteComponentaSelectata);
 	Buton* btn_mutare = CreazaButon(Vector2(0, 0), Vector2(latime_btn, inaltime_btn), "Iconite/move_icon.bmp", SDL_Color{ 49,49,49,255 }, SDL_Color{ 178,178,178,255 }, MutaComponentaSelectata);
+	Buton* btn_sterge_legaturi = CreazaButon(Vector2(0, 0), Vector2(latime_btn, inaltime_btn), "Iconite/cut.bmp", SDL_Color{ 49,49,49,255 }, SDL_Color{ 178,178,178,255 }, StergeLegaturiComponentaSelectata);
 
 	panou_info->AdaugaButon(btn_mutare);
 	panou_info->AdaugaButon(btn_rotatie);
+	panou_info->AdaugaButon(btn_sterge_legaturi);
 	panou_info->AdaugaButon(btn_stergere);
 
 	refresh_ui_listeners.push_back(RecalculeazaGrafica);
@@ -162,6 +164,14 @@ void editor_componente::ProcesareClick(int x, int y) {
 	if (componenta_apasata != NULL) {
 		SelectareComponenta(componenta_apasata);
 	}
+	else {
+		DreptunghiGrafic* bg = (DreptunghiGrafic*)panou_info->elem_grafice.front();
+		if(x >= bg->pozitie.x - (int)(bg->dimensiuni.x * bg->marime) / 2 && x <= bg->pozitie.x + (int)(bg->dimensiuni.x * bg->marime) / 2 && y >= bg->pozitie.y - (int)(bg->dimensiuni.y * bg->marime) / 2 && y <= bg->pozitie.y + (int)(bg->dimensiuni.y * bg->marime) / 2){		
+		}
+		else {	
+			DeselectareComponenta();
+		}
+	}
 }
 
 void editor_componente::StergeComponentaSelectata() {
@@ -188,12 +198,18 @@ void editor_componente::StergeLegaturiComponenta(Componenta* comp) {
 void editor_componente::RotesteComponentaSelectata() {
 	if (componenta_selectata == NULL)return;
 	componenta_selectata->rotatie = (ORIENTARE)((componenta_selectata->rotatie + 1) % 4);
-	StergeLegaturiComponenta(componenta_selectata);
 	RefreshUI();
+
 }
 
 void editor_componente::MutaComponentaSelectata() {
 	if (componenta_selectata == NULL)return;
 	pozitionator_componente::SelectareComponentaPozitionare(componenta_selectata);
 	StergeComponentaSelectata();
+}
+
+void editor_componente::StergeLegaturiComponentaSelectata() {
+	if (componenta_selectata == NULL)return;
+	StergeLegaturiComponenta(componenta_selectata);
+	RefreshUI();
 }

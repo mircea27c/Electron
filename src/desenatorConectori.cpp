@@ -21,6 +21,9 @@ void desenator_conectori::StartConectare(PunctConexiune* pct_start) {
 }
 void desenator_conectori::StopConectare() {
 
+	EliminaComponenta(conector_desenat);
+	delete(conector_desenat);
+
 	se_deseneaza_conector = false;
 	conector_desenat = NULL;
 
@@ -36,12 +39,16 @@ void desenator_conectori::ProcesareFinalizareConectare(int mouse_x, int mouse_y)
 	if (pct_sub_mouse != NULL) {
 		conector_desenat->final_conexiune = pct_sub_mouse;
 		pct_sub_mouse->conector = conector_desenat;
-		StopConectare();
+
+		se_deseneaza_conector = false;
+		conector_desenat = NULL;
 
 		RefreshUI();
 	}
+	else {
+		RefreshUI();
+	}
 }
-
 
 void desenator_conectori::ProcesareConectare() {
 	if (!se_deseneaza_conector)return;
@@ -117,4 +124,5 @@ void desenator_conectori::ProcesareConectare() {
 void desenator_conectori::ProcesareStopClickDesenare() {
 	if (!se_deseneaza_conector || conector_desenat == NULL)return;
 	StopConectare();
+	RefreshUI();
 }

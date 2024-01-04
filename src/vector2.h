@@ -23,6 +23,10 @@ public:
         Vector2 rezultat = Vector2(x - termen.x, y - termen.y);
         return rezultat;
     }    
+    Vector2 operator- (const Vector2& termen) const {
+        Vector2 rezultat = Vector2(x - termen.x, y - termen.y);
+        return rezultat;
+    }
     Vector2 operator+ (const Vector2& termen) {
         Vector2 rezultat = Vector2(x + termen.x, y + termen.y);
         return rezultat;

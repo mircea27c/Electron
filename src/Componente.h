@@ -1,8 +1,10 @@
 #pragma once
 #include <list>
+#include <iostream>
 #include "grid.cpp"
 #include "Vector2.h"
 #include "ElementeGrafice.h"
+
 
 enum ORIENTARE {
 	DREAPTA = 0,
@@ -38,6 +40,7 @@ public:
 	void Clonare(PunctConexiune* copie);
 };
 
+typedef std::function<bool*(Componenta*, bool*)> FunctDeProcesComp;
 
 class Componenta {
 	Vector2 pozitie_in_grid;
@@ -47,10 +50,14 @@ public:
 	int id; //pentru debugging doar
 
 	ORIENTARE rotatie;
+	bool generator_curent = false;
+
 
 	ElementGrafic* grafica;
 	PunctConexiune* puncte_conexiune;
 	int nr_pct_conexiune;
+
+	FunctDeProcesComp functie_procesare;
 
 	Componenta();
 	Componenta(Componenta* tip);
@@ -62,6 +69,7 @@ public:
 	Vector2 GetPozitie();
 
 	virtual void Print();
+
 
 };
 

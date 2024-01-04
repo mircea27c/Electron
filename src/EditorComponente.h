@@ -41,4 +41,6 @@ namespace editor_componente {
 	void StergeLegaturiComponenta(Componenta* comp);
 	void RotesteComponentaSelectata();
 	void MutaComponentaSelectata();
+
+	void StergeLegaturiComponentaSelectata();
 }

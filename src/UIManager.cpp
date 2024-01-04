@@ -1,8 +1,8 @@
 #pragma once
 #include "UIManager.h"
 #include<math.h>
-const int LATIME = 1200;
-const int INALTIME = 800;
+int LATIME;
+int INALTIME;
 float factor_zoom = 1;
 float rata_zoom = 1.2f;
 
@@ -14,7 +14,7 @@ PunctConexiune* pct_conex_selectat;
 PctConexSelectatCallback callback_slectare_pct_conex;
 
 list<RefreshUICallback> refresh_ui_listeners;
-
+list<Componenta*> toate_componentele;
 
 SDL_Renderer* GetCurrentRenderer() {
     return renderer;
@@ -54,6 +54,12 @@ void ZoomOut() {
 
 
 void InititalizareUIManager() {
+
+    SDL_DisplayMode DM;
+    SDL_GetCurrentDisplayMode(0, &DM);
+
+    LATIME = DM.w*0.8f;
+    INALTIME = DM.h * 0.8f;
 
     window = SDL_CreateWindow("Electron", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, LATIME, INALTIME, SDL_WINDOW_SHOWN);
     if (window == NULL)
@@ -241,10 +247,17 @@ void ActualizeazaGraficaConector(Conector* con) {
     Path* grafica = (Path*)con->grafica;
     grafica->pozitii.clear();
 
+
     if (con->start_conexiune != NULL) {
         Vector2 poz_ecran_pct = con->start_conexiune->buton->pozitie;
         grafica->pozitii.push_back(poz_ecran_pct);
 
+        if (con->pozitii.size() != 0) {
+            DeseneazaLegaturaPctLaConector(con->start_conexiune, con->pozitii.front(), grafica, true);
+        }
+        else if(con->final_conexiune != NULL){
+            DeseneazaLegaturaPctLaConector(con->start_conexiune, (con->start_conexiune->parinte->GetPozitie() + con->final_conexiune->parinte->GetPozitie()) / 2, grafica, true);
+        }
     }
 
     //adaug restul pozitiilor
@@ -257,77 +270,60 @@ void ActualizeazaGraficaConector(Conector* con) {
     //incer sa adaug conector final daca exista
     if (con->final_conexiune != NULL) {
         Vector2 poz_ecran_pct = con->final_conexiune->buton->pozitie;
+
+        if (con->pozitii.size() != 0) {
+            DeseneazaLegaturaPctLaConector(con->final_conexiune, con->pozitii.back(), grafica, false);
+        }
+        else if (con->start_conexiune != NULL){
+            DeseneazaLegaturaPctLaConector(con->final_conexiune, (con->start_conexiune->parinte->GetPozitie() + con->final_conexiune->parinte->GetPozitie()) / 2, grafica, false);
+           
+        }
         grafica->pozitii.push_back(poz_ecran_pct);
     }
 }
 
-void DeseneazaLegaturaPctLaConector(PunctConexiune* pct, Vector2 g_poz_conector /* g_ = pozitie in grid*/, Path* grafica) {
-    //Vector2 g_poz_pct = pct->parinte->GetPozitie();
-    //Vector2 e_poz_pct = PozitieGridLaPozitieEcran(g_poz_pct);
-    //
-    //Vector2 dir_fwd = g_poz_conector - g_poz_pct;
-    //Vector2 dir_dreapta = Vector2(dir_fwd.y, -dir_fwd.x);
+void DeseneazaLegaturaPctLaConector(PunctConexiune* pct, Vector2 g_poz_conector /* g_ = pozitie in grid*/, Path* grafica, bool primul) {
+    
+    Vector2 e_poz_next = PozitieGridLaPozitieEcran(g_poz_conector);
+    Vector2 e_poz_parinte = PozitieGridLaPozitieEcran(pct->parinte->GetPozitie());
 
-    //ORIENTARE orientare_rotita_pct = (ORIENTARE)(((int)pct->orientare + (int)pct->parinte->rotatie)%4);
+    Vector2 mijloc = (pct->buton->pozitie + e_poz_next)/2;
+    mijloc = mijloc + e_poz_parinte * -1 + Vector2(0.5f,0.5f)*Grid::MARIME_CELULA*factor_zoom;
+    mijloc = mijloc / factor_zoom / Grid::MARIME_CELULA;
 
-    //ORIENTARE orientare_spre_dest = DREAPTA;
+    Vector2 poz_relativa = Vector2(GasestePctIntermediar(mijloc.x), GasestePctIntermediar(mijloc.y));
 
-    //Vector2 mij_margine_pct = e_poz_pct;
+    Vector2 poz_rel_pct_rotita = pct->buton->pozitie - (e_poz_parinte - (Vector2(0.5f,0.5f) * factor_zoom * Grid::MARIME_CELULA));
+    poz_rel_pct_rotita = poz_rel_pct_rotita / factor_zoom / Grid::MARIME_CELULA;
+    
 
-    //float marime_cel_scalata = Grid::MARIME_CELULA * factor_zoom;
+    Vector2 dir_spre_next = g_poz_conector - pct->parinte->GetPozitie();
+    Vector2 deplasare_locala = Vector2(abs(poz_relativa.x - poz_rel_pct_rotita.x) * dir_spre_next.x, abs(poz_relativa.y - poz_rel_pct_rotita.y) * dir_spre_next.y);
 
-    //switch (orientare_rotita_pct)
-    //{
-    //case DREAPTA:
-    //    mij_margine_pct.x += 0.4 * marime_cel_scalata;
-    //    break;
-    //case JOS:
-    //    mij_margine_pct.y += 0.4 * marime_cel_scalata;
-    //    break;
-    //case STANGA:
-    //    mij_margine_pct.x -= 0.4 * marime_cel_scalata;
-    //    break;
-    //case SUS:
-    //    mij_margine_pct.y -= 0.4 * marime_cel_scalata;
-    //    break;
-    //default:
-    //    break;
-    //}
 
-    //if (g_poz_conector.x > g_poz_pct.x) {
-    //    orientare_spre_dest = DREAPTA;
-    //}
-    //else if(g_poz_conector.x < g_poz_pct.x){
-    //    orientare_spre_dest = STANGA;
-    //}else  if (g_poz_conector.y> g_poz_pct.y) {
-    //    orientare_spre_dest = JOS;
-    //}
-    //else if (g_poz_conector.y < g_poz_pct.y) {
-    //    orientare_spre_dest = SUS;
-    //}
-    //
-    //int abs_dif = std::abs((int)orientare_spre_dest - (int)orientare_rotita_pct);
-    //int semn_dif = (int)orientare_spre_dest - (int)orientare_rotita_pct;
+    Vector2 pct_intermediar1 = pct->buton->pozitie + (deplasare_locala * factor_zoom * Grid::MARIME_CELULA);
 
-    //printf("orientare punct %d, orientare componenta  %d, directia la urmator %d", (int)pct->orientare,(int)pct->parinte->rotatie, (int)orientare_spre_dest );
+    Vector2 pct_intermediar2 = e_poz_parinte + Vector2(poz_relativa.x - 0.5f, poz_relativa.y - 0.5f) * factor_zoom * Grid::MARIME_CELULA;
+    
+    if (primul) {
+        grafica->pozitii.push_back(pct_intermediar1);
+        grafica->pozitii.push_back(pct_intermediar2);
+    }
+    else{
+        grafica->pozitii.push_back(pct_intermediar2);
+        grafica->pozitii.push_back(pct_intermediar1);
+    }
 
-    //switch (abs_dif) {
-    //case 0:
-    //    //aceeasi directie
-    //    return;
-    //    break;
-    //case 2:
-    //    //directie opusa
-    //    grafica->pozitii.push_back(mij_margine_pct + (dir_fwd * 0.1f * marime_cel_scalata + (dir_dreapta * 0.4f * marime_cel_scalata)));
-    //    grafica->pozitii.push_back(mij_margine_pct + (dir_fwd * 0.9f * marime_cel_scalata + (dir_dreapta * 0.4f * marime_cel_scalata)));
-    //    break;
-    //case 1:
-    //    //stanga sau dreapta
-    //    grafica->pozitii.push_back(mij_margine_pct + (dir_fwd * 0.1f * marime_cel_scalata + (dir_dreapta * 0.4f * marime_cel_scalata * semn_dif)));
-    //    grafica->pozitii.push_back(mij_margine_pct + (dir_fwd * 0.5f * marime_cel_scalata + (dir_dreapta * 0.4f * marime_cel_scalata * semn_dif)));
-    //    break;
-    //}
 }
+float GasestePctIntermediar(float num) {
+    if (num < 0.25f)
+        return 0.1f;
+    else if (num < 0.75f)
+        return 0.5f;
+    else
+        return 0.9f;
+}
+
 
 std::list<Componenta*> GetToateComponentele()
 {
@@ -649,4 +645,48 @@ void EliminaWindowGrafic(WindowGrafic* window) {
     for (auto& btn : window->butoane) {
         EliminaButon(btn);
     }
+}
+
+Buton* CreeazaButonCuImagine(Vector2 pozitie, Vector2 dimensiuni,float procentaj_marime_imagine, SDL_Color culoare_btn, SDL_Color culoare_img, const char* path_img) {
+    Buton* btn = new Buton(pozitie,dimensiuni);
+
+    DreptunghiGrafic* bg_btn = new DreptunghiGrafic();
+    bg_btn->dimensiuni = btn->dimensiuni;
+    bg_btn->pozitie = btn->pozitie;
+    bg_btn->marime = 1;
+    bg_btn->culoare = culoare_btn;
+
+    ImagineGrafica* img_btn = new ImagineGrafica();
+    img_btn->dimensiuni = btn->dimensiuni * procentaj_marime_imagine;
+    img_btn->pozitie = btn->pozitie;
+    img_btn->marime = 1;
+    img_btn->culoare = culoare_img;
+    img_btn->path = path_img;
+
+    btn->AdaugaElementGrafic(bg_btn);
+    btn->AdaugaElementGrafic(img_btn);
+
+    return btn;
+}
+
+Buton* CreeazaButonCuText(Vector2 pozitie, Vector2 dimensiuni, float procentaj_marime_imagine, SDL_Color culoare_btn, SDL_Color culoare_img, const char* text) {
+    Buton* btn = new Buton(pozitie, dimensiuni);
+
+    DreptunghiGrafic* bg_btn = new DreptunghiGrafic();
+    bg_btn->dimensiuni = btn->dimensiuni;
+    bg_btn->pozitie = btn->pozitie;
+    bg_btn->marime = 1;
+    bg_btn->culoare = culoare_btn;
+
+    TextGrafic* img_btn = new TextGrafic();
+    img_btn->dimensiuni = btn->dimensiuni * procentaj_marime_imagine;
+    img_btn->pozitie = btn->pozitie;
+    img_btn->marime = 1;
+    img_btn->culoare = culoare_img;
+    img_btn->text = text;
+
+    btn->AdaugaElementGrafic(bg_btn);
+    btn->AdaugaElementGrafic(img_btn);
+
+    return btn;
 }

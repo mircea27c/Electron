@@ -12,8 +12,8 @@
 
 using namespace std;
 
-extern const int LATIME;
-extern const int INALTIME;
+extern int LATIME;
+extern int INALTIME;
 extern float factor_zoom;
 extern float rata_zoom;
 
@@ -22,7 +22,7 @@ extern Vector2 pozitie_grid;
 static SDL_Window* window;
 static SDL_Renderer* renderer;
 
-static std::list<Componenta*> toate_componentele;
+extern std::list<Componenta*> toate_componentele;
 static std::list<WindowGrafic*> toate_windowurile;
 
 enum ActiuneLista
@@ -61,6 +61,10 @@ void DeseneazaWindowuriGrafice();
 void InregistreazaWindowGrafic(WindowGrafic* window);
 void EliminaWindowGrafic(WindowGrafic* window);
 
+Buton* CreeazaButonCuImagine(Vector2 pozitie, Vector2 dimensiuni,float procentaj, SDL_Color culoare_btn, SDL_Color culoare_img, const char* path_img);
+
+Buton* CreeazaButonCuText(Vector2 pozitie, Vector2 dimensiuni, float procentaj_marime_imagine, SDL_Color culoare_btn, SDL_Color culoare_img, const char* text);
+
 void ActualizeazaGraficaComponenta(Componenta* comp);
 void ActualizeazaGraficaPctConex(Componenta* comp, PunctConexiune* pct);
 void ActualizeazaGraficaConector(Conector* con);
@@ -93,5 +97,6 @@ Vector2 CelulaAdiacentaInDir(Vector2 poz, ORIENTARE dir);
 
 PunctConexiune* MousePestePuctConexiune(Vector2 poz_mouse);
 
-void DeseneazaLegaturaPctLaConector(PunctConexiune* pct, Vector2 g_poz_conector, Path* grafica);
+void DeseneazaLegaturaPctLaConector(PunctConexiune* pct, Vector2 g_poz_conector, Path* grafica, bool primul);
+float GasestePctIntermediar(float num);
 std::list<Componenta*> GetToateComponentele();

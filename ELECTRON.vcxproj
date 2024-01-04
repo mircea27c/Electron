@@ -184,6 +184,7 @@
     </Font>
   </ItemGroup>
   <ItemGroup>
+    <Image Include="bin\Desenecomponente\2splitter.bmp" />
     <Image Include="bin\Desenecomponente\andgate.bmp" />
     <Image Include="bin\Desenecomponente\capacitor.bmp" />
     <Image Include="bin\Desenecomponente\dioda2linii.bmp" />
@@ -195,7 +196,11 @@
     <Image Include="bin\Desenecomponente\tranzistor.bmp" />
     <Image Include="bin\Iconite\delete_icon.bmp" />
     <Image Include="bin\Iconite\move_icon.bmp" />
+    <Image Include="bin\Iconite\pause.bmp" />
     <Image Include="bin\Iconite\rotate_icon.bmp" />
+    <Image Include="bin\Iconite\run.bmp" />
+    <Image Include="bin\Iconite\stop.bmp" />
+    <Image Include="bin\Iconite\zoom.bmp" />
     <Image Include="bin\Imagini\Cactus.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

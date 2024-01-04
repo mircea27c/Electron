@@ -48,5 +48,10 @@
     <Image Include="bin\Iconite\delete_icon.bmp" />
     <Image Include="bin\Iconite\move_icon.bmp" />
     <Image Include="bin\Iconite\rotate_icon.bmp" />
+    <Image Include="bin\Iconite\pause.bmp" />
+    <Image Include="bin\Iconite\run.bmp" />
+    <Image Include="bin\Iconite\stop.bmp" />
+    <Image Include="bin\Desenecomponente\2splitter.bmp" />
+    <Image Include="bin\Iconite\zoom.bmp" />
   </ItemGroup>
 </Project>
