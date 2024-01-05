@@ -18,6 +18,7 @@ void pozitionator_componente::SelectareComponentaPozitionare(int index) {
 		component_preview = imagine_preview;
 	}
 	component_preview->path = ((ImagineGrafica*)component_selectat->grafica)->path;
+	component_preview->rotatie = DREAPTA;
 
 	se_plaseaza = true;
 }

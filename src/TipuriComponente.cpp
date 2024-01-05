@@ -49,9 +49,33 @@ void CreazaComponenta(const char* path, Vector2 dimensiuni, std::vector<PunctCon
 void InitializareTipuriComponente() {
 	std::vector<PunctConexiune*> puncte;
 	//rezistor
-	
-	puncte.push_back(new PunctConexiune(Vector2(0.89, 0.50f), nullptr, STANGA, PunctConexiune::INPUT));
-	puncte.push_back(new PunctConexiune(Vector2(0.11, 0.50f), nullptr, DREAPTA, PunctConexiune::OUTPUT));
+
+	auto procesare_tranzistor = [](Componenta* comp, bool* puncte_curent) -> bool* {
+		bool* output_valid = new bool[comp->nr_pct_conexiune];
+		for (int i = 0; i < comp->nr_pct_conexiune; i++)
+		{
+			output_valid[i] = false;
+		}
+
+		if (puncte_curent[0] && puncte_curent[1]) {
+			output_valid[2] = true;
+		}
+		else {
+			output_valid[2] = false;
+		}
+		return output_valid;
+	};
+
+
+	puncte.push_back(new PunctConexiune(Vector2(0.15f, 0.5), nullptr, SUS, PunctConexiune::INPUT));
+	puncte.push_back(new PunctConexiune(Vector2(0.85f, 0.5), nullptr, JOS, PunctConexiune::OUTPUT));
+
+	CreazaComponenta("Desenecomponente/sursavoltaj.bmp", Vector2(MARIME_COMPONENTE, MARIME_COMPONENTE), puncte);
+	puncte.clear();
+
+
+	puncte.push_back(new PunctConexiune(Vector2(0.89, 0.50f), nullptr, STANGA, PunctConexiune::OUTPUT));
+	puncte.push_back(new PunctConexiune(Vector2(0.11, 0.50f), nullptr, DREAPTA, PunctConexiune::INPUT));
 	
 	CreazaComponenta("Desenecomponente/rezistor.bmp", Vector2(MARIME_COMPONENTE, MARIME_COMPONENTE), puncte);
 	puncte.clear();
@@ -60,8 +84,30 @@ void InitializareTipuriComponente() {
 	puncte.push_back(new PunctConexiune(Vector2(0.14, 0.50f), nullptr, STANGA, PunctConexiune::INPUT));
 	puncte.push_back(new PunctConexiune(Vector2(0.88, 0.50f), nullptr, DREAPTA, PunctConexiune::OUTPUT));
 
-	CreazaComponenta("Desenecomponente/intrerupator.bmp", Vector2(MARIME_COMPONENTE, MARIME_COMPONENTE), puncte);
+	CreazaComponenta("Desenecomponente/bec.bmp", Vector2(MARIME_COMPONENTE, MARIME_COMPONENTE), puncte);
 	puncte.clear();
+
+	auto procesare_bec = [](Componenta* comp, bool* puncte_curent) {
+		bool* output_valid = new bool[comp->nr_pct_conexiune];
+		for (int i = 0; i < comp->nr_pct_conexiune; i++)
+		{
+			output_valid[i] = false;
+		}
+
+		if (puncte_curent[0] == true) {
+			printf("seteaza culoare galben \n");
+			comp->grafica->culoare = SDL_Color{255,255,0};
+			output_valid[1] = true;
+		}
+		else {
+			printf("reseteaza culoare \n");
+			comp->grafica->culoare = SDL_Color{255,255,255};
+			output_valid[1] = false;
+		}
+
+		return output_valid;
+	};
+	tipuri_componente[2]->functie_procesare = procesare_bec;
 
 	//andgate
 	puncte.push_back(new PunctConexiune(Vector2(0.14, 0.43f), nullptr, STANGA, PunctConexiune::INPUT));
@@ -70,6 +116,8 @@ void InitializareTipuriComponente() {
 
 	CreazaComponenta("Desenecomponente/andgate.bmp", Vector2(MARIME_COMPONENTE, MARIME_COMPONENTE), puncte);
 	puncte.clear();
+
+	tipuri_componente[3]->functie_procesare = procesare_tranzistor;
 
 	//capacitor
 
@@ -100,36 +148,15 @@ void InitializareTipuriComponente() {
 	CreazaComponenta("Desenecomponente/impamantare.bmp", Vector2(MARIME_COMPONENTE, MARIME_COMPONENTE), puncte);
 	puncte.clear();
 
-	//sursavoltaj
-	puncte.push_back(new PunctConexiune(Vector2(0.5, 0.15f), nullptr, SUS, PunctConexiune::INPUT));
-	puncte.push_back(new PunctConexiune(Vector2(0.5, 0.85f), nullptr, JOS, PunctConexiune::OUTPUT));
-
-	CreazaComponenta("Desenecomponente/sursavoltaj.bmp", Vector2(MARIME_COMPONENTE, MARIME_COMPONENTE), puncte);
-	puncte.clear();
 
 	//tranzistor
-	puncte.push_back(new PunctConexiune(Vector2(0.65f,0.14), nullptr, STANGA, PunctConexiune::INPUT));
 	puncte.push_back(new PunctConexiune(Vector2(0.65f,0.88), nullptr, DREAPTA, PunctConexiune::INPUT));
-	puncte.push_back(new PunctConexiune(Vector2(0.15f,0.5), nullptr, SUS, PunctConexiune::OUTPUT));
+	puncte.push_back(new PunctConexiune(Vector2(0.15f,0.5), nullptr, SUS, PunctConexiune::INPUT));
+	puncte.push_back(new PunctConexiune(Vector2(0.65f,0.14), nullptr, STANGA, PunctConexiune::OUTPUT));
 
 	CreazaComponenta("Desenecomponente/tranzistor.bmp", Vector2(MARIME_COMPONENTE, MARIME_COMPONENTE), puncte);
 	puncte.clear();
 
-	auto procesare_tranzistor = [](Componenta* comp, bool* puncte_curent) -> bool* {
-		bool* output_valid = new bool[comp->nr_pct_conexiune];
-		for (int i = 0; i < comp->nr_pct_conexiune; i++)
-		{
-			output_valid[i] = false;
-		}
-
-		if (puncte_curent[0] && puncte_curent[1]) {
-			output_valid[2] = true;
-		}
-		else {
-			output_valid[2] = false;
-		}
-		return output_valid;
-	};
 	tipuri_componente[8]->functie_procesare = procesare_tranzistor;
 
 	puncte.push_back(new PunctConexiune(Vector2(0.5f, 0.8f), nullptr, JOS, PunctConexiune::INPUT));

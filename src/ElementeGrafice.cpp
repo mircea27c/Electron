@@ -66,7 +66,9 @@ void ImagineGrafica::Desenare(SDL_Renderer* rend) {
 }
 
 void TextGrafic::Desenare(SDL_Renderer* rend) {
-	if (text == "") {
+	if (text == "" || text == NULL) {
+		
+		printf("text null \n");
 		return;
 	}
 

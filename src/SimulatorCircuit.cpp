@@ -150,6 +150,18 @@ void SimulatorCircuit::Reseteaza()
 		{
 			comp->grafica->culoare = SDL_Color{255,255,255};
 		}
+		else {
+			bool* input_gol = new bool[comp->nr_pct_conexiune];
+			for (int i = 0; i < comp->nr_pct_conexiune; i++)
+			{
+				input_gol[i] = false;
+			}
+
+			if (comp->functie_procesare != NULL) {
+
+				comp->functie_procesare(comp, input_gol);
+			}
+		}
 	}
 
 	RefreshUI();

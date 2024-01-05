@@ -10,7 +10,11 @@
 #include "Componente.h"
 #include "ElementeGrafice.h"
 
+class EcranPrincipal;
+
 using namespace std;
+
+static bool afiseaza_GUI = true;
 
 extern int LATIME;
 extern int INALTIME;
@@ -19,8 +23,8 @@ extern float rata_zoom;
 
 extern Vector2 pozitie_grid;
 
-static SDL_Window* window;
-static SDL_Renderer* renderer;
+extern SDL_Window* window;
+extern SDL_Renderer* renderer;
 
 extern std::list<Componenta*> toate_componentele;
 static std::list<WindowGrafic*> toate_windowurile;
@@ -36,13 +40,14 @@ struct ActiuneListaButoane{
 };
 
 static std::queue<ActiuneListaButoane> coada_actiuni_lista_butoane;
-static std::list<Buton*> toate_butoanele;
+extern std::list<Buton*> toate_butoanele;
 
 typedef void (*PctConexSelectatCallback)(PunctConexiune*);
 typedef void (*RefreshUICallback)();
 
 extern PctConexSelectatCallback callback_slectare_pct_conex;
 extern list<RefreshUICallback> refresh_ui_listeners;
+extern list<RefreshUICallback> post_refresh_ui_listeners;
 
 void ZoomIn();
 void ZoomOut();
@@ -70,6 +75,10 @@ void ActualizeazaGraficaPctConex(Componenta* comp, PunctConexiune* pct);
 void ActualizeazaGraficaConector(Conector* con);
 
 void DeseneazaGrid(int grosime);
+
+void AfiseazaGUI();
+void AscundeGUI();
+
 Vector2 PozitieGridLaPozitieEcran(Vector2 grid_poz);
 Vector2 PozitieEcranLaPozitieGrid(Vector2 ecran_poz);
 Vector2 PozitieMouseInGrid();
@@ -100,3 +109,8 @@ PunctConexiune* MousePestePuctConexiune(Vector2 poz_mouse);
 void DeseneazaLegaturaPctLaConector(PunctConexiune* pct, Vector2 g_poz_conector, Path* grafica, bool primul);
 float GasestePctIntermediar(float num);
 std::list<Componenta*> GetToateComponentele();
+
+
+inline bool CuloriEgale(SDL_Color col1, SDL_Color col2) {
+	return (col1.r == col1.r && col1.g == col2.g && col2.b == col2.b);
+}

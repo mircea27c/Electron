@@ -1,6 +1,6 @@
-﻿  TipuriComponente.cpp
-D:\Facultate\IP\Electron\src\Vector2.h(10,13): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\Facultate\IP\Electron\src\Vector2.h(11,13): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+﻿  Aplicatie.cpp
+D:\Facultate\IP\Electron\src\vector2.h(10,13): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\Facultate\IP\Electron\src\vector2.h(11,13): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 D:\Facultate\IP\Electron\src\unelteDesenare.h(17,75): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
 D:\Facultate\IP\Electron\src\unelteDesenare.h(17,63): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
 D:\Facultate\IP\Electron\src\unelteDesenare.h(17,51): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
@@ -25,21 +25,17 @@ D:\Facultate\IP\Electron\src\unelteDesenare.h(31,75): warning C4244: 'argument':
 D:\Facultate\IP\Electron\src\unelteDesenare.h(31,63): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
 D:\Facultate\IP\Electron\src\unelteDesenare.h(31,51): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
 D:\Facultate\IP\Electron\src\unelteDesenare.h(31,39): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Facultate\IP\Electron\src\TipuriComponente.cpp(13,53): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-D:\Facultate\IP\Electron\src\TipuriComponente.cpp(53,46): warning C4305: 'argument': truncation from 'double' to 'float'
-D:\Facultate\IP\Electron\src\TipuriComponente.cpp(54,46): warning C4305: 'argument': truncation from 'double' to 'float'
-D:\Facultate\IP\Electron\src\TipuriComponente.cpp(60,46): warning C4305: 'argument': truncation from 'double' to 'float'
-D:\Facultate\IP\Electron\src\TipuriComponente.cpp(61,46): warning C4305: 'argument': truncation from 'double' to 'float'
-D:\Facultate\IP\Electron\src\TipuriComponente.cpp(67,46): warning C4305: 'argument': truncation from 'double' to 'float'
-D:\Facultate\IP\Electron\src\TipuriComponente.cpp(68,46): warning C4305: 'argument': truncation from 'double' to 'float'
-D:\Facultate\IP\Electron\src\TipuriComponente.cpp(69,46): warning C4305: 'argument': truncation from 'double' to 'float'
-D:\Facultate\IP\Electron\src\TipuriComponente.cpp(76,46): warning C4305: 'argument': truncation from 'double' to 'float'
-D:\Facultate\IP\Electron\src\TipuriComponente.cpp(77,46): warning C4305: 'argument': truncation from 'double' to 'float'
-D:\Facultate\IP\Electron\src\TipuriComponente.cpp(83,46): warning C4305: 'argument': truncation from 'double' to 'float'
-D:\Facultate\IP\Electron\src\TipuriComponente.cpp(84,46): warning C4305: 'argument': truncation from 'double' to 'float'
-D:\Facultate\IP\Electron\src\TipuriComponente.cpp(91,46): warning C4305: 'argument': truncation from 'double' to 'float'
-D:\Facultate\IP\Electron\src\TipuriComponente.cpp(92,46): warning C4305: 'argument': truncation from 'double' to 'float'
-D:\Facultate\IP\Electron\src\TipuriComponente.cpp(112,52): warning C4305: 'argument': truncation from 'double' to 'float'
-D:\Facultate\IP\Electron\src\TipuriComponente.cpp(113,52): warning C4305: 'argument': truncation from 'double' to 'float'
-D:\Facultate\IP\Electron\src\TipuriComponente.cpp(175,31): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\Aplicatie.cpp(31,20): warning C4244: 'initializing': conversion from 'const _Ty' to 'int', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+D:\Facultate\IP\Electron\src\Aplicatie.cpp(92,18): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\Aplicatie.cpp(96,24): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\Aplicatie.cpp(97,26): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\Aplicatie.cpp(232,25): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\Aplicatie.cpp(233,27): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\Aplicatie.cpp(316,123): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Facultate\IP\Electron\src\Aplicatie.cpp(414,26): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\Facultate\IP\Electron\src\Aplicatie.cpp(415,26): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
   ELECTRON.vcxproj -> D:\Facultate\IP\Electron\bin\x64\Debug\ELECTRON.exe

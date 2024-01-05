@@ -1,5 +1,7 @@
 #include "Aplicatie.h"
 
+class EcranPrincipal;
+
 bool Aplicatie::InitializareAplicatie() {
     int initResult = SDL_Init(SDL_INIT_VIDEO);
     if (initResult < 0)
@@ -16,13 +18,16 @@ bool Aplicatie::InitializareAplicatie() {
 }
 
 void Aplicatie::InchidereAplicatie() {
+
     InchidereUIManager();
     SDL_Quit();
 }
 
- Buton* Aplicatie::CreareButon(Vector2 pozitie, Vector2 dimensiune,SDL_Color culoare_buton, SDL_Color culoare_componenta, const char* path_imagine,int index_btn) {
+ Buton* Aplicatie::CreareButon(Vector2 pozitie, Vector2 dimensiune,SDL_Color culoare_buton, SDL_Color culoare_componenta, const char* path_imagine,int index_btn, const char* nume) {
     Buton* buton = new Buton(pozitie, dimensiune);
     
+    buton->tooltip = nume;
+
     int latura_img = min(dimensiune.x, dimensiune.y);
     
     ImagineGrafica* imagine = new ImagineGrafica();
@@ -50,13 +55,17 @@ void Aplicatie::InchidereAplicatie() {
     return buton;
 }
 
-
 void Aplicatie::InitializareUI() {
     //register buttons
 
     InititalizareUIManager();
     desenator_conectori::InitializareDesenatorConectori();
     editor_componente::InitializareEditor();
+
+    ecran_principal = new EcranPrincipal();
+    ecran_principal->Initializare([this]() {SchimbaEcranActiv(EDITOR); }, [this]() {running = false;});
+
+    tooltip::Initializare();
 
     SDL_Color culoare_btn = {60,60,60};
     SDL_Color culoare_comp = {150,150,150 };
@@ -88,10 +97,12 @@ void Aplicatie::InitializareUI() {
     int inaltime_btn_nav = (bg_h_nav->dimensiuni.y - pad_h_nav * 2);
 
     Buton* zoomInBtn = CreeazaButonCuText(Vector2(pad_h_nav + latime_btn_nav/2.0f, bg_h_nav->pozitie.y), Vector2(latime_btn_nav, inaltime_btn_nav),1.5f,culoare_btn, culoare_comp, "+");
+    zoomInBtn->tooltip = "zoom in";
     zoomInBtn->actiune_click = ZoomIn;
 
     Buton* zoomOutBtn = CreeazaButonCuText(Vector2(pad_h_nav * 2 + latime_btn_nav * 1.5f, bg_h_nav->pozitie.y), Vector2(latime_btn_nav, inaltime_btn_nav), 1.5f, culoare_btn, culoare_comp, "-");
     zoomOutBtn->actiune_click = ZoomOut;
+    zoomOutBtn->tooltip = "zoom out";
 
     ImagineGrafica* icon_zoom = new ImagineGrafica();
     icon_zoom->pozitie = Vector2(pad_h_nav * 3 + latime_btn_nav * 2.5f, bg_h_nav->pozitie.y);
@@ -115,6 +126,7 @@ void Aplicatie::InitializareUI() {
     moveUpBtn->ListaElementeGrafice.back()->rotatie = 270;
     moveUpBtn->actiune_click = []() {pozitie_grid.y += factor_zoom * 100; RefreshUI(); };
 
+
     Buton* moveDownBtn = CreeazaButonCuImagine(Vector2(centru_x, centru_y + spatiu_btn_miscare / 2), dim_btn_miscare, .8f, culoare_btn, culoare_comp, "Iconite/run.bmp");
     moveDownBtn->ListaElementeGrafice.back()->rotatie = 90;
     moveDownBtn->actiune_click = []() {pozitie_grid.y -= factor_zoom * 100; RefreshUI(); };
@@ -125,12 +137,22 @@ void Aplicatie::InitializareUI() {
 
     Buton* moveRightBtn = CreeazaButonCuImagine(Vector2(centru_x + spatiu_btn_miscare / 2, centru_y), dim_btn_miscare, .8f, culoare_btn, culoare_comp, "Iconite/run.bmp");
     moveRightBtn->actiune_click = []() {pozitie_grid.x -= factor_zoom * 100; RefreshUI(); };
+      
+    Buton* centerBtn = CreeazaButonCuImagine(Vector2(centru_x , centru_y), dim_btn_miscare, 1.1f, culoare_btn, culoare_comp, "Iconite/center.bmp");
+    centerBtn->actiune_click = []() {pozitie_grid = Vector2(0, 0); RefreshUI(); };
 
+
+    moveUpBtn->tooltip = "move up";
+    moveDownBtn->tooltip = "move down";
+    moveLeftBtn->tooltip = "move left";
+    moveRightBtn->tooltip = "move right";
+    centerBtn->tooltip = "center screen";
 
     header_navigare->AdaugaButon(moveUpBtn);
     header_navigare->AdaugaButon(moveDownBtn);
     header_navigare->AdaugaButon(moveLeftBtn);
     header_navigare->AdaugaButon(moveRightBtn);
+    header_navigare->AdaugaButon(centerBtn);
 
     header_navigare->AdaugaElementGrafic(icon_zoom);
     header_navigare->AdaugaButon(zoomInBtn);
@@ -157,16 +179,16 @@ void Aplicatie::InitializareUI() {
     footer_butoane->AdaugaElementGrafic(bg_footer);
 
 
-    Buton* rezistor = CreareButon(Vector2(225, INALTIME - 60), Vector2(latime_buton, inaltime_buton), culoare_btn, culoare_comp, "Desenecomponente/rezistor.bmp", 0);
-    Buton* intrerupator = CreareButon(Vector2(335, INALTIME - 60), Vector2(latime_buton, inaltime_buton), culoare_btn, culoare_comp, "Desenecomponente/intrerupator.bmp", 1);
-    Buton* andGate = CreareButon(Vector2(445, INALTIME - 60), Vector2(latime_buton, inaltime_buton), culoare_btn, culoare_comp, "Desenecomponente/andgate.bmp", 2);
-    Buton* capacitor = CreareButon(Vector2(555, INALTIME - 60), Vector2(latime_buton, inaltime_buton), culoare_btn, culoare_comp, "Desenecomponente/capacitor.bmp", 3);
-    Buton* dioda2linii = CreareButon(Vector2(665, INALTIME - 60), Vector2(latime_buton, inaltime_buton), culoare_btn, culoare_comp, "Desenecomponente/dioda2linii.bmp", 4);
-    Buton* diodacerc = CreareButon(Vector2(775, INALTIME - 60), Vector2(latime_buton, inaltime_buton), culoare_btn, culoare_comp, "Desenecomponente/diodacerc.bmp", 5);
-    Buton* impamantare = CreareButon(Vector2(885, INALTIME - 60), Vector2(latime_buton, inaltime_buton), culoare_btn, culoare_comp, "Desenecomponente/impamantare.bmp", 6);
-    Buton* sursavoltaj = CreareButon(Vector2(995, INALTIME - 60), Vector2(latime_buton, inaltime_buton), culoare_btn, culoare_comp, "Desenecomponente/sursavoltaj.bmp", 7);
-    Buton* tranzistor = CreareButon(Vector2(1105, INALTIME - 60), Vector2(latime_buton, inaltime_buton), culoare_btn, culoare_comp, "Desenecomponente/tranzistor.bmp", 8);
-    Buton* splitter = CreareButon(Vector2(1105, INALTIME - 60), Vector2(latime_buton, inaltime_buton), culoare_btn, culoare_comp, "Desenecomponente/2splitter.bmp", 9);
+    Buton* sursavoltaj = CreareButon(Vector2(0, 0), Vector2(latime_buton, inaltime_buton), culoare_btn, culoare_comp, "Desenecomponente/sursavoltaj.bmp", 0, "voltage source");
+    Buton* rezistor = CreareButon(Vector2(0, 0), Vector2(latime_buton, inaltime_buton), culoare_btn, culoare_comp, "Desenecomponente/rezistor.bmp", 1, "rezistor");
+    Buton* intrerupator = CreareButon(Vector2(0, 0), Vector2(latime_buton, inaltime_buton), culoare_btn, culoare_comp, "Desenecomponente/bec.bmp", 2, "light bulb");
+    Buton* andGate = CreareButon(Vector2(0, 0), Vector2(latime_buton, inaltime_buton), culoare_btn, culoare_comp, "Desenecomponente/andgate.bmp", 3,"and gate");
+    Buton* capacitor = CreareButon(Vector2(0, 0), Vector2(latime_buton, inaltime_buton), culoare_btn, culoare_comp, "Desenecomponente/capacitor.bmp",4 ,"capacitor");
+    Buton* dioda2linii = CreareButon(Vector2(0, 0), Vector2(latime_buton, inaltime_buton), culoare_btn, culoare_comp, "Desenecomponente/dioda2linii.bmp", 5, "varicap diode");
+    Buton* diodacerc = CreareButon(Vector2(0, 0), Vector2(latime_buton, inaltime_buton), culoare_btn, culoare_comp, "Desenecomponente/diodacerc.bmp", 6, "diode");
+    Buton* impamantare = CreareButon(Vector2(0, 0), Vector2(latime_buton, inaltime_buton), culoare_btn, culoare_comp, "Desenecomponente/impamantare.bmp",7, "ground");
+    Buton* tranzistor = CreareButon(Vector2(0, 0), Vector2(latime_buton, inaltime_buton), culoare_btn, culoare_comp, "Desenecomponente/tranzistor.bmp", 8,  "tranzistor");
+    Buton* splitter = CreareButon(Vector2(0, 0), Vector2(latime_buton, inaltime_buton), culoare_btn, culoare_comp, "Desenecomponente/2splitter.bmp", 9, "2 way splitter");
     
     footer_butoane->AdaugaButon(rezistor);
     footer_butoane->AdaugaButon(intrerupator);
@@ -180,6 +202,8 @@ void Aplicatie::InitializareUI() {
     footer_butoane->AdaugaButon(splitter);
     
     int index = 0;
+
+    //aici se calculeaza automat pozitia butoanelor
 
     for (auto &btn: footer_butoane->butoane)
     {
@@ -226,6 +250,10 @@ void Aplicatie::InitializareUI() {
     auto fct_stop = [this]() {simulator->Stop(); RefreshUI(); };
     btn_stop->actiune_click = fct_stop;
 
+    btn_run->tooltip = "start simulation";
+    btn_pause->tooltip = "pause simulation";
+    btn_stop->tooltip = "reset simulation";
+
     header_simulare->AdaugaElementGrafic(bg);
     header_simulare->AdaugaButon(btn_run);
     header_simulare->AdaugaButon(btn_pause);
@@ -233,8 +261,95 @@ void Aplicatie::InitializareUI() {
 
 #pragma endregion
 
+#pragma region sidebar_optiuni
+
+    WindowGrafic* sidebar_optiuni = new WindowGrafic();
+
+    DreptunghiGrafic* bg_optiuni = new DreptunghiGrafic();
+
+    int pad_optiuni = 15;
+    int nr_btn_optiuni = 3;
+
+    int latura_btn_optiuni = 45;
+
+    bg_optiuni->dimensiuni = Vector2(pad_optiuni * 2.0f + latura_btn_optiuni, pad_optiuni * (nr_btn_optiuni + 1.0f) + latura_btn_optiuni * nr_btn_optiuni);
+    bg_optiuni->pozitie = Vector2(LATIME - bg_optiuni->dimensiuni.x/2, bg_optiuni->dimensiuni.y / 2);
+    bg_optiuni->marime = 1;
+    bg_optiuni->culoare = culoare_bg;
+
+    sidebar_optiuni->AdaugaElementGrafic(bg_optiuni);
+
+    Buton* btn_delete_all = CreeazaButonCuImagine(Vector2(bg_optiuni->pozitie.x, latura_btn_optiuni / 2.0f + padding), Vector2(latura_btn_optiuni, latura_btn_optiuni), 0.9f, SDL_Color{ 100,50,50 } , culoare_comp, "Iconite/delete_tot.bmp");
+    Buton* btn_ss = CreeazaButonCuImagine(Vector2(bg_optiuni->pozitie.x, latura_btn_optiuni *1.5f + padding * 2), Vector2(latura_btn_optiuni, latura_btn_optiuni), 0.9f, culoare_btn, culoare_comp , "Iconite/camera.bmp");
+    Buton* btn_meniu = CreeazaButonCuImagine(Vector2(bg_optiuni->pozitie.x, latura_btn_optiuni *2.5f + padding * 3), Vector2(latura_btn_optiuni, latura_btn_optiuni), 0.9f, culoare_btn, culoare_comp , "Iconite/meniu.bmp");
+
+    auto fct_screenshot = []() {
+
+        float factor_scalare = (float)Grid::GRID_CELULE_LATIME * (float)Grid::MARIME_CELULA/ (float)INALTIME;
+
+        float factor_zoom_inainte = factor_zoom;
+        Vector2 offset_inainte = pozitie_grid;
+
+        factor_zoom = 1/factor_scalare;
+        pozitie_grid = Vector2(0,0);
+        AscundeGUI();
+
+        RefreshUI();
+
+        auto currentTime = std::chrono::system_clock::now();
+        std::time_t currentTime_t = std::chrono::system_clock::to_time_t(currentTime);
+
+        std::string path_save = "Screenshots/Circuit_";
+
+        std::string timp = std::ctime(&currentTime_t);
+        timp.pop_back();
+        for (char& c : timp) {
+            if (c == ' ' || c == ':') {
+                c = '_';
+            }
+        }
+        path_save += timp;
+
+        path_save += ".bmp";
+
+        printf("%s", path_save.c_str());
+        CapturaScreenshot(path_save.c_str(), window, renderer, (float)Grid::GRID_CELULE_LATIME* (float)Grid::MARIME_CELULA* factor_zoom, INALTIME);
+
+        AfiseazaGUI();
+        factor_zoom = factor_zoom_inainte;
+        pozitie_grid = offset_inainte;
+
+        RefreshUI();
+    };
+    btn_ss->actiune_click = fct_screenshot;
+
+    auto fct_delete = []() {
+        while (!toate_componentele.empty()) {
+            editor_componente::StergeComponenta(toate_componentele.front());
+        }
+    };
+
+    auto fct_meniu = [this]() {
+        SchimbaEcranActiv(START);
+    };
+
+    btn_delete_all->actiune_click = fct_delete;
+
+    btn_meniu->actiune_click = fct_meniu;
+
+    btn_delete_all->tooltip = "reset board";
+    btn_ss->tooltip = "export board as image";
+    btn_meniu->tooltip = "main menu";
+
+    sidebar_optiuni->AdaugaButon(btn_delete_all);
+    sidebar_optiuni->AdaugaButon(btn_ss);
+    sidebar_optiuni->AdaugaButon(btn_meniu);
+
+#pragma endregion
+
     InregistreazaWindowGrafic(header_navigare);
     InregistreazaWindowGrafic(header_simulare);
+    InregistreazaWindowGrafic(sidebar_optiuni);
 
     InregistreazaWindowGrafic(footer_butoane);
 
@@ -273,12 +388,18 @@ void Aplicatie::ProcesareClick(SDL_Event* actiune_mouse) {
         }
         break;
     case SDL_MOUSEMOTION:
+        
+        
         if (middle_btn_apasat) {
             pozitie_grid.x += (x - mouse_ultima_poz.x);
             pozitie_grid.y += (y - mouse_ultima_poz.y);
 
             RefreshUI();
         }
+        else {
+            tooltip::ProcesarePozitieMouse(Vector2(x,y));
+        }
+
         break;
     case SDL_MOUSEWHEEL:
         if (actiune_mouse->wheel.y > 0) {
@@ -302,26 +423,20 @@ void Aplicatie::Ruleaza()
 {
     InitializareAplicatie();
     InitializareUI();
- 
-    bool running = true;
+    running = true;
     SDL_Event actiune_input;
+
+    ecran_activ = Aplicatie::EDITOR;
+    SchimbaEcranActiv(Aplicatie::START);
 
     while (running) {
 
-        ProcesareActiuniListaButoane();
-
-        while (SDL_PollEvent(&actiune_input) != 0) {
-            if (actiune_input.type == SDL_QUIT) {
-                running = false;
-            }
-            else {
-                ProcesareClick(&actiune_input);
-            }
+        if (ecran_activ == Aplicatie::START) {
+            RuleazaEcranPrincipal(actiune_input);
         }
-
-        pozitionator_componente::ProcesarePlasare();
-        desenator_conectori::ProcesareConectare();
-        simulator->ParcurgePas(5);
+        else if (ecran_activ == Aplicatie::EDITOR) {
+            RuleazaEditor(actiune_input);
+        }
 
         SDL_Delay(5);
     }
@@ -329,4 +444,54 @@ void Aplicatie::Ruleaza()
 
     return;
 
+}
+
+void Aplicatie::RuleazaEditor(SDL_Event& actiune_input) {
+    if (refreshUI_urm_frame) {
+        RefreshUI();
+        refreshUI_urm_frame = false;
+    }
+    ProcesareActiuniListaButoane();
+
+    while (SDL_PollEvent(&actiune_input) != 0) {
+        if (actiune_input.type == SDL_QUIT) {
+            running = false;
+        }
+        else {
+            ProcesareClick(&actiune_input);
+        }
+    }
+
+    pozitionator_componente::ProcesarePlasare();
+    desenator_conectori::ProcesareConectare();
+    simulator->ParcurgePas(5);
+}
+
+void Aplicatie::RuleazaEcranPrincipal(SDL_Event& actiune_input) {
+    if (refreshUI_urm_frame) {
+        ecran_principal->RefreshUI();
+        refreshUI_urm_frame = false;
+    }
+    while (SDL_PollEvent(&actiune_input) != 0) {
+        if (actiune_input.type == SDL_QUIT) {
+            running = false;
+        }
+        else {
+
+            ecran_principal->ProceseazaMouse(&actiune_input);
+        }
+    }
+
+}
+
+void Aplicatie::SchimbaEcranActiv(Aplicatie::ECRAN ecran_nou) {
+    if (ecran_activ != ecran_nou) {
+        ecran_activ = ecran_nou;
+
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+        SDL_RenderClear(renderer);
+
+        refreshUI_urm_frame = true;
+        
+    }
 }

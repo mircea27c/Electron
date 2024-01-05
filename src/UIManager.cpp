@@ -14,7 +14,12 @@ PunctConexiune* pct_conex_selectat;
 PctConexSelectatCallback callback_slectare_pct_conex;
 
 list<RefreshUICallback> refresh_ui_listeners;
+list<RefreshUICallback> post_refresh_ui_listeners;
 list<Componenta*> toate_componentele;
+list<Buton*> toate_butoanele;
+
+SDL_Window* window;
+SDL_Renderer* renderer;
 
 SDL_Renderer* GetCurrentRenderer() {
     return renderer;
@@ -103,10 +108,6 @@ void EliminaComponenta(Componenta* comp) {
 }
 
 
-void ShowTabelDetalii(Componenta* comp) {
-    
-}
-
 void RefreshUI() {
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
@@ -121,14 +122,17 @@ void RefreshUI() {
         callback();
     }
     
+    if (afiseaza_GUI) {
+        DeseneazaWindowuriGrafice();
+        DeseneazaToateButoanele();
+    }
 
-    DeseneazaWindowuriGrafice();
-
-    DeseneazaToateButoanele();
+    for (auto& callback : post_refresh_ui_listeners) {
+        callback();
+    }
 
     SDL_RenderPresent(renderer);
-    
-    //ShowTabelDetalii(comp);
+
 }
 
 void DeseneazaComponente() {
@@ -322,6 +326,13 @@ float GasestePctIntermediar(float num) {
         return 0.5f;
     else
         return 0.9f;
+}
+
+void AscundeGUI() {
+    afiseaza_GUI = false;
+}
+void AfiseazaGUI() {
+    afiseaza_GUI = true;
 }
 
 

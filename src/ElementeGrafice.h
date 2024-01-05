@@ -82,6 +82,8 @@ public:
 class Buton
 {
 public:
+	const char* tooltip;
+
 	Vector2 pozitie;
 
 	float marime;

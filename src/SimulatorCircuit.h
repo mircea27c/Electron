@@ -38,7 +38,4 @@ public:
 
 };
 
-inline bool CuloriEgale(SDL_Color col1, SDL_Color col2) {
-	return (col1.r == col1.r && col1.g == col2.g && col2.b == col2.b);
-}
 

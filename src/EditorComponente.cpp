@@ -174,14 +174,18 @@ void editor_componente::ProcesareClick(int x, int y) {
 	}
 }
 
+void editor_componente::StergeComponenta(Componenta* comp) {
+	EliminaComponenta(comp);
+
+	StergeLegaturiComponenta(comp);
+
+	delete comp;
+	DeselectareComponenta();
+}
+
 void editor_componente::StergeComponentaSelectata() {
 	if (componenta_selectata == NULL)return;
-	EliminaComponenta(componenta_selectata);
-
-	StergeLegaturiComponenta(componenta_selectata);
-
-	delete componenta_selectata;
-	DeselectareComponenta();
+	StergeComponenta(componenta_selectata);
 }
 
 void editor_componente::StergeLegaturiComponenta(Componenta* comp) {
