@@ -1,10 +1,10 @@
-#pragma once
+﻿#pragma once
 
 #include <SDL.h>
 #include "vector2.h"
 #include "math.h"
 
-
+/*
  inline void DeseneazaLinie(SDL_Renderer* renderer, Vector2 poz1, Vector2 poz2, int thickness, SDL_Color culoare) {
 
     //SDL_SetRenderDrawColor(renderer, culoare.r, culoare.g, culoare.b, culoare.a);
@@ -31,4 +31,27 @@
 		SDL_RenderDrawLine(renderer, poz1.x + i, poz1.y + i, poz2.x + i, poz2.y + i);
 	}
 }
+*/
+inline void DeseneazaLinie(SDL_Renderer* renderer, Vector2 poz1, Vector2 poz2, int thickness, SDL_Color culoare) {
+    // linia principală
+    SDL_SetRenderDrawColor(renderer, culoare.r, culoare.g, culoare.b, culoare.a);
+    SDL_RenderDrawLine(renderer, poz1.x, poz1.y, poz2.x, poz2.y);
 
+    if (thickness > 1) {
+        float lungime = sqrt(pow(poz2.x - poz1.x, 2) + pow(poz2.y - poz1.y, 2));
+        float unghi = atan2(poz2.y - poz1.y, poz2.x - poz1.x);
+        float offsetX = (thickness / 2) * sin(unghi);
+        float offsetY = (thickness / 2) * cos(unghi);
+
+        //  linii suplimentare pentru grosime
+        for (int i = 1; i <= thickness / 2; ++i) {
+            float factor = i * 2;
+            SDL_RenderDrawLine(renderer,
+                poz1.x - (offsetX * factor), poz1.y + (offsetY * factor),
+                poz2.x - (offsetX * factor), poz2.y + (offsetY * factor));
+            SDL_RenderDrawLine(renderer,
+                poz1.x + (offsetX * factor), poz1.y - (offsetY * factor),
+                poz2.x + (offsetX * factor), poz2.y - (offsetY * factor));
+        }
+    }
+}
