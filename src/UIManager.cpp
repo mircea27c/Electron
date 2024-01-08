@@ -451,7 +451,7 @@ Vector2 PozitieMouseInGrid() {
 
     Vector2 positionInGrid = (Vector2(mouseX, mouseY) + offset_grid) / zoomedCellSize;
 
-    if (positionInGrid.x < 0 || positionInGrid.x > Grid::GRID_CELULE_LATIME - 1  || positionInGrid.y < 0 || positionInGrid.y > Grid::GRID_CELULE_INALTIME - 1) {
+    if (positionInGrid.x < 0 || positionInGrid.x > Grid::GRID_CELULE_LATIME  || positionInGrid.y < 0 || positionInGrid.y > Grid::GRID_CELULE_INALTIME) {
         positionInGrid.x = -1;
         positionInGrid.y = -1;
     }

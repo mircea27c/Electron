@@ -134,12 +134,31 @@ void Path::Desenare(SDL_Renderer* rend){
 
 	Vector2 pozAnterior;
 	bool prima = true;
+
+
+	int grosime = 5*marime;
+	grosime = std::max(grosime, 1);
+
 	for (auto poz : pozitii) {
 		if (prima) {
 			prima = false;
 		}
 		else {
-			DeseneazaLinie(rend, pozAnterior, poz, (int)(5*marime) > 1 ? (int)(5*marime):1, culoare);
+			Vector2 dir = poz - pozAnterior;
+			if (dir.x > 0)dir.x = 1;
+			if (dir.x < 0)dir.x = -1;	
+			if (dir.y > 0)dir.y = 1;
+			if (dir.y < 0)dir.y = -1;
+
+			Vector2 start_poz = pozAnterior;
+			Vector2 final_poz = poz;
+			if (5* marime > 1 && dir.x != 0 && dir.y != 0) {
+				DeseneazaLinie(rend, start_poz + Vector2(1, 0), final_poz + Vector2(1,0), grosime, culoare);
+			}
+			else {
+				start_poz = start_poz - dir * (grosime / 2 - 1);
+			}
+			DeseneazaLinie(rend, start_poz, final_poz, grosime, culoare);
 		}
 		pozAnterior = poz;
 	}
