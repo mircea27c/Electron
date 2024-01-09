@@ -189,7 +189,11 @@ void Aplicatie::InitializareUI() {
     Buton* impamantare = CreareButon(Vector2(0, 0), Vector2(latime_buton, inaltime_buton), culoare_btn, culoare_comp, "Desenecomponente/impamantare.bmp",7, "ground");
     Buton* tranzistor = CreareButon(Vector2(0, 0), Vector2(latime_buton, inaltime_buton), culoare_btn, culoare_comp, "Desenecomponente/tranzistor.bmp", 8,  "tranzistor");
     Buton* splitter = CreareButon(Vector2(0, 0), Vector2(latime_buton, inaltime_buton), culoare_btn, culoare_comp, "Desenecomponente/2splitter.bmp", 9, "2 way splitter");
+    Buton* connector = CreareButon(Vector2(0, 0), Vector2(latime_buton, inaltime_buton), culoare_btn, culoare_comp, "Desenecomponente/2splitter.bmp", 10, "2 way connector");
     
+    footer_butoane->AdaugaButon(sursavoltaj);
+    footer_butoane->AdaugaButon(splitter);
+    footer_butoane->AdaugaButon(connector);
     footer_butoane->AdaugaButon(rezistor);
     footer_butoane->AdaugaButon(intrerupator);
     footer_butoane->AdaugaButon(andGate);
@@ -197,9 +201,7 @@ void Aplicatie::InitializareUI() {
     footer_butoane->AdaugaButon(dioda2linii);
     footer_butoane->AdaugaButon(diodacerc);
     footer_butoane->AdaugaButon(impamantare);
-    footer_butoane->AdaugaButon(sursavoltaj);
     footer_butoane->AdaugaButon(tranzistor);
-    footer_butoane->AdaugaButon(splitter);
     
     int index = 0;
 

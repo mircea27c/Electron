@@ -178,6 +178,28 @@ void InitializareTipuriComponente() {
 	};
 	tipuri_componente[9]->functie_procesare = procesare_splitter;
 
+	puncte.clear();
+
+
+	puncte.push_back(new PunctConexiune(Vector2(0.5f, 0.8f), nullptr, JOS, PunctConexiune::OUTPUT));
+	puncte.push_back(new PunctConexiune(Vector2(0.3f, 0.2f), nullptr, STANGA, PunctConexiune::INPUT));
+	puncte.push_back(new PunctConexiune(Vector2(0.7f, 0.2f), nullptr, DREAPTA, PunctConexiune::INPUT));
+
+	CreazaComponenta("Desenecomponente/2splitter.bmp", Vector2(MARIME_COMPONENTE, MARIME_COMPONENTE), puncte);
+
+	auto procesare_connector = [](Componenta* comp, bool* puncte_curent) -> bool* {
+		bool* output_valid = new bool[comp->nr_pct_conexiune];
+		for (int i = 0; i < comp->nr_pct_conexiune; i++)
+		{
+			output_valid[i] = false;
+		}
+
+		output_valid[0] = puncte_curent[1] || puncte_curent[2];
+		return output_valid;
+	};
+	tipuri_componente[10]->functie_procesare = procesare_connector;
+
+	puncte.clear();
 }
 
 void SelecteazaComponenta(int index) {

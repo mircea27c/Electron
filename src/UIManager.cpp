@@ -63,13 +63,13 @@ void InititalizareUIManager() {
     SDL_DisplayMode DM;
     SDL_GetCurrentDisplayMode(0, &DM);
 
-    LATIME = DM.w*0.8f;
-    INALTIME = DM.h * 0.8f;
+    LATIME = DM.w;
+    INALTIME = DM.h;
 
     window = SDL_CreateWindow("Electron", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, LATIME, INALTIME, SDL_WINDOW_SHOWN);
     if (window == NULL)
     {
-        printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
+        printf("Nu se poate crea window SDL! SDL_Error: %s\n", SDL_GetError());
         return;
     }
 
@@ -79,7 +79,7 @@ void InititalizareUIManager() {
 
     if (TTF_Init() < 0) {
         //Eroare
-        cout << "ttf initialization error";
+        cout << "ttf eroare initializare";
     }
 
     font = TTF_OpenFont("Fonts/ShareTech.ttf", 24);
@@ -88,7 +88,7 @@ void InititalizareUIManager() {
 
     }
     if (font == NULL) {
-        printf("NULL font error");
+        printf("NULL font");
     }
 
 }
