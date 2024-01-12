@@ -5,6 +5,10 @@
 #include "Vector2.h"
 #include "ElementeGrafice.h"
 
+static int id_actual = 0;
+
+int GetIdActualComponente();
+void SetIdActualComponente(int id);
 
 enum ORIENTARE {
 	DREAPTA = 0,
@@ -47,7 +51,8 @@ class Componenta {
 
 public:
 
-	int id; //pentru debugging doar
+	int id_tip; //pentru debugging doar
+	int id;
 
 	ORIENTARE rotatie;
 	bool generator_curent = false;

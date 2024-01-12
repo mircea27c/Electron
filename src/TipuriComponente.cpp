@@ -1,5 +1,7 @@
 ﻿#include "TipuriComponente.h"
 
+std::array<Componenta*, 11> tipuri_componente;
+
 void CreazaComponenta(const char* path, Vector2 dimensiuni, std::vector<PunctConexiune*> puncteConexiune) {
 	static int index_componenta = 0;
 
@@ -17,7 +19,7 @@ void CreazaComponenta(const char* path, Vector2 dimensiuni, std::vector<PunctCon
 		componenta->puncte_conexiune[i] = *puncteConexiune[i];
 	}
 
-	componenta->id = index_componenta;
+	componenta->id_tip = index_componenta;
 	tipuri_componente[index_componenta] = componenta;
 
 	index_componenta++;
@@ -95,12 +97,10 @@ void InitializareTipuriComponente() {
 		}
 
 		if (puncte_curent[0] == true) {
-			printf("seteaza culoare galben \n");
 			comp->grafica->culoare = SDL_Color{255,255,0};
 			output_valid[1] = true;
 		}
 		else {
-			printf("reseteaza culoare \n");
 			comp->grafica->culoare = SDL_Color{255,255,255};
 			output_valid[1] = false;
 		}

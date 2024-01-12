@@ -13,6 +13,7 @@
 #include "Screenshotter.h"
 #include "EcranPrincipal.h"
 #include "Tooltip.h"
+#include "SaveLoad.h"
 class Aplicatie{
 
 	bool refreshUI_urm_frame = false;

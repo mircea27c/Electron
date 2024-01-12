@@ -9,13 +9,11 @@ void desenator_conectori::StartConectare(PunctConexiune* pct_start) {
 	conector_desenat = new Conector();
 	conector_desenat->start_conexiune = pct_start;
 
-	Path* path = new Path();
-	conector_desenat->grafica = path;
 	pct_start->conector = conector_desenat;
 
 	se_deseneaza_conector = true;
 
-	conector_desenat->id = -2;
+	conector_desenat->id_tip = -1;
 
 	InregistreazaComponenta(conector_desenat);
 }

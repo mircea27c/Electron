@@ -62,6 +62,7 @@ void ImagineGrafica::Desenare(SDL_Renderer* rend) {
 								  (int)dimensiuni_reale.x, (int)dimensiuni_reale.y };
 
 	SDL_Point center = { dest_rect.w / 2, dest_rect.h / 2 };
+
 	SDL_RenderCopyEx(rend, image_textura, nullptr, &dest_rect, rotatie, &center, SDL_FLIP_NONE);
 }
 

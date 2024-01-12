@@ -234,8 +234,6 @@ void Aplicatie::InitializareUI() {
     int latime_btn_head = (bg->dimensiuni.x - 4 * padding)/3;
     int inaltime_btn_head = bg->dimensiuni.y - 2*padding;
 
-    cout << latime_btn_head << " " << inaltime_btn_head << endl;
-
     Buton* btn_run = CreeazaButonCuImagine(Vector2(LATIME / 2.0f - latime_btn_head - padding, bg->pozitie.y), Vector2(latime_btn_head, inaltime_btn_head), 0.7f, culoare_btn, SDL_Color{150,200,150}, "Iconite/run.bmp"); 
 
     auto fct_simulare = [this]() {simulator->Simuleaza(); RefreshUI(); };
@@ -358,34 +356,32 @@ void Aplicatie::InitializareUI() {
     RefreshUI();
 }
 
-void Aplicatie::ProcesareClick(SDL_Event* actiune_mouse) {
+void Aplicatie::ProcesareClick(SDL_Event* actiune_input) {
 
     int x, y;
     SDL_GetMouseState(&x, &y);
-    switch (actiune_mouse->type) {
+    switch (actiune_input->type) {
     case SDL_MOUSEBUTTONDOWN:
-        if (actiune_mouse->button.button == SDL_BUTTON_LEFT) {
+        if (actiune_input->button.button == SDL_BUTTON_LEFT) {
             pozitionator_componente::ProcesareClickPlasare();
             ProceseazaClickPuncteConexiune(Vector2(x,y));
             ProcesareButoane(Vector2(x, y));
             editor_componente::ProcesareClick(x,y);
         }
-        if (actiune_mouse->button.button == SDL_BUTTON_RIGHT) {
-            Vector2 mouseInGrid = PozitieMouseInGrid();
-            cout << mouseInGrid.x << " " << mouseInGrid.y << endl;
+        if (actiune_input->button.button == SDL_BUTTON_RIGHT) {
         }
-        if (actiune_mouse->button.button == SDL_BUTTON_MIDDLE) {
+        if (actiune_input->button.button == SDL_BUTTON_MIDDLE) {
             middle_btn_apasat = true;
         }
 
         break;
     case SDL_MOUSEBUTTONUP:
-        if (actiune_mouse->button.button == SDL_BUTTON_LEFT) {
+        if (actiune_input->button.button == SDL_BUTTON_LEFT) {
             desenator_conectori::ProcesareStopClickDesenare();
         }
-        if (actiune_mouse->button.button == SDL_BUTTON_RIGHT) {
+        if (actiune_input->button.button == SDL_BUTTON_RIGHT) {
         }
-        if (actiune_mouse->button.button == SDL_BUTTON_MIDDLE) {
+        if (actiune_input->button.button == SDL_BUTTON_MIDDLE) {
             middle_btn_apasat = false;
         }
         break;
@@ -404,11 +400,21 @@ void Aplicatie::ProcesareClick(SDL_Event* actiune_mouse) {
 
         break;
     case SDL_MOUSEWHEEL:
-        if (actiune_mouse->wheel.y > 0) {
+        if (actiune_input->wheel.y > 0) {
             ZoomIn();
         }
-        else if (actiune_mouse->wheel.y < 0) {
+        else if (actiune_input->wheel.y < 0) {
             ZoomOut();
+        }
+        break;
+    case SDL_KEYDOWN:
+        switch (actiune_input->key.keysym.sym) {
+        case SDLK_s:
+            SaveCircuit("Test");
+            break;
+        case SDLK_l:
+            LoadCircuit("Test");
+            break;
         }
         break;
     }
@@ -427,6 +433,7 @@ void Aplicatie::Ruleaza()
     InitializareUI();
     running = true;
     SDL_Event actiune_input;
+
 
     ecran_activ = Aplicatie::EDITOR;
     SchimbaEcranActiv(Aplicatie::START);

@@ -16,6 +16,7 @@
     <ClCompile Include="src\Screenshotter.cpp" />
     <ClCompile Include="src\EcranPrincipal.cpp" />
     <ClCompile Include="src\Tooltip.cpp" />
+    <ClCompile Include="src\SaveLoad.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\pozitionatorComponente.h" />
@@ -33,6 +34,7 @@
     <ClInclude Include="src\Screenshotter.h" />
     <ClInclude Include="src\EcranPrincipal.h" />
     <ClInclude Include="src\Tooltip.h" />
+    <ClInclude Include="src\SaveLoad.h" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="bin\ShareTech.ttf" />

@@ -63,8 +63,8 @@ void InititalizareUIManager() {
     SDL_DisplayMode DM;
     SDL_GetCurrentDisplayMode(0, &DM);
 
-    LATIME = DM.w;
-    INALTIME = DM.h;
+    LATIME = DM.w*0.9f;
+    INALTIME = DM.h * 0.9f;
 
     window = SDL_CreateWindow("Electron", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, LATIME, INALTIME, SDL_WINDOW_SHOWN);
     if (window == NULL)
@@ -190,6 +190,7 @@ void ActualizeazaGraficaComponenta(Componenta* comp) {
         break;
     }
 
+
     if (Conector* conector = dynamic_cast<Conector*>(comp)) {
         ActualizeazaGraficaConector(conector);
     }
@@ -247,10 +248,10 @@ void ActualizeazaGraficaPctConex(Componenta* comp, PunctConexiune* pct)
 }
 
 void ActualizeazaGraficaConector(Conector* con) {
+
     //incerc sa adaug conectorul de start daca exista
     Path* grafica = (Path*)con->grafica;
     grafica->pozitii.clear();
-
 
     if (con->start_conexiune != NULL) {
         Vector2 poz_ecran_pct = con->start_conexiune->buton->pozitie;
@@ -701,3 +702,5 @@ Buton* CreeazaButonCuText(Vector2 pozitie, Vector2 dimensiuni, float procentaj_m
 
     return btn;
 }
+
+

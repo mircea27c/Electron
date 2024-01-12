@@ -24,7 +24,7 @@ void pozitionator_componente::SelectareComponentaPozitionare(int index) {
 }
 
 void pozitionator_componente::SelectareComponentaPozitionare(Componenta* comp) {
-	SelectareComponentaPozitionare(comp->id);
+	SelectareComponentaPozitionare(comp->id_tip);
 	component_selectat->rotatie = comp->rotatie;
 	switch (comp->rotatie)
 	{

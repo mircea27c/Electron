@@ -3,7 +3,7 @@
 Vector2 Componenta::GetPozitie() { return pozitie_in_grid; }
 
 Componenta::Componenta(Componenta* tip) {
-	id = tip->id;
+	id_tip = tip->id_tip;
 
 	grafica = tip->grafica->Clonare();
 
@@ -24,9 +24,12 @@ Componenta::Componenta(Componenta* tip) {
 	pozitie_in_grid = Vector2();
 
 	functie_procesare = tip->functie_procesare;
+
+	id_actual++;
+	id = id_actual;
 }
 Componenta::Componenta() {
-	id = -1;
+	id_tip = -1;
 	DreptunghiGrafic* dreptunghi = new DreptunghiGrafic();
 	dreptunghi->culoare = SDL_Color{ 255,255,255,255 };
 	dreptunghi->dimensiuni = Vector2(50, 50);
@@ -36,6 +39,9 @@ Componenta::Componenta() {
 
 	pozitie_in_grid = Vector2();
 	functie_procesare = NULL;
+
+	id_actual++;
+	id = id_actual;
 }
 
 void Componenta::StergeLegaturi() {
@@ -125,6 +131,12 @@ void Componenta::Print() {
 Conector::Conector() {
 	start_conexiune = NULL;
 	final_conexiune = NULL;
+
+	Path* path = new Path();
+	grafica = path;
+
+	id_actual++;
+	id = id_actual;
 }
 
 Conector::~Conector() {
@@ -136,4 +148,14 @@ Conector::~Conector() {
 		final_conexiune->conector = NULL;
 		final_conexiune = NULL;
 	}
+}
+
+int GetIdActualComponente()
+{
+	return id_actual;
+}
+
+void SetIdActualComponente(int id)
+{
+	id_actual = id;
 }
