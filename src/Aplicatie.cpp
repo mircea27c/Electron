@@ -1,5 +1,5 @@
 #include "Aplicatie.h"
-
+#include "SaveLoad.h"
 class EcranPrincipal;
 
 bool Aplicatie::InitializareAplicatie() {
@@ -431,6 +431,7 @@ void Aplicatie::Ruleaza()
 {
     InitializareAplicatie();
     InitializareUI();
+    SaveLoadUI();
     running = true;
     SDL_Event actiune_input;
 
@@ -503,4 +504,53 @@ void Aplicatie::SchimbaEcranActiv(Aplicatie::ECRAN ecran_nou) {
         refreshUI_urm_frame = true;
         
     }
+}
+void Aplicatie::SaveLoadUI()
+{
+    SDL_Color culoare_btn = { 50,200,50 };
+    SDL_Color culoare_comp = { 50,100,50};
+    SDL_Color culoare_bg = SDL_Color{ 30,30,30 };
+
+#pragma region saveload
+
+    WindowGrafic* saveload = new WindowGrafic();
+
+    DreptunghiGrafic* bg_optiune = new DreptunghiGrafic();
+
+    int padding = 14.25;
+    bg_optiune->dimensiuni = Vector2((65.0f - padding * 2) * 3.0f + padding * 3, 65.0f);
+    bg_optiune->marime = 1;
+    bg_optiune->pozitie = Vector2(LATIME * 0.032f, bg_optiune->dimensiuni.y * 2.6f);
+    bg_optiune->culoare = culoare_bg;
+
+    int latime_btn_head = (bg_optiune->dimensiuni.x - 4 * padding)/2.3;
+    int inaltime_btn_head = bg_optiune->dimensiuni.y - 2 * padding-3.1;
+
+    saveload->AdaugaElementGrafic(bg_optiune);
+
+    Buton* btn_save = CreeazaButonCuImagine(Vector2(LATIME / 15.8f - latime_btn_head - padding, bg_optiune->pozitie.y+10), Vector2(latime_btn_head, inaltime_btn_head), 0.8f, culoare_btn, SDL_Color{ 50,200,50 }, "Iconite/save.bmp");
+    //primu pozitie al doilea marime;
+    auto fct_save = []() {
+        //SaveCircuitFileBrowser();
+        SaveCircuit("test");
+        };
+    Buton* btn_load = CreeazaButonCuImagine(Vector2(LATIME / 15.5f, bg_optiune->pozitie.y+10), Vector2(latime_btn_head, inaltime_btn_head), 0.6f, culoare_btn, SDL_Color{ 50,200,50 }, "Iconite/load.bmp");
+    auto fct_load = []() {
+        //LoadCircuitFileBrowser();
+        LoadCircuit("test");
+        };
+
+    btn_save->actiune_click = fct_save;
+    btn_load->actiune_click = fct_load;
+
+    btn_save->tooltip = "save board";
+    btn_load->tooltip = "load board";
+
+
+    saveload->AdaugaButon(btn_save);
+    saveload->AdaugaButon(btn_load);
+#pragma endregion
+InregistreazaWindowGrafic(saveload);
+    RefreshUI();
+    
 }

@@ -1,18 +1,53 @@
-﻿  SaveLoad.cpp
-D:\Facultate\IP\Electron\src\vector2.h(10,13): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\Facultate\IP\Electron\src\vector2.h(11,13): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\Facultate\IP\Electron\src\unelteDesenare.h(20,60): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Facultate\IP\Electron\src\unelteDesenare.h(20,52): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Facultate\IP\Electron\src\unelteDesenare.h(20,44): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Facultate\IP\Electron\src\unelteDesenare.h(20,36): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Facultate\IP\Electron\src\unelteDesenare.h(37,33): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
-D:\Facultate\IP\Electron\src\unelteDesenare.h(38,96): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Facultate\IP\Electron\src\unelteDesenare.h(38,77): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Facultate\IP\Electron\src\unelteDesenare.h(38,58): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Facultate\IP\Electron\src\unelteDesenare.h(38,39): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Facultate\IP\Electron\src\SaveLoad.cpp(395,16): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-D:\Facultate\IP\Electron\src\SaveLoad.cpp(396,18): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-D:\Facultate\IP\Electron\src\SaveLoad.cpp(397,16): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+﻿  Aplicatie.cpp
+D:\Proiect ip\Proiect ip bun\Electron\src\vector2.h(10,13): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  (compiling source file 'src/Aplicatie.cpp')
+  
+D:\Proiect ip\Proiect ip bun\Electron\src\vector2.h(11,13): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  (compiling source file 'src/Aplicatie.cpp')
+  
+D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(20,60): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  (compiling source file 'src/Aplicatie.cpp')
+  
+D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(20,52): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  (compiling source file 'src/Aplicatie.cpp')
+  
+D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(20,44): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  (compiling source file 'src/Aplicatie.cpp')
+  
+D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(20,36): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  (compiling source file 'src/Aplicatie.cpp')
+  
+D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(37,33): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
+  (compiling source file 'src/Aplicatie.cpp')
+  
+D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(38,96): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  (compiling source file 'src/Aplicatie.cpp')
+  
+D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(38,77): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  (compiling source file 'src/Aplicatie.cpp')
+  
+D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(38,58): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  (compiling source file 'src/Aplicatie.cpp')
+  
+D:\Proiect ip\Proiect ip bun\Electron\src\unelteDesenare.h(38,39): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  (compiling source file 'src/Aplicatie.cpp')
+  
+D:\Proiect ip\Proiect ip bun\Electron\src\Aplicatie.cpp(31,20): warning C4244: 'initializing': conversion from 'const _Ty' to 'int', possible loss of data
+D:\Proiect ip\Proiect ip bun\Electron\src\Aplicatie.cpp(31,20): warning C4244:         with
+D:\Proiect ip\Proiect ip bun\Electron\src\Aplicatie.cpp(31,20): warning C4244:         [
+D:\Proiect ip\Proiect ip bun\Electron\src\Aplicatie.cpp(31,20): warning C4244:             _Ty=float
+D:\Proiect ip\Proiect ip bun\Electron\src\Aplicatie.cpp(31,20): warning C4244:         ]
+D:\Proiect ip\Proiect ip bun\Electron\src\Aplicatie.cpp(92,18): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Proiect ip\Proiect ip bun\Electron\src\Aplicatie.cpp(96,24): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Proiect ip\Proiect ip bun\Electron\src\Aplicatie.cpp(97,26): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Proiect ip\Proiect ip bun\Electron\src\Aplicatie.cpp(234,25): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Proiect ip\Proiect ip bun\Electron\src\Aplicatie.cpp(235,27): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\Proiect ip\Proiect ip bun\Electron\src\Aplicatie.cpp(316,123): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Proiect ip\Proiect ip bun\Electron\src\Aplicatie.cpp(422,26): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\Proiect ip\Proiect ip bun\Electron\src\Aplicatie.cpp(423,26): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\Proiect ip\Proiect ip bun\Electron\src\Aplicatie.cpp(520,17): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+D:\Proiect ip\Proiect ip bun\Electron\src\Aplicatie.cpp(526,25): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+D:\Proiect ip\Proiect ip bun\Electron\src\Aplicatie.cpp(527,27): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
 LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/OPT:ICF' specification
 EcranPrincipal.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/OPT:ICF' specification
-  ELECTRON.vcxproj -> D:\Facultate\IP\Electron\bin\x64\Release\ELECTRON.exe
+  ELECTRON.vcxproj -> D:\Proiect ip\Proiect ip bun\Electron\bin\x64\Release\ELECTRON.exe

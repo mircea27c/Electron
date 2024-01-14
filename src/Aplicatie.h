@@ -36,6 +36,8 @@ public:
 
 	void InitializareUI();
 
+	void SaveLoadUI();
+
 	void ProcesareClick(SDL_Event* actiune_mouse);
 
 	float ParteFractionara(float nr);
