@@ -36,7 +36,7 @@ public:
 
 	void InitializareUI();
 
-	void SaveLoadUI();
+	void SaveLoadUI(int centru_x, int centru_y, int dimensiunex, int dimensiuney);
 
 	void ProcesareClick(SDL_Event* actiune_mouse);
 
@@ -48,6 +48,7 @@ public:
 	void RuleazaEcranPrincipal(SDL_Event& actiune_input);
 
 	void SchimbaEcranActiv(Aplicatie::ECRAN ecran_nou);
+
 
 }; 
 

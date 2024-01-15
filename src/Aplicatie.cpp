@@ -122,6 +122,8 @@ void Aplicatie::InitializareUI() {
 
     header_navigare->AdaugaElementGrafic(bg_miscare);
 
+    SaveLoadUI(bg_miscare->pozitie.x, bg_miscare->pozitie.y, bg_miscare->dimensiuni.x, bg_miscare->dimensiuni.y);
+
     Buton* moveUpBtn = CreeazaButonCuImagine(Vector2(centru_x, centru_y - spatiu_btn_miscare / 2), dim_btn_miscare, .8f, culoare_btn, culoare_comp, "Iconite/run.bmp");
     moveUpBtn->ListaElementeGrafice.back()->rotatie = 270;
     moveUpBtn->actiune_click = []() {pozitie_grid.y += factor_zoom * 100; RefreshUI(); };
@@ -469,7 +471,6 @@ void Aplicatie::Ruleaza()
 {
     InitializareAplicatie();
     InitializareUI();
-    SaveLoadUI();
     running = true;
     SDL_Event actiune_input;
 
@@ -543,40 +544,45 @@ void Aplicatie::SchimbaEcranActiv(Aplicatie::ECRAN ecran_nou) {
         
     }
 }
-void Aplicatie::SaveLoadUI()
+
+void Aplicatie::SaveLoadUI(int centru_x, int centru_y, int dimensiunex, int dimensiuney)
 {
     SDL_Color culoare_btn = { 50,200,50 };
-    SDL_Color culoare_comp = { 50,100,50};
+    SDL_Color culoare_comp = { 50,100,50 };
     SDL_Color culoare_bg = SDL_Color{ 30,30,30 };
 
 #pragma region saveload
 
+    int nr_el = 2;
+
+    int padding = 7;
+
+
+    int spatiu_btn_miscare = 40;
+    int marime_btn_miscare = 25;
     WindowGrafic* saveload = new WindowGrafic();
+    int inaltime_dreptunghi = 55;
+    int centru_nou_x = centru_x;
+    int centru_nou_y = centru_y + dimensiuney / 2 + inaltime_dreptunghi / 2;
 
     DreptunghiGrafic* bg_optiune = new DreptunghiGrafic();
-
-    int padding = 14.25;
-    bg_optiune->dimensiuni = Vector2((65.0f - padding * 2) * 3.0f + padding * 3, 65.0f);
+    bg_optiune->dimensiuni = Vector2(dimensiunex, inaltime_dreptunghi);
     bg_optiune->marime = 1;
-    bg_optiune->pozitie = Vector2(LATIME * 0.032f, bg_optiune->dimensiuni.y * 2.6f);
-    bg_optiune->culoare = culoare_bg;
+    bg_optiune->pozitie = Vector2(centru_nou_x, centru_nou_y);
+    bg_optiune->culoare = SDL_Color{ 30,30,30 };
 
-    int latime_btn_head = (bg_optiune->dimensiuni.x - 4 * padding)/2.3;
-    int inaltime_btn_head = bg_optiune->dimensiuni.y - 2 * padding-3.1;
+    int latime_buton = dimensiunex / 2 - 1.5 * padding;
 
     saveload->AdaugaElementGrafic(bg_optiune);
-
-    Buton* btn_save = CreeazaButonCuImagine(Vector2(LATIME / 15.8f - latime_btn_head - padding, bg_optiune->pozitie.y+10), Vector2(latime_btn_head, inaltime_btn_head), 0.8f, culoare_btn, SDL_Color{ 50,200,50 }, "Iconite/save.bmp");
-    //primu pozitie al doilea marime;
+    Buton* btn_save = CreeazaButonCuImagine(Vector2(latime_buton / 2 + padding, centru_nou_y), Vector2(latime_buton, inaltime_dreptunghi - padding * 2), .8f, culoare_btn, culoare_comp, "Iconite/save.bmp");
     auto fct_save = []() {
         SaveCircuitFileBrowser();
-        //SaveCircuit("test");
-        };
-    Buton* btn_load = CreeazaButonCuImagine(Vector2(LATIME / 15.5f, bg_optiune->pozitie.y+10), Vector2(latime_btn_head, inaltime_btn_head), 0.6f, culoare_btn, SDL_Color{ 50,200,50 }, "Iconite/load.bmp");
+    };
+    Buton* btn_load = CreeazaButonCuImagine(Vector2(latime_buton / 2 + padding + centru_nou_x, centru_nou_y), Vector2(dimensiunex / 2 - 2 * padding, inaltime_dreptunghi - padding * 2), .8f, culoare_btn, culoare_comp, "Iconite/load.bmp");
     auto fct_load = []() {
         LoadCircuitFileBrowser();
-        //LoadCircuit("test");
-        };
+    };
+
 
     btn_save->actiune_click = fct_save;
     btn_load->actiune_click = fct_load;
@@ -588,7 +594,6 @@ void Aplicatie::SaveLoadUI()
     saveload->AdaugaButon(btn_save);
     saveload->AdaugaButon(btn_load);
 #pragma endregion
-InregistreazaWindowGrafic(saveload);
+    InregistreazaWindowGrafic(saveload);
     RefreshUI();
-    
 }
