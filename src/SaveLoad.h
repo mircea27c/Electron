@@ -1,6 +1,7 @@
 #include <fstream>
 #include <string>
 #include <sstream>
+#include <windows.h>
 #include "UIManager.h"
 #include "TipuriComponente.h"
 #include "EditorComponente.h"

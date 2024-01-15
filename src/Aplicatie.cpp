@@ -190,7 +190,7 @@ void Aplicatie::InitializareUI() {
     Buton* tranzistor = CreareButon(Vector2(0, 0), Vector2(latime_buton, inaltime_buton), culoare_btn, culoare_comp, "Desenecomponente/tranzistor.bmp", 8,  "tranzistor");
     Buton* splitter = CreareButon(Vector2(0, 0), Vector2(latime_buton, inaltime_buton), culoare_btn, culoare_comp, "Desenecomponente/2splitter.bmp", 9, "2 way splitter");
     Buton* connector = CreareButon(Vector2(0, 0), Vector2(latime_buton, inaltime_buton), culoare_btn, culoare_comp, "Desenecomponente/2splitter.bmp", 10, "2 way connector");
-    
+
     footer_butoane->AdaugaButon(sursavoltaj);
     footer_butoane->AdaugaButon(splitter);
     footer_butoane->AdaugaButon(connector);
@@ -234,6 +234,20 @@ void Aplicatie::InitializareUI() {
     int latime_btn_head = (bg->dimensiuni.x - 4 * padding)/3;
     int inaltime_btn_head = bg->dimensiuni.y - 2*padding;
 
+
+    int pad_viteze = 10;
+    DreptunghiGrafic* bg_viteze = new DreptunghiGrafic();
+
+    float inaltime_panou_viteze = 45.0f;
+
+    bg_viteze->dimensiuni = Vector2((inaltime_panou_viteze - padding * 2) * 3.0f + padding * 4,inaltime_panou_viteze);
+    bg_viteze->marime = 1;
+    bg_viteze->pozitie.x = bg->pozitie.x - bg->dimensiuni.x/2 - bg_viteze->dimensiuni.x/2;
+    bg_viteze->pozitie.y = bg_viteze->dimensiuni.y / 2;
+    bg_viteze->culoare = SDL_Color{40,40,40};
+
+    int marime_btn_viteze = bg_viteze->dimensiuni.y - 2 * pad_viteze;
+
     Buton* btn_run = CreeazaButonCuImagine(Vector2(LATIME / 2.0f - latime_btn_head - padding, bg->pozitie.y), Vector2(latime_btn_head, inaltime_btn_head), 0.7f, culoare_btn, SDL_Color{150,200,150}, "Iconite/run.bmp"); 
 
     auto fct_simulare = [this]() {simulator->Simuleaza(); RefreshUI(); };
@@ -250,14 +264,37 @@ void Aplicatie::InitializareUI() {
     auto fct_stop = [this]() {simulator->Stop(); RefreshUI(); };
     btn_stop->actiune_click = fct_stop;
 
+    Buton* btn_scade_viteza = CreeazaButonCuText(Vector2(bg_viteze->pozitie.x - marime_btn_viteze - pad_viteze, bg_viteze->pozitie.y), Vector2(marime_btn_viteze, marime_btn_viteze), 0.7f, culoare_btn, culoare_comp, "<<");
+    Buton* btn_creste_viteza = CreeazaButonCuText(Vector2(bg_viteze->pozitie.x + marime_btn_viteze + pad_viteze, bg_viteze->pozitie.y), Vector2(marime_btn_viteze, marime_btn_viteze), 0.7f, culoare_btn, culoare_comp, ">>");
+    TextGrafic* display_viteza = new TextGrafic();
+    
+    display_viteza->pozitie = bg_viteze->pozitie;
+    display_viteza->dimensiuni = Vector2(marime_btn_viteze, marime_btn_viteze) * 1.3f;
+    display_viteza->marime = 1;
+    display_viteza->culoare = culoare_comp;
+    display_viteza->text = "1.00x";
+
+
     btn_run->tooltip = "start simulation";
     btn_pause->tooltip = "pause simulation";
     btn_stop->tooltip = "reset simulation";
+    btn_creste_viteza->tooltip = "speed up";
+    btn_scade_viteza->tooltip = "slow down";
+
+
+    btn_creste_viteza->actiune_click = [this, display_viteza]() {simulator->CresteViteza(); display_viteza->text = simulator->text_viteza.c_str(); };
+    btn_scade_viteza->actiune_click = [this, display_viteza]() {simulator->ScadeViteza(); display_viteza->text = simulator->text_viteza.c_str(); };
 
     header_simulare->AdaugaElementGrafic(bg);
     header_simulare->AdaugaButon(btn_run);
     header_simulare->AdaugaButon(btn_pause);
     header_simulare->AdaugaButon(btn_stop);
+
+    header_simulare->AdaugaElementGrafic(bg_viteze);
+    header_simulare->AdaugaElementGrafic(display_viteza);
+    header_simulare->AdaugaButon(btn_scade_viteza);
+    header_simulare->AdaugaButon(btn_creste_viteza);
+
 
 #pragma endregion
 
@@ -346,6 +383,7 @@ void Aplicatie::InitializareUI() {
     sidebar_optiuni->AdaugaButon(btn_meniu);
 
 #pragma endregion
+
 
     InregistreazaWindowGrafic(header_navigare);
     InregistreazaWindowGrafic(header_simulare);
@@ -531,13 +569,13 @@ void Aplicatie::SaveLoadUI()
     Buton* btn_save = CreeazaButonCuImagine(Vector2(LATIME / 15.8f - latime_btn_head - padding, bg_optiune->pozitie.y+10), Vector2(latime_btn_head, inaltime_btn_head), 0.8f, culoare_btn, SDL_Color{ 50,200,50 }, "Iconite/save.bmp");
     //primu pozitie al doilea marime;
     auto fct_save = []() {
-        //SaveCircuitFileBrowser();
-        SaveCircuit("test");
+        SaveCircuitFileBrowser();
+        //SaveCircuit("test");
         };
     Buton* btn_load = CreeazaButonCuImagine(Vector2(LATIME / 15.5f, bg_optiune->pozitie.y+10), Vector2(latime_btn_head, inaltime_btn_head), 0.6f, culoare_btn, SDL_Color{ 50,200,50 }, "Iconite/load.bmp");
     auto fct_load = []() {
-        //LoadCircuitFileBrowser();
-        LoadCircuit("test");
+        LoadCircuitFileBrowser();
+        //LoadCircuit("test");
         };
 
     btn_save->actiune_click = fct_save;

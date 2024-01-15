@@ -2,13 +2,16 @@
 
 
 void SaveCircuit(const char* nume) {
-	string path_save = "Saves/";
-	path_save += nume;
-	path_save += ".txt";
+	string path_save = nume;
 	
 	ofstream output;
 	
 	output.open(path_save);
+
+	if (!output.is_open()) {
+		printf("Nu se poate deschide fisierul %s \n", nume);
+		return;
+	}
 
 	string date_componente = "";
 	string date_conectori = "";
@@ -109,13 +112,17 @@ void SaveCircuit(const char* nume) {
 }
 
 void LoadCircuit(const char* nume) {
-	string path_load = "Saves/";
-	path_load += nume;
-	path_load += ".txt";
+	
+	string path_load = nume;
 
 	ifstream input;
 
 	input.open(path_load);
+
+	if (!input.is_open()) {
+		printf("Nu se poate deschide fisierul %s \n", nume);
+		return;
+	}
 
 	bool eroare_citire = false;
 
@@ -389,6 +396,8 @@ void LoadCircuit(const char* nume) {
 	else {
 		printf("Eroare Load: Fisierul nu este un save file valid sau formatarea a fost corupta.");
 	}
+
+	input.close();
 }
 
 Vector2 ParseazaPozitie(string text) {
@@ -414,9 +423,98 @@ Componenta* GasesteComponentaDupaID(list<Componenta*>* lista,int id) {
 
 
 void SaveCircuitFileBrowser() {
+	OPENFILENAMEA fereastra_select_fisier;
+	CHAR nume_fisier[MAX_PATH] = { 0 };
+
+	//salvam current working directoryul actual si dam restore dupa pentru a nu strica referintelele relative dindin proiect
+	CHAR dir_actual[MAX_PATH];
+	GetCurrentDirectoryA(MAX_PATH, dir_actual);
+
+	//initializeaza tot cu 0
+	ZeroMemory(&fereastra_select_fisier, sizeof(fereastra_select_fisier));
 	
+	//initializare selector de fisier
+	fereastra_select_fisier.lStructSize = sizeof(fereastra_select_fisier);
+	fereastra_select_fisier.hwndOwner = NULL;
+	fereastra_select_fisier.lpstrFile = nume_fisier;
+	fereastra_select_fisier.nMaxFile = sizeof(nume_fisier);
+
+	//selecteaza doar fisiere text
+	fereastra_select_fisier.lpstrFilter = "Text Files (*.txt)\0*.txt\0All Files (*.*)\0*.*\0";
+	fereastra_select_fisier.nFilterIndex = 1;
+	fereastra_select_fisier.lpstrFileTitle = NULL;
+	fereastra_select_fisier.nMaxFileTitle = 0;
+
+	//setari pt selectie, cand selectezi un fisier care exista deja, te intreaba daca vrei sa-l suprsascrii
+	// si te obliga sa selectezi un fisier/folder care exista
+	fereastra_select_fisier.Flags = OFN_OVERWRITEPROMPT | OFN_PATHMUSTEXIST;
+
+
+	if (GetSaveFileNameA(&fereastra_select_fisier) == TRUE) {
+
+		// Now 'nume_fisier' contains the selected save file path.
+		// You can use it for further processing (e.g., saving the file).
+		// ...
+
+		const char* extensie_txt = ".txt";
+
+		//verificam daca se termina in .txt save file-ul creat, daca nu, adaugam .txt
+		if (strcmp(nume_fisier + strlen(nume_fisier) - strlen(extensie_txt), extensie_txt) != 0) {
+			strcat(nume_fisier, extensie_txt);
+		}
+		printf("salveaza circuit: %s\n", nume_fisier);
+		SaveCircuit(nume_fisier);
+
+		//resetam current directory sa fie cel original(in bin)
+		//altfel, nu se vor incarca asseturile cum ar fi imagini sau fonturi
+		SetCurrentDirectoryA(dir_actual);
+
+		return;
+	}
+	else {
+		printf("Circuitul nu poate fi salvat la: %s\n", nume_fisier);
+		
+		SetCurrentDirectoryA(dir_actual);
+
+		return;
+	}
 }
 
 void LoadCircuitFileBrowser() {
-	
+
+	OPENFILENAMEA fereastra_select_fisier;
+	CHAR nume_fisier[MAX_PATH] = { 0 };
+
+	CHAR dir_actual[MAX_PATH];
+	GetCurrentDirectoryA(MAX_PATH, dir_actual);
+
+	ZeroMemory(&fereastra_select_fisier, sizeof(fereastra_select_fisier));
+	fereastra_select_fisier.lStructSize = sizeof(fereastra_select_fisier);
+	fereastra_select_fisier.hwndOwner = NULL;
+	fereastra_select_fisier.lpstrFile = nume_fisier;
+	fereastra_select_fisier.nMaxFile = sizeof(nume_fisier);
+
+	fereastra_select_fisier.lpstrFilter = "Text Files (*.txt)\0*.txt\0All Files (*.*)\0*.*\0";
+	fereastra_select_fisier.nFilterIndex = 1;
+	fereastra_select_fisier.lpstrFileTitle = NULL;
+	fereastra_select_fisier.nMaxFileTitle = 0;
+
+	fereastra_select_fisier.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
+
+	if (GetOpenFileNameA(&fereastra_select_fisier) == TRUE) {
+		printf("Incarca circuit: %s\n", nume_fisier);
+
+		LoadCircuit(nume_fisier);
+
+		SetCurrentDirectoryA(dir_actual);
+
+		return;
+	}
+	else {
+		printf("Nu se poate deschide circuitul: %s\n", nume_fisier);
+
+		SetCurrentDirectoryA(dir_actual);
+
+		return;
+	}
 }

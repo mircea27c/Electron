@@ -27,12 +27,6 @@ void SimulatorCircuit::Stop()
 
 void SimulatorCircuit::ParcurgePas(float timp_trecut) {
 
-	timp_pas += timp_trecut;
-	if (timp_pas < interval_pas) {
-		return;
-	}
-	timp_pas = 0;
-
 	if (reset) {
 		Reseteaza();
 		reset = false;
@@ -41,6 +35,12 @@ void SimulatorCircuit::ParcurgePas(float timp_trecut) {
 	if (pauza) {
 		return;
 	}
+
+	timp_pas += timp_trecut;
+	if (timp_pas < interval_pas) {
+		return;
+	}
+	timp_pas = 0;
 
 	if (de_vizitat.empty() || reset) {
 		return;
@@ -89,6 +89,7 @@ void SimulatorCircuit::ParcurgePas(float timp_trecut) {
 
 		puncte_output = top->functie_procesare(top, puncte_input);
 
+		delete[] puncte_input;
 	}
 
 	for (int i = 0; i < top->nr_pct_conexiune; i++)
@@ -106,7 +107,6 @@ void SimulatorCircuit::ParcurgePas(float timp_trecut) {
 				continue;
 			}
 
-			SDL_Delay(500);
 			con->grafica->culoare = cul_curent;
 			RefreshUI();
 
@@ -133,12 +133,36 @@ void SimulatorCircuit::ParcurgePas(float timp_trecut) {
 		}
 	}
 
+	delete[] puncte_output;
 
 	//printf("simuleaza...\n");
 	de_vizitat.pop();
 
 }
 
+void SimulatorCircuit::CresteViteza()
+{
+	index_viteza = min(index_viteza + 1, nr_viteze - 1);
+	RecalculeazaViteza();
+}
+
+void SimulatorCircuit::ScadeViteza()
+{
+	index_viteza = max(index_viteza - 1, 0);
+	RecalculeazaViteza();
+}
+
+
+void SimulatorCircuit::RecalculeazaViteza()
+{
+	float viteza = viteze[index_viteza];
+	interval_pas = interval_normal * 1.0f / viteza;
+
+	text_viteza.clear();
+	text_viteza = std::to_string(viteze[index_viteza]);
+	text_viteza.erase(4);
+	text_viteza += 'x';
+}
 
 void SimulatorCircuit::Reseteaza()
 {

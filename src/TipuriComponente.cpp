@@ -1,6 +1,6 @@
 ﻿#include "TipuriComponente.h"
 
-std::array<Componenta*, 11> tipuri_componente;
+std::array<Componenta*, nr_componente> tipuri_componente;
 
 void CreazaComponenta(const char* path, Vector2 dimensiuni, std::vector<PunctConexiune*> puncteConexiune) {
 	static int index_componenta = 0;
